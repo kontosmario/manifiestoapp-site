@@ -1,0 +1,18 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["ZKYQF7UNYA.com.manifiesto.mobile.ZKYQF7UNYA"],
+        "components": [
+          {
+            "/": "/auth/*",
+            "comment": "Universal Link auth callback handler (Supabase OAuth + magic link). Closes manifiesto:// scheme hijacking vector documented in Sprint P · P-1."
+          }
+        ]
+      }
+    ]
+  },
+  "webcredentials": {
+    "apps": ["ZKYQF7UNYA.com.manifiesto.mobile.ZKYQF7UNYA"]
+  }
+}

@@ -13,12 +13,33 @@ Sitio público de [Manifiesto](https://manifiestoapp.com) — landing minimal + 
 ```
 .
 ├── index.html       # Landing
-├── privacy.html     # Política de Privacidad
-├── terms.html       # Términos y Condiciones
+├── privacy/         # Política de Privacidad
+├── terms/           # Términos y Condiciones
 ├── styles.css       # CSS único (forest-deep theme, mobile-first)
-├── _redirects       # Cloudflare Pages → /privacy → /privacy.html
+├── _redirects       # Cloudflare Pages → /privacy → /privacy/
+├── _headers         # Content-Type para los Universal Link manifests
+├── .well-known/     # Universal Links (iOS) + App Links (Android)
+│   ├── apple-app-site-association
+│   └── assetlinks.json
 ├── .gitignore
 └── README.md
+```
+
+## Universal Links / App Links
+
+Los archivos en `.well-known/` permiten que la app móvil intercepte URLs `https://manifiestoapp.com/auth/*` directamente (sin el chooser dialog), cerrando el vector de scheme hijacking en `manifiesto://` documentado en Sprint P · P-1 del repo principal.
+
+- **`apple-app-site-association`** (iOS): bind a `ZKYQF7UNYA.com.manifiesto.mobile.ZKYQF7UNYA`, paths `/auth/*`
+- **`assetlinks.json`** (Android): bind a `com.manifiesto.mobile.ZKYQF7UNYA` — actualmente con SHA256 fingerprint PLACEHOLDER. **Antes del Android launch**, reemplazar con el fingerprint real del Play Console (App signing key certificate fingerprints → SHA-256).
+- **`_headers`**: fuerza `Content-Type: application/json` (Apple lo exige; los archivos sin extensión confunden el content-sniffing default de Cloudflare).
+
+Para validar el setup en producción:
+```bash
+# AASA — debe responder application/json sin redirect
+curl -I https://manifiestoapp.com/.well-known/apple-app-site-association
+
+# assetlinks (Android) — mismo
+curl -I https://manifiestoapp.com/.well-known/assetlinks.json
 ```
 
 ## Deploy
