@@ -1,6 +1,13 @@
 # Cloudflare Pages _redirects file
-# Convierte /privacy y /terms en /privacy.html y /terms.html
-# así las URLs en la app quedan limpias.
+#
+# El sitio sirve URLs limpias automáticamente porque cada sección legal
+# vive en su propio folder con index.html:
+#   /privacy/  → privacy/index.html
+#   /terms/    → terms/index.html
+#
+# Por ergonomía, redirijimos /privacy → /privacy/ (sin slash trailing)
+# para que las URLs publicadas en mobile/lib/legal-urls.ts funcionen
+# tanto con como sin slash.
 
-/privacy   /privacy.html   200
-/terms     /terms.html     200
+/privacy   /privacy/   301
+/terms     /terms/     301
