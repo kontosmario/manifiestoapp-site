@@ -1,0 +1,6 @@
+# Cloudflare Pages _redirects file
+# Convierte /privacy y /terms en /privacy.html y /terms.html
+# así las URLs en la app quedan limpias.
+
+/privacy   /privacy.html   200
+/terms     /terms.html     200
