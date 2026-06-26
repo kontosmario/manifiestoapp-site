@@ -7,9 +7,13 @@
 
 document.documentElement.classList.remove('no-js')
 
-const prefersReducedMotion =
-  window.matchMedia &&
-  window.matchMedia('(prefers-reduced-motion: reduce)').matches
+// Live media query — read `.matches` at fire-time (not just at load) so an
+// auto-advance loop can be gated on the CURRENT preference. Prevents a 0ms
+// runaway if the user enables "reduce motion" with the page already open.
+const reduceMotionMq = window.matchMedia
+  ? window.matchMedia('(prefers-reduced-motion: reduce)')
+  : { matches: false }
+const prefersReducedMotion = reduceMotionMq.matches
 
 const $  = (sel, ctx = document) => ctx.querySelector(sel)
 const $$ = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel))
@@ -20,7 +24,7 @@ const $$ = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel))
 if (window.matchMedia) {
   window.matchMedia('(prefers-reduced-motion: reduce)').addEventListener('change', (e) => {
     if (!e.matches) return
-    $$('.hero__eyebrow, .hero__fern, .fern-silhouette, .fern-leaf, .hero__wordmark .letter, .hero__wordmark .dot, .hero__tagline, .hero__cta-row > *, .hero__cue, .reveal, .garden-cell')
+    $$('.hero__eyebrow, .hero__fern, .fern-silhouette, .fern-leaf, .hero__wordmark .letter, .hero__wordmark .dot, .hero__tagline, .hero__subhead, .hero__cta-row > *, .hero__trust, .hero__cue, .reveal, .garden-cell')
       .forEach((el) => { el.style.opacity = '1'; el.style.transform = 'none'; el.style.filter = 'none' })
   })
 }
@@ -76,8 +80,200 @@ spawnFireflies($('#hero-fireflies'),   isCompactViewport ? 22 : 44)
 spawnFireflies($('#policy-fireflies'), isCompactViewport ?  9 : 14)
 // Celebration field (cream + coral) behind the Floración medallion,
 // and a tiny mint field inside the annual plan tile.
-spawnFireflies($('#floracion-fireflies'), isCompactViewport ? 7 : 10, { warm: '#F0B488', cool: '#FFFBF2' })
+spawnFireflies($('#logros-fireflies'), isCompactViewport ? 18 : 34, { warm: '#F0B488', cool: '#FFFBF2' })
+spawnFireflies($('#sobre-fireflies'),  isCompactViewport ? 16 : 30, { warm: '#E2935E', cool: '#F0B488' })
 spawnFireflies($('#plan-fireflies'),      isCompactViewport ? 3 :  4, { warm: '#FFFBF2', cool: '#A6EF8F' })
+
+// Fireflies in EVERY remaining section: inject a full-width layer behind the
+// content (peach on the cream sections, cream/mint on the dark footer).
+;(function litEverySection() {
+  function lit(sel, lo, hi, opts) {
+    const sec = $(sel)
+    if (!sec || sec.querySelector(':scope > .section__fireflies')) return
+    sec.classList.add('section--lit')
+    const host = document.createElement('div')
+    host.className = 'section__fireflies'
+    host.setAttribute('aria-hidden', 'true')
+    sec.insertBefore(host, sec.firstChild)
+    spawnFireflies(host, isCompactViewport ? lo : hi, opts)
+  }
+  lit('#planes',      10, 16, { warm: '#E2935E', cool: '#F0B488' })
+  lit('#confianza',   14, 26, { warm: '#E2935E', cool: '#F0B488' })
+  lit('.site-footer',  8, 14, { warm: '#F0B488', cool: '#FFFBF2' })
+})()
+
+// ─── "Cómo se siente" carousel ──────────────────────────────
+// Screens crossfade inside the phone; the right-side copy syncs. The active
+// dot's CSS progress (scaleX 0→1, ~5.2s) is the autoplay clock — its
+// `animationend` advances the carousel, so pausing that animation (on hover or
+// keyboard focus) pauses everything. Reduced-motion kills the autoplay; the
+// dots still navigate manually. No timers, fully interruptible (per emil).
+;(function initCarousel() {
+  const root = document.querySelector('[data-carousel]')
+  if (!root) return
+  const screens = Array.from(root.querySelectorAll('.carousel__screen'))
+  const slides = Array.from(root.querySelectorAll('.carousel__slide'))
+  const dots = Array.from(root.querySelectorAll('.carousel__dot'))
+  const N = dots.length
+  if (!N) return
+  let idx = 0
+  function show(i) {
+    idx = (i + N) % N
+    screens.forEach((el, k) => el.classList.toggle('is-active', k === idx))
+    slides.forEach((el, k) => el.classList.toggle('is-active', k === idx))
+    dots.forEach((el, k) => {
+      const on = k === idx
+      el.classList.toggle('is-active', on)
+      el.setAttribute('aria-selected', on ? 'true' : 'false')
+    })
+    // Restart the active dot's progress animation from 0 (it is the clock).
+    const fill = dots[idx].querySelector('.carousel__dot-fill')
+    if (fill) { fill.style.animation = 'none'; void fill.offsetWidth; fill.style.animation = '' }
+  }
+  dots.forEach((dot, k) => {
+    dot.addEventListener('click', () => show(k))
+    const fill = dot.querySelector('.carousel__dot-fill')
+    if (fill) fill.addEventListener('animationend', () => { if (k === idx && !reduceMotionMq.matches) show(idx + 1) })
+  })
+  // Many easy ways to move between views: arrows, tapping the phone, keyboard
+  // arrows (when the carousel has focus), and swipe on touch.
+  const go = (dir) => show(idx + dir)
+  root.querySelectorAll('.carousel__arrow').forEach((btn) => {
+    btn.addEventListener('click', () => go(parseInt(btn.dataset.dir, 10) || 1))
+  })
+  const screensEl = root.querySelector('.carousel__screens')
+  if (screensEl) screensEl.addEventListener('click', () => go(1))
+  root.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') { go(-1); e.preventDefault() }
+    else if (e.key === 'ArrowRight') { go(1); e.preventDefault() }
+  })
+  let swipeX = null
+  root.addEventListener('touchstart', (e) => { swipeX = e.touches[0].clientX }, { passive: true })
+  root.addEventListener('touchend', (e) => {
+    if (swipeX === null) return
+    const dx = e.changedTouches[0].clientX - swipeX
+    swipeX = null
+    if (Math.abs(dx) > 40) go(dx < 0 ? 1 : -1)
+  }, { passive: true })
+  const pause = () => root.classList.add('is-paused')
+  const play = () => root.classList.remove('is-paused')
+  root.addEventListener('mouseenter', pause)
+  root.addEventListener('mouseleave', play)
+  root.addEventListener('focusin', pause)
+  root.addEventListener('focusout', play)
+  show(0)
+})()
+
+// ─── Logros showcase ───────────────────────────────────────
+// The 5 real achievements cycle through the celebration card: the medallion
+// icon + the title/body/tier crossfade, and the active badge lights up. The
+// active badge's CSS progress bar (scaleX 0→1) is the clock — its
+// `animationend` advances to the next, looping forever. Clicking a badge jumps
+// to it; arrows navigate when focused. Hover/focus pauses so you can read.
+// Reduced-motion drops the auto-cycle (no animationend wired) — manual only.
+;(function initAchievements() {
+  const root = document.querySelector('[data-achievements]')
+  if (!root) return
+  const stack = root.querySelector('.floracion__medallion-stack')
+  const caps = Array.from(root.querySelectorAll('.floracion__cap'))
+  const nav = document.querySelector('.logros-card .badge-row')
+  if (!stack || !caps.length || !nav) return
+  const badges = Array.from(nav.querySelectorAll('.badge'))
+  const btns = Array.from(nav.querySelectorAll('.badge__btn'))
+  const N = caps.length
+
+  // Clone each badge icon into a stacked, crossfading medallion icon, so the
+  // featured medallion shows the active achievement's own art.
+  const icons = btns.map((btn) => {
+    const svg = btn.querySelector('.badge__icon svg')
+    const slot = document.createElement('div')
+    slot.className = 'floracion__medallion-icon'
+    if (svg) slot.appendChild(svg.cloneNode(true))
+    stack.appendChild(slot)
+    return slot
+  })
+
+  let idx = 0
+  function show(i) {
+    idx = (i + N) % N
+    icons.forEach((el, k) => el.classList.toggle('is-active', k === idx))
+    caps.forEach((el, k) => el.classList.toggle('is-active', k === idx))
+    badges.forEach((el, k) => el.classList.toggle('is-active', k === idx))
+    btns.forEach((el, k) => el.setAttribute('aria-pressed', k === idx ? 'true' : 'false'))
+    // Restart the active badge's progress bar (the clock) from 0.
+    const fill = badges[idx].querySelector('.badge__bar-fill')
+    if (fill) { fill.style.animation = 'none'; void fill.offsetWidth; fill.style.animation = '' }
+  }
+
+  const pause = () => nav.classList.add('is-paused')
+  const play = () => nav.classList.remove('is-paused')
+
+  btns.forEach((btn, k) => {
+    // Explicit selection pauses the cycle: this is the TOUCH pause path (no
+    // hover) so a tap to read isn't yanked away 5s later. On desktop a later
+    // mouseleave resumes; on touch it stays put (the user took control).
+    btn.addEventListener('click', () => { show(k); pause() })
+    const fill = badges[k].querySelector('.badge__bar-fill')
+    // Always wire; gate the advance on the LIVE preference (not load-time) so a
+    // mid-session reduce-motion toggle can't drive a 0ms runaway loop.
+    if (fill) fill.addEventListener('animationend', () => { if (k === idx && !reduceMotionMq.matches) show(idx + 1) })
+  })
+  nav.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') { show(idx - 1); btns[idx].focus(); pause(); e.preventDefault() }
+    else if (e.key === 'ArrowRight') { show(idx + 1); btns[idx].focus(); pause(); e.preventDefault() }
+  })
+  // Pause while reading — hover is scoped to the CONTENT (medallion/caption +
+  // the badge nav), not the whole full-width card, so a cursor resting in the
+  // empty band doesn't stall autoplay. Keyboard focus on the card still pauses.
+  ;[root, nav].forEach((el) => {
+    el.addEventListener('mouseenter', pause)
+    el.addEventListener('mouseleave', play)
+  })
+  const card = root.closest('.logros-card') || root
+  card.addEventListener('focusin', pause)
+  card.addEventListener('focusout', play)
+
+  show(0)
+})()
+
+// ─── Product showcase ──────────────────────────────────────
+// The phone screen + the 3 step cards stay in sync. The active card's CSS
+// progress bar is the clock — its `animationend` advances to the next (looping).
+// Click a card (or the phone) to jump; hover/focus pauses. Reduced-motion drops
+// the auto-cycle (no animationend gating it live) — manual nav still works.
+;(function initShowcase() {
+  const root = document.querySelector('[data-showcase]')
+  if (!root) return
+  const screens = Array.from(root.querySelectorAll('.carousel__screen'))
+  const steps = Array.from(root.querySelectorAll('.showcase__step'))
+  const N = steps.length
+  if (!N || !screens.length) return
+  let idx = 0
+  function show(i) {
+    idx = (i + N) % N
+    screens.forEach((el, k) => el.classList.toggle('is-active', k === idx))
+    steps.forEach((el, k) => {
+      el.classList.toggle('is-active', k === idx)
+      el.setAttribute('aria-pressed', k === idx ? 'true' : 'false')
+    })
+    const fill = steps[idx].querySelector('.step__bar-fill')
+    if (fill) { fill.style.animation = 'none'; void fill.offsetWidth; fill.style.animation = '' }
+  }
+  const pause = () => root.classList.add('is-paused')
+  const play = () => root.classList.remove('is-paused')
+  steps.forEach((step, k) => {
+    step.addEventListener('click', () => { show(k); pause() })
+    const fill = step.querySelector('.step__bar-fill')
+    if (fill) fill.addEventListener('animationend', () => { if (k === idx && !reduceMotionMq.matches) show(idx + 1) })
+  })
+  const screensEl = root.querySelector('.carousel__screens')
+  if (screensEl) screensEl.addEventListener('click', () => { show(idx + 1); pause() })
+  root.addEventListener('mouseenter', pause)
+  root.addEventListener('mouseleave', play)
+  root.addEventListener('focusin', pause)
+  root.addEventListener('focusout', play)
+  show(0)
+})()
 
 // ─── Garden grid ───────────────────────────────────────────
 // Data-driven like spawnFireflies: a 5-week pattern (L→D) of real
@@ -118,10 +314,13 @@ function buildGarden(host) {
   if (!host) return []
   const frag = document.createDocumentFragment()
   const cells = []
-  for (const stage of GARDEN_PATTERN) {
+  for (let i = 0; i < GARDEN_PATTERN.length; i++) {
+    const stage = GARDEN_PATTERN[i]
     const cell = document.createElement('div')
     cell.className = 'garden-cell garden-cell--' + stage
     cell.innerHTML = GARDEN_GLYPHS[stage] || ''
+    // Stagger the perfect-week bloom by day-of-week (70ms each, app's cadence).
+    if (stage === 'bloom') cell.style.setProperty('--bloom-delay', (i % 7) * 70 + 'ms')
     frag.appendChild(cell)
     cells.push(cell)
   }
@@ -129,6 +328,57 @@ function buildGarden(host) {
   return cells
 }
 const gardenCells = buildGarden($('#garden-grid'))
+
+// ─── Feature switch (Tu jardín ⇆ Logros) ───────────────────
+// One section, two features. The switch swaps the visible view; landing on
+// "Tu jardín" plays the perfect-week bloom (the 7 brotes pop in staggered).
+// Proper tablist: roving tabindex + Arrow/Home/End. Reduced-motion shows the
+// blooms statically (no arm/animation).
+;(function initFeatureSwitch() {
+  const tabs = Array.from(document.querySelectorAll('.feature-switch__btn'))
+  if (!tabs.length) return
+  const grid = document.getElementById('garden-grid')
+  if (grid && !prefersReducedMotion) grid.classList.add('is-armed')
+  function playBloom() {
+    if (!grid || prefersReducedMotion) return
+    grid.classList.remove('is-blooming'); void grid.offsetWidth; grid.classList.add('is-blooming')
+  }
+  function select(view, focus) {
+    tabs.forEach((t) => {
+      const on = t.dataset.view === view
+      t.classList.toggle('is-active', on)
+      t.setAttribute('aria-selected', on ? 'true' : 'false')
+      t.tabIndex = on ? 0 : -1
+      const panel = document.getElementById(t.getAttribute('aria-controls'))
+      if (panel) {
+        panel.classList.toggle('is-active', on)
+        if (on) panel.removeAttribute('hidden'); else panel.setAttribute('hidden', '')
+      }
+    })
+    if (view === 'jardin') playBloom()
+    if (focus) { const t = tabs.find((x) => x.dataset.view === view); if (t) t.focus() }
+  }
+  tabs.forEach((t, i) => {
+    t.addEventListener('click', () => select(t.dataset.view))
+    t.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+        const dir = e.key === 'ArrowRight' ? 1 : -1
+        select(tabs[(i + dir + tabs.length) % tabs.length].dataset.view, true); e.preventDefault()
+      } else if (e.key === 'Home') { select(tabs[0].dataset.view, true); e.preventDefault() }
+      else if (e.key === 'End') { select(tabs[tabs.length - 1].dataset.view, true); e.preventDefault() }
+    })
+  })
+  // Play the bloom when the garden first scrolls into view (jardín is default).
+  if (grid && 'IntersectionObserver' in window && !prefersReducedMotion) {
+    const io = new IntersectionObserver((entries, obs) => {
+      entries.forEach((en) => {
+        const jardin = document.getElementById('view-jardin')
+        if (en.isIntersecting && jardin && !jardin.hasAttribute('hidden')) { playBloom(); obs.disconnect() }
+      })
+    }, { threshold: 0.35 })
+    io.observe(grid)
+  }
+})()
 
 // ─── Nav glass on scroll ────────────────────────────────────
 const nav = $('.site-nav')
@@ -188,7 +438,9 @@ if (hasGSAP) {
     gsap.set('.hero__wordmark .letter', { opacity: 0, y: 18, filter: 'blur(6px)' })
     gsap.set('.hero__wordmark .dot', { opacity: 0, y: 18, filter: 'blur(6px)', scale: 0.5, transformOrigin: '50% 75%' })
     gsap.set('.hero__tagline', { opacity: 0, y: 14 })
+    gsap.set('.hero__subhead', { opacity: 0, y: 14 })
     gsap.set('.hero__cta-row > *', { opacity: 0, y: 12 })
+    gsap.set('.hero__trust', { opacity: 0, y: 10 })
     gsap.set('.hero__cue', { opacity: 0, y: 8 })
   }
 
@@ -227,7 +479,9 @@ if (hasGSAP) {
         ease: 'expo.out',
       }, '-=0.05')
       .to('.hero__tagline', { opacity: 1, y: 0, duration: 0.9 }, '-=0.45')
-      .to('.hero__cta-row > *', { opacity: 1, y: 0, duration: 0.7, stagger: 0.06 }, '-=0.25')
+      .to('.hero__subhead', { opacity: 1, y: 0, duration: 0.8 }, '-=0.5')
+      .to('.hero__cta-row > *', { opacity: 1, y: 0, duration: 0.7, stagger: 0.06 }, '-=0.35')
+      .to('.hero__trust', { opacity: 1, y: 0, duration: 0.6 }, '-=0.25')
       .to('.hero__cue', { opacity: 1, y: 0, duration: 0.6 }, '-=0.1')
   }
 
@@ -247,34 +501,11 @@ if (hasGSAP) {
     })
   }
 
-  // 3. Cursor parallax on the fern (desktop, fine pointer only).
-  //    Spring-damped via lerp so it feels alive, not snappy.
-  //    Disabled on coarse-pointer (touch) — there's no cursor to track.
+  // 3. Pointer gate for the firefly catch below. The fern logo itself stays
+  //    still — no cursor parallax (the mark shouldn't chase the mouse).
   const fineHover =
     window.matchMedia('(hover: hover) and (pointer: fine)').matches &&
     !isCompactViewport
-  const fern = document.querySelector('.hero__fern')
-  if (fern && fineHover && !prefersReducedMotion) {
-    let targetX = 0, targetY = 0
-    let currX = 0, currY = 0
-    const onMove = (e) => {
-      const rect = fern.getBoundingClientRect()
-      const cx = rect.left + rect.width / 2
-      const cy = rect.top + rect.height / 2
-      targetX = (e.clientX - cx) * 0.020   // max ~12px at the viewport edge
-      targetY = (e.clientY - cy) * 0.020
-    }
-    window.addEventListener('mousemove', onMove, { passive: true })
-    // Lerp with 0.08 — feels like a soft spring without a physics lib.
-    // Early-return once converged so we don't repaint the fern every frame for nothing.
-    gsap.ticker.add(() => {
-      const dx = targetX - currX, dy = targetY - currY
-      if (Math.abs(dx) < 0.01 && Math.abs(dy) < 0.01) return
-      currX += dx * 0.08
-      currY += dy * 0.08
-      fern.style.transform = `translate3d(${currX.toFixed(2)}px, ${currY.toFixed(2)}px, 0)`
-    })
-  }
 
   // 3b. "Cazar luciérnagas" — flies whose home falls within a radius of the
   //     cursor are drawn in and pile up near the pointer (brightening as they

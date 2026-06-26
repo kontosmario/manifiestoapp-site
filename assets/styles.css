@@ -249,6 +249,7 @@ button {
   display: inline-flex;
   align-items: center;
   gap: 6px;
+  margin-right: clamp(60px, 8vw, 108px); /* clear the absolute lang switcher + theme toggle */
   font-size: 14px;
   font-weight: 500;
   letter-spacing: -0.01em;
@@ -443,6 +444,17 @@ button {
   100% { opacity: 0.14; }
 }
 
+/* A "lit" section carries a full-width firefly layer behind its content.
+   On a cream (light) surface the peach flies read as warm drifting motes. */
+.section--lit { position: relative; overflow: hidden; }
+.section--lit > .shell { position: relative; z-index: 1; }
+.section__fireflies { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
+/* peach flies on cream: a hair smaller + softer halo so they stay tasteful */
+.section--lit .firefly { box-shadow: 0 0 5px currentColor; }
+.section--lit .firefly--bright { box-shadow: 0 0 6px currentColor, 0 0 13px rgba(226, 147, 94, 0.14); }
+/* clear break between the two merged sub-blocks (por qué → cómo se siente) */
+.section__head--merged { margin-top: clamp(76px, 12vh, 156px); }
+
 /* Hero composition · single column, vertical, fern behind wordmark.
    Mobile-first padding accounts for nav (~60px) + safe-area top so the
    monument never collides with the notch / Dynamic Island. */
@@ -468,6 +480,51 @@ button {
     padding-top:    clamp(130px, 16vh, 180px);
     padding-bottom: clamp(90px, 12vh, 120px);
   }
+}
+
+/* ── Hero layout: brand monument + the app on a phone ──────────
+   Mobile stacks (monument, then phone). Desktop ≥880 splits into
+   two columns so the product sits beside the brand. */
+.hero__layout {
+  display: grid;
+  gap: clamp(34px, 5vw, 64px);
+  width: 100%;
+  justify-items: center;
+  align-items: center;
+}
+.hero__brand {
+  display: grid;
+  justify-items: center;
+  text-align: center;
+  width: 100%;
+  max-width: 560px;
+}
+.hero__subhead {
+  margin: 18px 0 0;
+  max-width: 32ch;
+  font-size: clamp(15px, 2vw, 18px);
+  line-height: 1.55;
+  color: rgba(253, 254, 249, 0.74);
+}
+.hero__trust {
+  margin: 22px 0 0;
+  font-size: 12px;
+  letter-spacing: 0.01em;
+  color: rgba(253, 254, 249, 0.5);
+}
+.hero__showcase { display: grid; place-items: center; width: 100%; }
+.phone--hero-app { width: clamp(220px, 62vw, 296px); }
+
+@media (min-width: 880px) {
+  .hero__layout {
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: clamp(40px, 5vw, 76px);
+  }
+  .hero__brand { max-width: none; }
+  /* Monument shrinks to share the row with the phone */
+  .hero__layout .hero__wordmark { font-size: clamp(48px, 7vw, 104px); }
+  .hero__layout .hero__fern { width: clamp(150px, 15vw, 200px); }
+  .phone--hero-app { width: clamp(256px, 25vw, 332px); }
 }
 
 .hero__eyebrow {
@@ -665,6 +722,15 @@ button {
 .cta--ghost:hover {
   background: rgba(255, 251, 242, 0.06);
   border-color: rgba(255, 251, 242, 0.28);
+}
+
+/* The primary CTA lives on the always-dark hero. Pin its colours so they
+   don't follow the theme (--cream flips to near-black in dark mode, which
+   made the button vanish dark-on-dark). The ghost + any light-section CTA
+   keep their theme-aware vars via :not(). */
+.on-dark .cta:not(.cta--ghost) {
+  --bg: #FDFEF9;
+  --fg: #143726;
 }
 
 .cta__arrow {
@@ -1259,6 +1325,42 @@ main { background: var(--cream); position: relative; }
     gap: clamp(48px, 6vw, 96px);
   }
 }
+
+/* ── Restructure additions: merged "Cómo se siente" + "Confianza" ── */
+.showcase-grid--inline { margin-top: clamp(52px, 8vw, 104px); }
+
+.features__lead {
+  margin: 0 0 4px;
+  font-family: var(--font-serif);
+  font-size: clamp(20px, 2.6vw, 26px);
+  font-weight: 380;
+  letter-spacing: -0.01em;
+  color: var(--text-ink);
+}
+
+.gallery-lead { margin: clamp(52px, 8vw, 104px) 0 26px; max-width: 60ch; }
+.gallery-lead__title {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: clamp(24px, 3.4vw, 34px);
+  font-weight: 380;
+  letter-spacing: -0.015em;
+  color: var(--text-ink);
+}
+.gallery-lead__title em { font-style: italic; color: var(--brand-strong); }
+.gallery-lead__sub { margin: 8px 0 0; color: var(--text-muted); font-size: 15px; }
+
+.subsection__title {
+  margin: clamp(56px, 8vw, 96px) 0 24px;
+  font-family: var(--font-serif);
+  font-size: clamp(22px, 3vw, 30px);
+  font-weight: 380;
+  letter-spacing: -0.015em;
+  color: var(--text-ink);
+}
+
+.section__head--seam { margin-top: clamp(72px, 10vw, 128px); text-align: center; margin-inline: auto; }
+.section__head--seam .section__lede { margin-inline: auto; }
 
 .features { max-width: 60ch; }
 
@@ -1944,22 +2046,47 @@ main { background: var(--cream); position: relative; }
 .achievements {
   display: grid;
   gap: clamp(40px, 6vw, 64px);
-  justify-items: start;
+  justify-items: center;
 }
-/* Floración — the celebration moment, recreated */
-.floracion {
+/* ── Logros: the whole section lives inside one celebration card ── */
+/* The card IS the section: full-bleed width, full viewport height, content
+   centered both axes. No frame (radius/border/shadow) — the forest gradient +
+   fireflies fill the whole section edge to edge. */
+.logros-card {
+  position: relative;
+  width: 100%;
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  background: radial-gradient(125% 72% at 50% 40%, #1E5430, #102A1C 82%);
+  border-top: 1px solid rgba(166, 239, 143, 0.10);
+  overflow: hidden;
+  isolation: isolate;
+}
+.logros-card__fireflies { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
+.logros-card__inner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1000px;
+  display: grid;
+  justify-items: center;
+  padding: clamp(56px, 9vh, 120px) clamp(22px, 5vw, 64px);
+}
+.logros-card .section__head--seam {
+  margin: 0 0 clamp(32px, 5vw, 44px);
+  max-width: 54ch;
+}
+.logros-card .section__title { font-size: clamp(26px, 3.6vw, 44px); }
+.logros-card .badge-row { margin-top: clamp(44px, 6vw, 60px); }
+
+/* The "Floración" celebration, now a transparent demo inside the card */
+.floracion-demo {
   position: relative;
   margin: 0;
-  width: 100%;
-  max-width: 560px;
   display: grid;
   justify-items: center;
   gap: 22px;
-  padding: clamp(34px, 5vw, 56px) clamp(24px, 4vw, 48px);
-  border-radius: var(--radius-lg);
-  background: radial-gradient(120% 92% at 50% 28%, #1B4A28, #133420 72%);
-  border: 1px solid rgba(166, 239, 143, 0.12);
-  overflow: hidden;
 }
 .floracion__fireflies { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
 .floracion__aura {
@@ -1980,7 +2107,7 @@ main { background: var(--cream); position: relative; }
 }
 .floracion__medallion {
   position: relative;
-  width: 118px; height: 118px;
+  width: 132px; height: 132px;
   border-radius: 50%;
   background: #FFFBF2;
   border: 2px solid rgba(240, 180, 136, 0.48);
@@ -1989,7 +2116,32 @@ main { background: var(--cream); position: relative; }
   display: grid; place-items: center;
   z-index: 1;
 }
-.floracion__medallion svg { width: 100%; height: 100%; display: block; }
+.floracion__medallion-stack { position: absolute; inset: 0; }
+/* Entrances ease OUT (fast attack, gentle settle); exit is quicker than enter
+   so the outgoing icon clears before the incoming peaks (no ghost/double). */
+.floracion__medallion-icon {
+  position: absolute; inset: 0;
+  opacity: 0; transform: scale(0.94);
+  transition: opacity 300ms var(--ease-out-quart), transform 300ms var(--ease-out-quart);
+}
+.floracion__medallion-icon.is-active {
+  opacity: 1; transform: scale(1);
+  transition: opacity 460ms var(--ease-out-quart), transform 520ms var(--ease-out-expo);
+}
+.floracion__medallion-icon svg { width: 100%; height: 100%; display: block; }
+/* Cyclic captions — all stacked in one grid cell, crossfading */
+.floracion__cap-stack { display: grid; width: 100%; }
+.floracion__cap {
+  grid-area: 1 / 1;
+  display: grid; justify-items: center; gap: 9px; align-content: start;
+  opacity: 0; transform: translateY(10px);
+  transition: opacity 240ms var(--ease-out-quart), transform 240ms var(--ease-out-quart);
+  pointer-events: none;
+}
+.floracion__cap.is-active {
+  opacity: 1; transform: none; pointer-events: auto;
+  transition: opacity 400ms var(--ease-out-quart), transform 460ms var(--ease-out-expo);
+}
 /* coral blooms that drift + pulse near the medallion (siblings, not clipped) */
 .floracion__bloom {
   position: absolute;
@@ -2039,35 +2191,143 @@ main { background: var(--cream); position: relative; }
   letter-spacing: -0.012em;
   color: #FFFFFF;
 }
-/* The 5 families — real line icons as a strip of medallions on the
-   forest band (NOT a card grid; the band is already the container). */
+.floracion__body {
+  max-width: 34ch;
+  margin: 2px 0 0;
+  font-size: 14px; line-height: 1.5;
+  color: #A9C2A1;
+}
+.floracion__tier {
+  display: inline-flex; align-items: center; gap: 7px;
+  margin-top: 10px;
+  padding: 7px 15px;
+  border-radius: 30px;
+  background: color-mix(in srgb, var(--tier, #9FE08A) 13%, transparent);
+  border: 1px solid color-mix(in srgb, var(--tier, #9FE08A) 30%, transparent);
+  font-size: 11px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase;
+  color: var(--tier, #9FE08A);
+}
+.floracion__tier-mark { width: 14px; height: 14px; color: var(--tier, #9FE08A); }
+/* The 5 achievements as an interactive nav track — active one lit, with an
+   auto-advance progress bar that doubles as the cycle clock. */
 .badge-row {
   list-style: none; margin: 0; padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: clamp(22px, 4vw, 46px);
+  width: 100%;
+  display: flex; flex-wrap: wrap;
+  justify-content: center;
+  gap: clamp(14px, 3vw, 40px);
 }
-.badge {
-  display: grid; justify-items: center; gap: 13px;
-  width: 86px;
+@media (min-width: 760px) {
+  .logros-card .badge-row {
+    max-width: 860px; margin-inline: auto;
+    justify-content: space-between;
+    gap: 16px;
+  }
 }
-.badge__icon { transition: transform 240ms var(--ease-out); }
-@media (hover: hover) and (pointer: fine) {
-  .badge:hover .badge__icon { transform: translateY(-4px); }
+.badge { display: block; }
+.badge__btn {
+  display: grid; justify-items: center; gap: 11px;
+  width: 98px;
+  padding: 6px 0 0; margin: 0; border: 0;
+  background: none; color: inherit; font: inherit;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 }
 .badge__icon {
-  width: 54px; height: 54px;
-  display: grid; place-items: center;
-  border-radius: 50%;
-  background: #FFFBF2;
-  box-shadow: 0 8px 20px -12px rgba(0, 0, 0, 0.6);
+  width: 58px; height: 58px;
+  border-radius: 50%; overflow: hidden;
+  border: 1px solid rgba(255, 251, 242, 0.14);
+  box-shadow: 0 10px 22px -12px rgba(0, 0, 0, 0.55);
+  opacity: 0.5; filter: saturate(0.6);
+  transform: scale(0.9);
+  transition: opacity 340ms var(--ease-out), transform 340ms var(--ease-out),
+              filter 340ms var(--ease-out), border-color 340ms var(--ease-out), box-shadow 340ms var(--ease-out);
 }
-.badge__icon svg { width: 34px; height: 34px; display: block; }
+.badge__icon svg { width: 100%; height: 100%; display: block; }
+.badge.is-active .badge__icon {
+  opacity: 1; filter: none; transform: scale(1);
+  border-color: rgba(166, 239, 143, 0.45);
+  box-shadow: 0 14px 28px -12px rgba(0, 0, 0, 0.6), 0 0 0 4px rgba(166, 239, 143, 0.10);
+}
+@media (hover: hover) and (pointer: fine) {
+  .badge__btn:hover .badge__icon { opacity: 0.85; transform: scale(0.96); }
+  .badge.is-active .badge__btn:hover .badge__icon { opacity: 1; transform: scale(1.03); }
+}
+.badge__btn:active .badge__icon { transform: scale(0.94); }
+.badge__btn:focus-visible { outline: none; }
+.badge__btn:focus-visible .badge__icon {
+  border-color: rgba(166, 239, 143, 0.7);
+  box-shadow: 0 0 0 3px rgba(166, 239, 143, 0.35);
+}
+/* Inactive labels use a SOLID accessible green (AA on the card's dark bottom),
+   not a low opacity on top of an already-muted token (that stacked to ~2.97:1). */
 .badge__label {
-  font-size: 12.5px; font-weight: 600;
-  letter-spacing: -0.01em;
-  color: var(--text-on-dark-muted);
-  text-align: center;
+  font-size: 12px; font-weight: 600; letter-spacing: -0.01em;
+  color: #9FB79A; text-align: center;
+  transition: color 340ms var(--ease-out);
+}
+.badge.is-active .badge__label { color: var(--text-on-dark); }
+.badge__bar {
+  width: 32px; height: 3px; border-radius: 3px;
+  background: rgba(255, 251, 242, 0.12);
+  overflow: hidden;
+  opacity: 0; transition: opacity 340ms var(--ease-out);
+}
+.badge.is-active .badge__bar { opacity: 1; }
+.badge__bar-fill {
+  display: block; width: 100%; height: 100%; border-radius: 3px;
+  background: rgba(166, 239, 143, 0.9);
+  transform: scaleX(0); transform-origin: left center;
+  /* governs only the snap-back when a badge stops being active (the running
+     .is-active keyframe overrides transform while playing) — drains, not pops. */
+  transition: transform 220ms var(--ease-out-quart);
+}
+.badge.is-active .badge__bar-fill {
+  animation: badgeProgress var(--dwell, 5000ms) linear forwards;
+}
+.badge-row.is-paused .badge.is-active .badge__bar-fill { animation-play-state: paused; }
+@keyframes badgeProgress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+/* ── Feature switch (Tu jardín ⇆ Logros) — one section, two features ── */
+.feature-switch {
+  display: inline-flex; gap: 4px; padding: 4px;
+  border-radius: 999px;
+  background: rgba(255, 251, 242, 0.06);
+  border: 1px solid rgba(166, 239, 143, 0.16);
+  margin-bottom: clamp(36px, 5vh, 60px);
+  justify-self: center;
+}
+.feature-switch__btn {
+  appearance: none; -webkit-appearance: none; border: 0; margin: 0;
+  cursor: pointer;
+  padding: 9px 22px; border-radius: 999px;
+  font-family: var(--font-mono); font-size: 11.5px; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--text-on-dark-muted); background: transparent;
+  transition: color 280ms var(--ease-out), background 280ms var(--ease-out);
+}
+.feature-switch__btn.is-active { color: #143726; background: #FDFEF9; }
+.feature-switch__btn:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(166, 239, 143, 0.45); }
+@media (hover: hover) and (pointer: fine) {
+  .feature-switch__btn:not(.is-active):hover { color: var(--text-on-dark); }
+}
+
+/* The two views swap (only one shown); the entering one fades up */
+.feature-view { width: 100%; display: grid; justify-items: center; }
+.feature-view[hidden] { display: none; }
+.feature-view.is-active { animation: viewIn 480ms var(--ease-out) both; }
+@keyframes viewIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+/* Perfect-week bloom — the 7 brotes pop in staggered, mirroring the app's
+   week-close celebration: scale 0.2 → 1.16 overshoot → 1.0 + fade, 70ms/day. */
+.garden-grid.is-armed .garden-cell--bloom svg { opacity: 0; }
+.garden-grid.is-blooming .garden-cell--bloom svg {
+  animation: bloomPop 720ms var(--ease-out) var(--bloom-delay, 0ms) both;
+}
+@keyframes bloomPop {
+  0%   { opacity: 0; transform: scale(0.2); }
+  55%  { opacity: 1; transform: scale(1.16); }
+  100% { opacity: 1; transform: scale(1); }
 }
 
 /* ── Plans ── two real tiles: monthly quiet, annual hero */
@@ -2079,6 +2339,26 @@ main { background: var(--cream); position: relative; }
   max-width: 780px;
 }
 @media (min-width: 720px) { .plans { grid-template-columns: 1fr 1fr; } }
+
+/* Planes — centered + emphasized (mayor énfasis, centrada) */
+#planes .section__head { text-align: center; margin-inline: auto; max-width: 52ch; }
+#planes .section__lede { margin-inline: auto; }
+#planes .plans { margin-inline: auto; max-width: 860px; }
+#planes .plans__foot { text-align: center; margin-inline: auto; }
+/* The recommended (annual) tile floats forward */
+@media (min-width: 720px) {
+  .plan--hero {
+    transform: translateY(-16px);
+    box-shadow: 0 42px 84px -42px rgba(8, 34, 26, 0.55);
+  }
+}
+
+/* Confianza — centered so the principles + FAQ + documents read as one section */
+#confianza .section__head { text-align: center; margin-inline: auto; max-width: 56ch; }
+#confianza .subsection__title { text-align: center; }
+#confianza .principles { margin-inline: auto; max-width: 900px; }
+#confianza .faq { margin-inline: auto; }
+#confianza .legal-grid { margin-inline: auto; max-width: 900px; }
 .plan {
   position: relative;
   display: flex; flex-direction: column;
@@ -2219,6 +2499,24 @@ main { background: var(--cream); position: relative; }
 [data-theme="dark"] .site-nav.is-glass--paper .site-nav__links { color: var(--text-muted); }
 
 /* ── Theme toggle button (in the nav) ── */
+.site-nav__lang {
+  position: absolute;
+  right: calc(var(--gutter) + 54px);
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-flex; align-items: center; gap: 1px;
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.04em;
+}
+.site-nav__lang a {
+  color: var(--text-on-dark-soft); text-decoration: none;
+  padding: 5px 5px; border-radius: 5px;
+  transition: color 200ms var(--ease-out);
+}
+.site-nav__lang a.is-active { color: var(--text-on-dark); font-weight: 700; }
+.site-nav__lang a:hover { color: var(--text-on-dark); }
+.site-nav.is-glass--paper .site-nav__lang a { color: var(--text-muted); }
+.site-nav.is-glass--paper .site-nav__lang a.is-active { color: var(--text-ink); }
+
 .site-nav__theme {
   position: absolute;
   right: var(--gutter);
@@ -2308,6 +2606,203 @@ main:focus-visible { outline: none; }
   filter: blur(38px); z-index: -1; pointer-events: none;
 }
 @media (max-width: 720px) { .phone__glow { filter: blur(24px); } }
+
+/* ── Product showcase — phone (one screen per step) beside 3 reactive cards ── */
+.showcase {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(40px, 7vw, 72px);
+  align-items: center;
+  margin-top: clamp(52px, 8vw, 96px);
+}
+@media (min-width: 900px) {
+  .showcase {
+    grid-template-columns: clamp(258px, 28vw, 320px) minmax(0, 1fr);
+    gap: clamp(48px, 6vw, 104px);
+  }
+}
+.showcase__device { width: 100%; max-width: 300px; justify-self: center; }
+.showcase__steps { list-style: none; margin: 0; padding: 0; display: grid; gap: clamp(12px, 1.4vw, 16px); }
+.showcase__steps > li { display: block; }
+/* Feature variant: copy + reactive cards (left) · big phone gallery (right) */
+.showcase__panel { display: grid; gap: clamp(22px, 2.6vw, 34px); align-content: center; }
+.showcase__panel .section__head { margin: 0; max-width: none; }
+@media (min-width: 900px) {
+  .showcase--feature { grid-template-columns: minmax(0, 1fr) clamp(304px, 32vw, 388px); }
+  .showcase--feature .showcase__device { max-width: 388px; }
+}
+/* POR QUÉ is now a single-column intro (the meta panel moved to the footer) */
+#sobre .about-grid { display: block; max-width: 64ch; }
+/* Platform / market / support meta, now in the footer */
+.footer__meta { margin: 0; }
+.footer__meta dt {
+  font-family: var(--font-mono); font-size: 10.5px; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--text-on-dark-soft); margin-top: 13px;
+}
+.footer__meta dt:first-child { margin-top: 0; }
+.footer__meta dd { margin: 2px 0 0; font-size: 14px; line-height: 1.45; color: var(--text-on-dark-muted); }
+.footer__meta dd a { color: inherit; transition: color 200ms var(--ease-out); }
+.footer__meta dd a:hover { color: var(--peach); }
+.showcase__step {
+  position: relative;
+  display: block; width: 100%; text-align: left; margin: 0;
+  padding: clamp(20px, 2.3vw, 28px) clamp(22px, 2.4vw, 30px) clamp(20px, 2.3vw, 26px);
+  background: var(--cream);
+  border: 1px solid var(--line-warm);
+  border-radius: 20px;
+  cursor: pointer; font: inherit; color: inherit;
+  transition: border-color 360ms var(--ease-out), box-shadow 360ms var(--ease-out), transform 220ms var(--ease-out);
+}
+.showcase__step .step__num {
+  display: block; font-size: clamp(32px, 3.4vw, 40px); margin-bottom: 2px;
+  opacity: 0.4; transition: opacity 360ms var(--ease-out);
+}
+.showcase__step .step__body { margin-top: 8px; }
+.showcase__step.is-active {
+  border-color: color-mix(in srgb, var(--brand-strong) 46%, var(--line-warm));
+  box-shadow: 0 22px 46px -30px rgba(8, 34, 26, 0.5);
+}
+.showcase__step.is-active .step__num { opacity: 1; }
+@media (hover: hover) and (pointer: fine) {
+  .showcase__step:not(.is-active):hover { border-color: color-mix(in srgb, var(--brand-strong) 26%, var(--line-warm)); }
+  .showcase__step:not(.is-active):hover .step__num { opacity: 0.7; }
+}
+.showcase__step:active { transform: scale(0.992); }
+.showcase__step:focus-visible {
+  outline: none; border-color: var(--brand-strong);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand-strong) 28%, transparent);
+}
+.step__bar {
+  display: block; margin-top: 14px; height: 3px; border-radius: 3px;
+  background: color-mix(in srgb, var(--brand-strong) 15%, transparent);
+  overflow: hidden; opacity: 0; transition: opacity 360ms var(--ease-out);
+}
+.showcase__step.is-active .step__bar { opacity: 1; }
+.step__bar-fill {
+  display: block; width: 100%; height: 100%; border-radius: 3px;
+  background: var(--brand-strong);
+  transform: scaleX(0); transform-origin: left center;
+  transition: transform 200ms var(--ease-out-quart);
+}
+.showcase__step.is-active .step__bar-fill { animation: stepProgress var(--dwell, 5200ms) linear forwards; }
+.showcase.is-paused .showcase__step.is-active .step__bar-fill { animation-play-state: paused; }
+@keyframes stepProgress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+/* ── Dynamic carousel · app screens cycle inside the phone, copy syncs ──
+   The active dot's progress (scaleX) animation is the autoplay timer: its
+   animationend advances the carousel, so pausing it pauses everything. */
+.carousel {
+  display: grid;
+  gap: clamp(36px, 5vw, 60px);
+  align-items: center;
+  margin-top: clamp(52px, 8vw, 104px);
+}
+@media (min-width: 880px) {
+  /* Flex + justify-content centre the phone+copy pair on the page (a grid 1fr
+     text column left-weighted it, leaving the right half empty). */
+  .carousel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: clamp(44px, 5vw, 72px);
+  }
+  .carousel__device { flex: none; width: 296px; margin-inline: 0; }
+  .carousel__panel { flex: none; width: 44ch; max-width: 44ch; }
+}
+.carousel__device { width: 100%; max-width: 296px; justify-self: center; }
+.phone--carousel { width: 100%; }
+.carousel__screens {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 720 / 1565;
+  border-radius: 33px;
+  overflow: hidden;
+}
+.carousel__screen {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transform: scale(1.045);
+  transition: opacity 560ms var(--ease-out), transform 760ms var(--ease-out);
+}
+.carousel__screen.is-active { opacity: 1; transform: scale(1); }
+
+.carousel__panel { max-width: 46ch; }
+.carousel__slides { position: relative; min-height: 200px; }
+@media (min-width: 880px) { .carousel__slides { min-height: 176px; } }
+.carousel__slide {
+  position: absolute; inset: 0;
+  opacity: 0; transform: translateY(10px);
+  transition: opacity 380ms var(--ease-out), transform 520ms var(--ease-out);
+  pointer-events: none;
+}
+.carousel__slide.is-active { opacity: 1; transform: translateY(0); pointer-events: auto; }
+.carousel__kicker {
+  display: inline-block; margin-bottom: 14px;
+  font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--brand-strong);
+}
+.carousel__title {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: clamp(24px, 3.4vw, 34px);
+  font-weight: 380; letter-spacing: -0.015em;
+  color: var(--text-ink);
+}
+.carousel__body {
+  margin: 12px 0 0;
+  font-size: clamp(15px, 1.9vw, 18px);
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+.carousel__nav { display: flex; align-items: center; gap: 18px; margin-top: 32px; }
+.carousel__dots { display: flex; gap: 10px; }
+.carousel__arrow {
+  flex: none;
+  width: 42px; height: 42px;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  background: transparent;
+  border: 1px solid var(--line-strong);
+  color: var(--text-ink);
+  cursor: pointer;
+  transition: border-color 200ms var(--ease-out), color 200ms var(--ease-out), transform 150ms var(--ease-out);
+}
+@media (hover: hover) and (pointer: fine) {
+  .carousel__arrow:hover { border-color: var(--brand-strong); color: var(--brand-strong); }
+}
+.carousel__arrow:active { transform: scale(0.94); }
+.carousel__arrow:focus-visible { outline: 2px solid var(--brand-strong); outline-offset: 3px; }
+.carousel__arrow svg { width: 17px; height: 17px; }
+.carousel__screens { cursor: pointer; }
+.carousel__dot {
+  position: relative; width: 38px; height: 5px;
+  padding: 0; border: none; cursor: pointer;
+  border-radius: 99px; overflow: hidden;
+  background: var(--line-strong);
+  opacity: 0.45;
+  transition: opacity 220ms var(--ease-out);
+}
+.carousel__dot.is-active { opacity: 1; }
+.carousel__dot:focus-visible { outline: 2px solid var(--brand-strong); outline-offset: 3px; }
+.carousel__dot-fill {
+  position: absolute; inset: 0;
+  background: var(--brand-strong);
+  border-radius: inherit;
+  transform-origin: left; transform: scaleX(0);
+}
+.carousel__dot.is-active .carousel__dot-fill {
+  animation: carouselProgress 5200ms linear forwards;
+}
+.carousel.is-paused .carousel__dot.is-active .carousel__dot-fill { animation-play-state: paused; }
+@keyframes carouselProgress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .carousel__screen, .carousel__slide { transition: none; }
+  .carousel__dot.is-active .carousel__dot-fill { animation: none; transform: scaleX(1); }
+}
 
 .gallery {
   display: flex;
