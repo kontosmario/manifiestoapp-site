@@ -5,6 +5,19 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <meta name="theme-color" content="#0E3A26" />
   <meta name="color-scheme" content="light dark" />
+
+  <!-- Theme: resolve before paint (stored choice → system preference) to avoid a flash. -->
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('manifiesto-theme');
+        if (t !== 'light' && t !== 'dark') {
+          t = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        document.documentElement.setAttribute('data-theme', t);
+      } catch (e) {}
+    })();
+  </script>
   <title>Manifiesto · Finanzas familiares compartidas, sin discusiones</title>
   <meta name="description" content="App de finanzas para parejas y hogares argentinos. Vos y tu pareja ven lo mismo: gastos del día, fijos, metas y un asistente que te avisa antes de que se vaya el mes." />
   <meta name="keywords" content="finanzas familiares, app finanzas pareja, gastos compartidos, control de gastos Argentina, presupuesto familiar, app de ahorro, manifiesto app" />
@@ -29,12 +42,14 @@
   <meta name="twitter:title" content="Manifiesto · Finanzas familiares compartidas" />
   <meta name="twitter:description" content="Una app para que vos y tu pareja vean lo mismo del mes: gastos, fijos, metas. Sin discusiones." />
   <meta name="twitter:image" content="https://manifiestoapp.com/assets/og-cover.svg" />
+  <meta name="twitter:image:alt" content="Manifiesto — finanzas para tu familia" />
 
   <!-- Apple touch icon (mismo fern, usado cuando la usuaria guarda el site al home) -->
   <link rel="apple-touch-icon" href="/assets/fern.svg" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
   <link rel="stylesheet" href="/assets/styles.css" />
   <link rel="icon" type="image/svg+xml" href="/assets/fern.svg" />
 
@@ -85,6 +100,8 @@
 </head>
 <body>
 
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+
   <!-- ── Persistent nav ──────────────────────────────────── -->
   <nav class="site-nav" aria-label="Principal">
     <div class="site-nav__inner">
@@ -97,8 +114,19 @@
       <div class="site-nav__links">
         <a href="#como-funciona">Cómo funciona</a>
         <a href="#producto">Producto</a>
+        <a href="#jardin">Jardín</a>
+        <a href="#planes">Planes</a>
         <a href="#documentos">Documentos</a>
       </div>
+      <button class="site-nav__theme" type="button" aria-label="Cambiar entre modo claro y oscuro" title="Cambiar tema">
+        <svg class="theme-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4.2" />
+          <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5 5l1.4 1.4M17.6 17.6L19 19M19 5l-1.4 1.4M6.4 17.6L5 19" />
+        </svg>
+        <svg class="theme-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M20 14.5A8 8 0 0 1 9.5 4 7 7 0 1 0 20 14.5Z" />
+        </svg>
+      </button>
     </div>
   </nav>
 
@@ -133,6 +161,12 @@
               <path class="fern-leaf fern-leaf-1" fill="var(--fern-leaf)" transform="scale(0.725 0.725318)" d="M940.001 190.008C976.452 189.436 1012.9 191.405 1049.08 195.901C1047.96 206.133 1046.52 216.328 1044.75 226.468C1039.09 258.278 1028.32 293.779 1017.85 324.454C990.198 405.487 949.024 493.189 876.722 543.311C840.482 568.434 786.505 586.1 742.513 577.238C698.365 568.346 662.384 548.669 636.588 511.375C651.629 486.891 667.932 470.004 688.321 449.745C700.69 437.455 710.432 427.807 724.066 416.835C740.014 403.518 756.623 391.011 773.828 379.362C778.29 376.362 782.793 373.335 787.494 370.523C795.451 365.757 804.841 362.059 811.563 355.592C814.02 353.139 814.386 349.645 812.82 346.623C807.626 336.598 797.538 342.155 790.071 345.557C782.881 348.832 776.098 352.422 769.25 356.208C724.897 380.222 684.913 411.546 650.981 448.86C639.941 460.912 629.717 473.591 619.353 486.222C607.842 463.542 601.504 438.592 600.793 413.168C599.721 364.873 617.657 318.089 650.74 282.886C701.833 229.232 768.24 210.12 839.336 199.1C872.689 194.145 906.299 191.11 940.001 190.008Z"/>
               <path class="fern-leaf fern-leaf-2" fill="var(--fern-leaf)" transform="scale(0.725 0.725318)" d="M299.425 371.216C325.942 368.849 368.616 375.554 394.913 381.185C431.308 388.979 467.255 411.085 487.374 442.889C509.898 478.492 511.072 511.978 502.224 551.543C466.873 522.344 431.932 496.886 387.985 482.014C381.25 479.735 358.193 468.482 352.419 475.503C344.307 485.366 373.887 494.667 379.659 497.195C386.443 500.186 393.14 503.367 399.744 506.736C426.763 520.381 446.339 534.016 469.306 553.437C477.807 560.605 483.531 567.102 491.042 575.382C476.584 600.7 453.484 619.958 425.978 629.626C395.077 640.598 358.147 637.769 328.735 623.233C253.52 586.058 210.161 502.676 181.261 427.685C176.412 415.103 172.678 401.625 168.179 388.882C202.606 377.39 262.485 373.148 299.425 371.216Z"/>
             </g>
+            <!-- Stem-tracer: the "growing stem" that draws bottom→top (sap rising),
+                 then the silhouette fades in and this fades out — the welcome screen's
+                 FernLogo entrance. Coords are in viewBox space (no scale transform). -->
+            <path class="fern-stem-trace" d="M 406 648.5 C 405.9 593.42, 405.45 539.96, 405.25 486.5"
+                  fill="none" stroke="currentColor" stroke-width="21" stroke-linecap="round"
+                  pathLength="175" stroke-dasharray="175" stroke-dashoffset="175" />
           </svg>
         </div>
 
@@ -142,7 +176,7 @@
           </span><span class="dot">.</span>
         </h1>
 
-        <p class="hero__tagline">Finanzas <em>para</em> tu familia.</p>
+        <p class="hero__tagline">Finanzas <em>para</em> tu familia</p>
       </div>
 
       <div class="hero__cta-row">
@@ -167,7 +201,7 @@
   <!-- Soft seam between dark hero and cream paper -->
   <div class="horizon" aria-hidden="true"></div>
 
-  <main>
+  <main id="main" tabindex="-1">
 
     <!-- ── ABOUT ────────────────────────────────────────── -->
     <section class="section" id="sobre">
@@ -259,80 +293,12 @@
       <div class="shell">
         <div class="showcase-grid">
 
-          <!-- Stylized device showing the Home pattern -->
-          <div class="device reveal" aria-hidden="true">
-            <div class="device__frame">
-              <div class="device__notch"></div>
-              <div class="device__screen">
-                <div class="device__status">
-                  <span>9:41</span>
-                  <span class="device__status-icons">
-                    <i class="dot"></i><i class="dot"></i><i class="dot"></i>
-                  </span>
-                </div>
-
-                <div class="device__hero">
-                  <div class="device__hero-row">
-                    <span class="device__hero-label">mayo · día 18</span>
-                    <span class="device__hero-pill">🔥 12</span>
-                  </div>
-                  <div class="device__hero-amount">
-                    <span class="device__currency">$</span>
-                    <span class="device__amount">14.320</span>
-                    <span class="device__per">/ día</span>
-                  </div>
-                  <div class="device__bar">
-                    <span style="width: 42%"></span>
-                  </div>
-                  <div class="device__hero-foot">
-                    <span>Cupo del día</span>
-                    <span>42% usado</span>
-                  </div>
-                </div>
-
-                <div class="device__cards">
-                  <div class="device__card">
-                    <div class="device__card-row">
-                      <span class="device__card-emoji">🥑</span>
-                      <div class="device__card-info">
-                        <span class="device__card-title">Coto</span>
-                        <span class="device__card-sub">Súper · hoy 13:24</span>
-                      </div>
-                      <span class="device__card-amount">−$ 8.450</span>
-                    </div>
-                  </div>
-                  <div class="device__card">
-                    <div class="device__card-row">
-                      <span class="device__card-emoji">☕</span>
-                      <div class="device__card-info">
-                        <span class="device__card-title">Café Martínez</span>
-                        <span class="device__card-sub">Café · ayer 10:02</span>
-                      </div>
-                      <span class="device__card-amount">−$ 2.800</span>
-                    </div>
-                  </div>
-                  <div class="device__card device__card--fixed">
-                    <div class="device__card-row">
-                      <span class="device__card-emoji">📺</span>
-                      <div class="device__card-info">
-                        <span class="device__card-title">Netflix</span>
-                        <span class="device__card-sub">Fijo · vence 21</span>
-                      </div>
-                      <span class="device__card-amount">$ 7.490</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="device__tabbar">
-                  <span class="device__tab is-active">Inicio</span>
-                  <span class="device__tab">Gastos</span>
-                  <span class="device__tab">Fijos</span>
-                  <span class="device__tab">Control</span>
-                </div>
-              </div>
-            </div>
-            <!-- Soft glow underneath the device -->
-            <div class="device__glow"></div>
+          <!-- Real Home screenshot in a clean phone bezel -->
+          <div class="phone phone--hero reveal">
+            <div class="phone__glow" aria-hidden="true"></div>
+            <img class="phone__shot" src="/assets/screens/home.webp" width="720" height="1565"
+                 alt="Inicio de Manifiesto: saldo del mes, cuánto se puede gastar por día, gastos variables y fijos, y una meta de ahorro."
+                 decoding="async" fetchpriority="high" />
           </div>
 
           <!-- Features list (NOT a card grid — typographic) -->
@@ -410,6 +376,293 @@
       </div>
     </section>
 
+    <!-- ── REAL SCREENS GALLERY ─────────────────────────── -->
+    <section class="section section--soft" id="capturas">
+      <div class="shell">
+        <div class="section__head">
+          <div class="eyebrow reveal">la app por dentro</div>
+          <h2 class="section__title reveal">No es un render. <em>Es la app.</em></h2>
+          <p class="section__lede reveal">
+            Capturas reales de Manifiesto en uso: el control diario, los cierres
+            de mes, el jardín de hitos, los planes. Deslizá para recorrerlas.
+          </p>
+        </div>
+
+        <div class="gallery reveal" role="list" aria-label="Capturas de pantalla de Manifiesto">
+          <figure class="gallery__item" role="listitem">
+            <div class="phone"><img class="phone__shot" src="/assets/screens/splash.webp" width="720" height="1565" loading="lazy" decoding="async" alt="Pantalla de bienvenida de Manifiesto: el helecho de marca y el logotipo sobre verde profundo." /></div>
+            <figcaption class="gallery__cap"><strong>Bienvenida</strong>El arranque, cada día</figcaption>
+          </figure>
+          <figure class="gallery__item" role="listitem">
+            <div class="phone"><img class="phone__shot" src="/assets/screens/control.webp" width="720" height="1565" loading="lazy" decoding="async" alt="Pantalla Control: aviso de que te pasaste del mes, monto por encima, ritmo y cupo diario." /></div>
+            <figcaption class="gallery__cap"><strong>Control</strong>Tu situación, día a día</figcaption>
+          </figure>
+          <figure class="gallery__item" role="listitem">
+            <div class="phone"><img class="phone__shot" src="/assets/screens/gastos.webp" width="720" height="1565" loading="lazy" decoding="async" alt="Pantalla Gastos: total del ciclo, peso por categoría y un calendario del mes coloreado por día." /></div>
+            <figcaption class="gallery__cap"><strong>Gastos</strong>Tu mes en un vistazo</figcaption>
+          </figure>
+          <figure class="gallery__item" role="listitem">
+            <div class="phone"><img class="phone__shot" src="/assets/screens/fijos.webp" width="720" height="1565" loading="lazy" decoding="async" alt="Pantalla Fijos: progreso del ciclo, cuánto ya pagaste, dinero libre y los gastos fijos del mes." /></div>
+            <figcaption class="gallery__cap"><strong>Fijos</strong>Todo lo recurrente, ordenado</figcaption>
+          </figure>
+          <figure class="gallery__item" role="listitem">
+            <div class="phone"><img class="phone__shot" src="/assets/screens/logros.webp" width="720" height="1565" loading="lazy" decoding="async" alt="Pantalla Logros: colección de hitos, 10 de 18 desbloqueados, con sus íconos botánicos." /></div>
+            <figcaption class="gallery__cap"><strong>Logros</strong>Tu colección de hitos</figcaption>
+          </figure>
+          <figure class="gallery__item" role="listitem">
+            <div class="phone"><img class="phone__shot" src="/assets/screens/floracion.webp" width="720" height="1565" loading="lazy" decoding="async" alt="Celebración Floración a pantalla completa: el primer brote, sobre fondo verde profundo." /></div>
+            <figcaption class="gallery__cap"><strong>Floración</strong>El hito se celebra una vez</figcaption>
+          </figure>
+          <figure class="gallery__item" role="listitem">
+            <div class="phone"><img class="phone__shot" src="/assets/screens/planes.webp" width="720" height="1565" loading="lazy" decoding="async" alt="Pantalla Plan del hogar: plan mensual y anual, con el anual recomendado." /></div>
+            <figcaption class="gallery__cap"><strong>Planes</strong>Un hogar, una cuenta</figcaption>
+          </figure>
+          <figure class="gallery__item" role="listitem">
+            <div class="phone"><img class="phone__shot" src="/assets/screens/meta.webp" width="720" height="1565" loading="lazy" decoding="async" alt="Pantalla Meta de ahorro: fondo de emergencia al 65%, con barra de progreso y proyección." /></div>
+            <figcaption class="gallery__cap"><strong>Metas</strong>Ahorro con seguimiento</figcaption>
+          </figure>
+          <figure class="gallery__item" role="listitem">
+            <div class="phone"><img class="phone__shot" src="/assets/screens/ediciones.webp" width="720" height="1565" loading="lazy" decoding="async" alt="Pantalla Ediciones: saldo acumulado de cuatro ciclos cerrados, cada uno con su margen." /></div>
+            <figcaption class="gallery__cap"><strong>Ediciones</strong>Cada cierre, revivible</figcaption>
+          </figure>
+          <figure class="gallery__item" role="listitem">
+            <div class="phone"><img class="phone__shot" src="/assets/screens/wrapped.webp" width="720" height="1565" loading="lazy" decoding="async" alt="Resumen del mes 'Tu mes, en cifras' — la edición de mayo." /></div>
+            <figcaption class="gallery__cap"><strong>Tu mes en cifras</strong>El resumen del ciclo</figcaption>
+          </figure>
+          <figure class="gallery__item" role="listitem">
+            <div class="phone"><img class="phone__shot" src="/assets/screens/agregar-gasto.webp" width="720" height="1565" loading="lazy" decoding="async" alt="Pantalla Agregar gasto: monto, montos rápidos y la grilla de categorías." /></div>
+            <figcaption class="gallery__cap"><strong>Cargar</strong>Un gasto en segundos</figcaption>
+          </figure>
+          <figure class="gallery__item" role="listitem">
+            <div class="phone"><img class="phone__shot" src="/assets/screens/que-cargas.webp" width="720" height="1565" loading="lazy" decoding="async" alt="Hoja '¿Qué cargás?': gasto, importar captura, día sin gasto, ingreso o gasto fijo." /></div>
+            <figcaption class="gallery__cap"><strong>¿Qué cargás?</strong>Gasto, ingreso o día sin gasto</figcaption>
+          </figure>
+          <figure class="gallery__item" role="listitem">
+            <div class="phone"><img class="phone__shot" src="/assets/screens/notificaciones.webp" width="720" height="1565" loading="lazy" decoding="async" alt="Pantalla Notificaciones: cierre del día y los avisos de cada ciclo cerrado." /></div>
+            <figcaption class="gallery__cap"><strong>Avisos</strong>Solo lo que importa</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── GARDEN (streak system) · forest band ─────────── -->
+    <section class="section section--forest" id="jardin">
+      <div class="aurora aurora--soft" aria-hidden="true">
+        <span class="aurora__blob aurora__blob--top"></span>
+        <span class="aurora__blob aurora__blob--bottom"></span>
+      </div>
+      <div class="shell">
+        <div class="garden-grid-layout">
+          <div class="garden-copy">
+            <div class="eyebrow eyebrow--on-dark reveal">tu jardín</div>
+            <h2 class="section__title section__title--on-dark reveal">
+              Cada día que registrás, <em>plantás un brote</em>.
+            </h2>
+            <p class="section__lede section__lede--on-dark reveal">
+              Manifiesto convierte el hábito en algo que se ve crecer. Anotás
+              un gasto (o marcás un día sin gastos) y plantás el brote del día.
+              Una semana entera y tu jardín <strong>florece</strong>.
+            </p>
+            <ul class="garden-points reveal">
+              <li><span class="garden-points__dot" style="background:var(--g-seed)"></span> Empieza como semilla y se vuelve helecho con los días.</li>
+              <li><span class="garden-points__dot" style="background:var(--g-bloom)"></span> La semana perfecta (7 de 7) hace florecer todos los brotes.</li>
+              <li><span class="garden-points__dot" style="background:var(--g-skip)"></span> ¿Te saltaste un día? Sin culpa: el jardín te espera intacto.</li>
+            </ul>
+          </div>
+
+          <!-- The real garden card — cream card on the forest band, like the app -->
+          <div class="garden-card reveal" aria-label="Ejemplo de jardín de rachas">
+            <div class="garden-card__head">
+              <span class="garden-card__title">Tu jardín</span>
+              <span class="garden-card__meta">últimas 5 semanas</span>
+            </div>
+            <div class="garden-weekdays" aria-hidden="true">
+              <span>L</span><span>M</span><span>M</span><span>J</span><span>V</span><span>S</span><span>D</span>
+            </div>
+            <!-- Grid is built by main.js (buildGarden) from a real stage pattern -->
+            <div class="garden-grid" id="garden-grid" role="img" aria-label="Cinco semanas de brotes: semillas, helechos y una semana en flor"></div>
+            <div class="garden-legend" aria-hidden="true">
+              <span class="garden-legend__item"><i style="background:var(--g-seed)"></i>semilla</span>
+              <span class="garden-legend__item"><i style="background:var(--g-grow)"></i>creciendo</span>
+              <span class="garden-legend__item"><i style="background:var(--g-root)"></i>arraigado</span>
+              <span class="garden-legend__item"><i style="background:var(--g-bloom)"></i>floración</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── ACHIEVEMENTS · continues the forest band ──────── -->
+    <section class="section section--forest section--forest-seam" id="logros">
+      <div class="shell">
+        <div class="section__head">
+          <div class="eyebrow eyebrow--on-dark reveal">logros</div>
+          <h2 class="section__title section__title--on-dark reveal">
+            Hitos que se <em>celebran</em>, no que se acumulan.
+          </h2>
+          <p class="section__lede section__lede--on-dark reveal">
+            Tu primer gasto, tu primera meta, una racha de 30 días, una semana
+            sin gastar de más. Cuando alcanzás un hito, el jardín florece a
+            pantalla completa. Una vez. Sin ruido, sin insignias que se apilan.
+          </p>
+        </div>
+
+        <div class="achievements">
+          <!-- The celebration "Floración" moment, recreated -->
+          <figure class="floracion reveal" aria-label="Celebración de un hito">
+            <div class="floracion__fireflies" id="floracion-fireflies" aria-hidden="true"></div>
+            <div class="floracion__aura" aria-hidden="true"></div>
+            <div class="floracion__medallion">
+              <!-- Real FILLED achievement icon `goal_completed` (the open flower) — the app's own Floración art -->
+              <svg viewBox="0 0 1024 1024" width="118" height="118" aria-hidden="true">
+                <path fill="#1C3D27" d="M0 0L1024 0L1024 1024L521.1 1024L503.5 1024L0 1024L0 0Z"/>
+                <path fill="#FEFEFE" d="M429.2 291.6C433.2 276.0 441.9 264.2 455.9 256.0C480.2 242.0 513.7 238.4 540.7 245.2C558.7 249.8 577.7 259.9 587.5 276.3C590.6 281.5 592.5 287.5 594.1 293.4C640.1 278.3 681.6 325.2 693.7 365.0C702.6 394.0 700.2 410.8 682.2 434.5C715.0 466.7 691.1 525.7 663.2 552.8C643.1 572.3 625.0 581.4 597.2 575.7C589.0 610.1 553.2 625.0 520.9 626.7C521.1 680.1 520.5 734.2 521.1 787.5C532.4 750.9 558.0 720.4 592.0 702.8C609.6 693.6 628.9 688.1 648.8 686.6C670.2 684.8 665.3 691.0 663.3 709.7C662.4 718.0 658.9 728.5 656.0 736.5C643.1 771.1 617.1 799.2 583.6 814.8C561.5 825.0 544.9 827.0 521.2 827.0C521.0 852.1 520.9 877.2 521.1 902.3L521.1 1024L503.5 1024C503.3 938.8 504.3 853.0 503.5 768.0C494.9 768.1 487.2 768.2 478.7 767.3C449.9 763.7 423.0 750.8 402.3 730.5C379.9 708.7 365.4 680.0 361.0 649.1C360.7 646.5 360.3 643.6 360.0 641.0C359.0 632.4 358.4 627.3 369.2 627.4C375.1 627.5 381.2 628.0 387.2 628.7C422.9 633.2 455.5 651.4 477.9 679.5C490.1 695.0 498.7 711.1 503.9 730.2C502.7 697.2 503.6 659.7 503.9 626.6C470.1 625.0 436.5 607.1 429.8 571.5C415.1 576.4 406.6 576.7 391.4 572.0C348.8 558.7 311.6 487.9 332.2 446.6C334.9 441.1 338.5 436.0 342.8 431.6C331.7 420.5 326.2 408.1 326.3 392.2C326.5 365.0 342.6 334.1 361.6 315.2C376.0 301.0 396.0 289.5 416.7 290.1C420.9 290.2 425.1 290.3 429.2 291.6Z"/>
+                <path fill="#A9D57F" d="M550.9 491.4C561.0 500.0 571.0 516.8 577.5 528.3C617.4 598.5 537.2 629.6 479.8 611.1C458.8 604.0 443.2 589.3 439.6 566.9C465.2 546.2 476.1 529.5 489.2 499.1C491.0 499.7 492.7 500.2 494.5 500.6C515.9 506.0 532.3 502.5 550.9 491.4Z"/>
+                <path fill="#A9D57F" d="M600.6 425.7C622.8 423.0 666.0 426.8 679.1 447.2C698.2 476.9 679.9 521.7 657.1 544.3C651.0 550.3 646.0 554.1 639.0 558.8C625.5 566.2 613.8 568.6 598.4 565.1C595.6 530.7 581.5 510.3 559.3 484.9C561.2 483.1 563.0 481.2 564.7 479.2C577.0 465.4 583.4 447.4 582.3 428.9C587.4 427.1 595.2 426.1 600.6 425.7Z"/>
+                <path fill="#A9D57F" d="M410.3 301.1C416.7 300.6 421.9 301.3 428.3 302.0C428.1 330.8 447.3 357.9 464.8 379.2C447.9 397.6 441.4 412.9 441.9 437.7C422.8 441.0 412.5 442.1 393.1 439.8C367.0 435.2 341.0 428.7 337.8 398.0C335.3 374.4 346.3 350.9 360.7 332.8C373.1 317.1 389.8 303.6 410.3 301.1Z"/>
+                <path fill="#A9D57F" d="M607.8 301.2C653.2 298.0 693.8 361.9 686.9 402.8C685.2 413.0 680.2 420.4 673.2 427.5C659.6 420.1 648.8 417.1 633.7 415.1C617.3 412.9 597.3 414.5 581.3 418.2C574.5 393.2 565.9 383.9 545.1 369.7C550.6 354.2 561.1 335.0 571.7 322.5C582.0 310.4 591.6 302.5 607.8 301.2Z"/>
+                <path fill="#A9D57F" d="M502.7 253.2C505.5 252.7 512.5 252.8 515.4 252.9C531.9 253.2 549.8 257.1 563.5 266.6C575.2 274.8 581.7 283.8 584.3 297.9C559.8 314.4 546.2 339.2 535.5 365.8C529.1 363.3 521.6 362.5 514.8 362.1C497.0 361.8 488.6 364.9 473.2 372.9C456.6 354.3 441.4 331.2 439.2 305.8C436.1 270.7 473.8 255.3 502.7 253.2Z"/>
+                <path fill="#A9D57F" d="M352.3 438.4C370.5 450.0 401.0 452.9 422.6 451.4C429.3 451.0 436.6 449.5 443.2 448.1C443.5 449.0 443.7 449.9 444.0 450.8C449.5 470.7 461.8 484.9 479.5 495.0C472.3 513.0 462.2 529.8 449.6 544.6C448.6 545.6 447.5 546.6 446.5 547.6C435.9 557.9 425.4 564.7 410.1 564.3C392.7 563.9 378.6 555.8 366.8 543.4C349.1 524.7 336.8 495.6 337.3 469.6C337.6 456.4 342.8 447.2 352.3 438.4Z"/>
+                <path fill="#A9D57F" d="M370.2 638.4C397.2 637.4 429.0 649.1 449.6 666.1C480.5 691.5 493.2 719.3 498.0 757.9C468.3 755.9 448.3 752.5 422.9 734.0C400.5 717.6 384.0 694.3 376.1 667.7C373.2 658.0 371.8 648.4 370.2 638.4Z"/>
+                <path fill="#A9D57F" d="M646.8 697.7C648.5 697.4 652.2 697.4 654.1 697.3C651.7 713.4 649.2 725.2 642.7 740.3C627.2 776.3 595.9 803.1 557.9 812.6C550.4 814.4 543.0 815.1 535.3 815.9C532.5 815.9 529.5 815.9 526.7 815.9C528.2 779.6 551.3 744.2 579.8 722.8C599.9 707.7 622.1 700.0 646.8 697.7Z"/>
+              </svg>
+            </div>
+            <span class="floracion__bloom floracion__bloom--1" aria-hidden="true"></span>
+            <span class="floracion__bloom floracion__bloom--2" aria-hidden="true"></span>
+            <figcaption class="floracion__caption">
+              <span class="floracion__eyebrow">hito alcanzado</span>
+              <span class="floracion__title">Tu jardín floreció</span>
+            </figcaption>
+          </figure>
+
+          <!-- The 5 families of achievements — the app's real line icons (forest #256E15 + coral #C2521C) -->
+          <ul class="badge-row reveal">
+            <li class="badge">
+              <span class="badge__icon">
+                <svg viewBox="0 0 48 48" aria-hidden="true"><g stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" fill="none">
+                  <path d="M9 37 Q24 33 39 37" stroke="#256E15"/><path d="M24 37 V23" stroke="#256E15"/>
+                  <path d="M24 27 C18 27 14 23 13 18 C19 18 23 22 24 27 Z" fill="#C2521C" stroke="none"/>
+                  <path d="M24 25 C30 25 34 21 35 16 C29 16 25 20 24 25 Z" fill="#256E15" stroke="none"/>
+                  <circle cx="24" cy="39.5" r="1.7" fill="#C2521C" stroke="none"/></g></svg>
+              </span>
+              <span class="badge__label">Primeros pasos</span>
+            </li>
+            <li class="badge">
+              <span class="badge__icon">
+                <svg viewBox="0 0 48 48" aria-hidden="true"><g stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" fill="none">
+                  <path d="M24 39 V21" stroke="#256E15"/>
+                  <path d="M24 30 C18 30 14 26 13 21 C19 21 23 25 24 30 Z" fill="#C2521C" stroke="none"/>
+                  <path d="M24 27 C30 27 34 23 35 18 C29 18 25 22 24 27 Z" fill="#256E15" stroke="none"/></g></svg>
+              </span>
+              <span class="badge__label">Rachas</span>
+            </li>
+            <li class="badge">
+              <span class="badge__icon">
+                <svg viewBox="0 0 48 48" aria-hidden="true"><g stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" fill="none">
+                  <g transform="rotate(0 24 24)"><path d="M24 24 C24 17 21 13 18 11 C20 16 21 20 24 24 Z" fill="#256E15" stroke="none"/></g>
+                  <g transform="rotate(72 24 24)"><path d="M24 24 C24 17 21 13 18 11 C20 16 21 20 24 24 Z" fill="#256E15" stroke="none"/></g>
+                  <g transform="rotate(144 24 24)"><path d="M24 24 C24 17 21 13 18 11 C20 16 21 20 24 24 Z" fill="#256E15" stroke="none"/></g>
+                  <g transform="rotate(216 24 24)"><path d="M24 24 C24 17 21 13 18 11 C20 16 21 20 24 24 Z" fill="#256E15" stroke="none"/></g>
+                  <g transform="rotate(288 24 24)"><path d="M24 24 C24 17 21 13 18 11 C20 16 21 20 24 24 Z" fill="#256E15" stroke="none"/></g>
+                  <circle cx="24" cy="24" r="4.4" fill="#C2521C" stroke="none"/></g></svg>
+              </span>
+              <span class="badge__label">Metas</span>
+            </li>
+            <li class="badge">
+              <span class="badge__icon">
+                <svg viewBox="0 0 48 48" aria-hidden="true"><g stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" fill="none">
+                  <circle cx="24" cy="30" r="11" stroke="#256E15"/>
+                  <path d="M24 25 V35.5" stroke="#C2521C"/>
+                  <path d="M27 27 Q22 24.5 21.5 28.5 Q21.5 31 25 31.5 Q28 32 27.5 34.5 Q27 37 22 35" stroke="#C2521C"/>
+                  <path d="M24 19 C19 19 16 16 15 12 C20 12 23 15 24 19 Z" fill="#C2521C" stroke="none"/>
+                  <path d="M24 17 C28 17 31 14 32 11 C28 11 25 14 24 17 Z" fill="#256E15" stroke="none"/></g></svg>
+              </span>
+              <span class="badge__label">Bajo cupo</span>
+            </li>
+            <li class="badge">
+              <span class="badge__icon">
+                <svg viewBox="0 0 48 48" aria-hidden="true"><g stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" fill="none">
+                  <path d="M14 31 C14 31 19 21 24 13 C29 21 34 31 34 31 A10 10 0 0 1 14 31 Z" stroke="#256E15"/>
+                  <path d="M19.5 31 A4.5 4.5 0 0 0 24 35.5" stroke="#C2521C"/></g></svg>
+              </span>
+              <span class="badge__label">Sin gasto</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── PLANS / PRICING ──────────────────────────────── -->
+    <section class="section section--soft" id="planes">
+      <div class="shell">
+        <div class="section__head">
+          <div class="eyebrow reveal">planes</div>
+          <h2 class="section__title reveal">
+            Un hogar, <em>una cuenta</em>.
+          </h2>
+          <p class="section__lede reveal">
+            Todo Manifiesto, completo, para vos y quien sumes. Sin niveles ni
+            funciones bloqueadas: o tenés la app entera, o nada a medias.
+            Empezás con <strong>14 días de acceso completo</strong>.
+          </p>
+        </div>
+
+        <div class="plans">
+          <!-- Monthly — quiet -->
+          <article class="plan reveal">
+            <header class="plan__head">
+              <span class="plan__name">Plan Mensual</span>
+              <span class="plan__tagline">Para empezar sin compromisos.</span>
+            </header>
+            <div class="plan__price">
+              <span class="plan__amount">US$ 4,99</span>
+              <span class="plan__per">/ mes</span>
+            </div>
+            <span class="plan__sub">hasta 2 personas en el hogar</span>
+            <ul class="plan__features">
+              <li>Una sola fuente de números, con quien sumes</li>
+              <li>Cupo diario, gastos fijos y metas de ahorro</li>
+              <li>Avisos contextuales y dual-currency $/US$</li>
+              <li>Modo claro y oscuro · cancelás cuando quieras</li>
+            </ul>
+          </article>
+
+          <!-- Annual — hero -->
+          <article class="plan plan--hero reveal">
+            <div class="plan__fireflies" id="plan-fireflies" aria-hidden="true"></div>
+            <span class="plan__badge">recomendado</span>
+            <svg class="plan__fern" viewBox="0 0 841 742" aria-hidden="true">
+              <g>
+                <path fill="#FDFEF9" transform="scale(0.725 0.725318)" d="M930.253 161.648C952.922 159.917 1062.65 162.321 1076.44 174.946C1079.49 177.73 1079.97 182.367 1080.01 186.271C1080.2 205.99 1073.97 226.042 1069.75 245.157C1050.77 331.198 1019.52 419.339 967.311 491.088C958.351 503.402 949.002 515.375 938.355 526.29C892.277 573.533 835.21 606.984 767.766 607.738C704.872 608.441 663.17 580.618 619.808 538.225C612.042 551.619 604.976 565.241 599.394 579.713C562.824 674.534 577.135 784.414 575.226 884.105C575.094 891.017 574.839 899.088 569.313 904.098C566.753 906.419 563.54 907.347 560.122 907.064C553.915 906.55 549.809 902.664 545.937 898.219C544.903 850.17 546.229 802.453 545.856 754.442C545.687 732.639 546.482 705.849 543.286 684.587C538.997 656.056 525.326 615.996 505.998 594.098C471.757 641.839 423.33 665.422 364.287 656.958C361.934 656.532 359.589 656.063 357.252 655.552C292.47 641.763 247.364 597.198 212.432 543.25C202.547 527.751 193.559 511.698 185.511 495.17C176.231 476.329 139.547 392.415 143.742 375.865C144.27 373.78 145.452 372.567 147.286 371.505C155.165 366.941 176.958 362.948 186.794 361.124C251.798 349.071 338.872 343.373 403.143 360.107C449.172 372.091 487.461 397.644 511.7 439.119C538.02 484.154 532.767 522.432 520.174 570.237C529.873 584.248 539.612 597.775 547.484 612.911C549.8 617.364 552.056 622.19 554.717 626.383C562.515 596.662 570.598 571.293 584.369 543.61C589.503 533.291 595.151 523.284 600.587 513.116C597.622 506.214 593.352 497.641 590.117 490.746C578.915 466.869 574.123 446.843 572.474 420.558C569.457 364.126 588.941 308.8 626.655 266.71C699.915 183.799 826.22 168.029 930.253 161.648Z"/>
+                <path fill="#A9D57F" transform="scale(0.725 0.725318)" d="M940.001 190.008C976.452 189.436 1012.9 191.405 1049.08 195.901C1047.96 206.133 1046.52 216.328 1044.75 226.468C1039.09 258.278 1028.32 293.779 1017.85 324.454C990.198 405.487 949.024 493.189 876.722 543.311C840.482 568.434 786.505 586.1 742.513 577.238C698.365 568.346 662.384 548.669 636.588 511.375C651.629 486.891 667.932 470.004 688.321 449.745C700.69 437.455 710.432 427.807 724.066 416.835C740.014 403.518 756.623 391.011 773.828 379.362C778.29 376.362 782.793 373.335 787.494 370.523C795.451 365.757 804.841 362.059 811.563 355.592C814.02 353.139 814.386 349.645 812.82 346.623C807.626 336.598 797.538 342.155 790.071 345.557C782.881 348.832 776.098 352.422 769.25 356.208C724.897 380.222 684.913 411.546 650.981 448.86C639.941 460.912 629.717 473.591 619.353 486.222C607.842 463.542 601.504 438.592 600.793 413.168C599.721 364.873 617.657 318.089 650.74 282.886C701.833 229.232 768.24 210.12 839.336 199.1C872.689 194.145 906.299 191.11 940.001 190.008Z"/>
+                <path fill="#A9D57F" transform="scale(0.725 0.725318)" d="M299.425 371.216C325.942 368.849 368.616 375.554 394.913 381.185C431.308 388.979 467.255 411.085 487.374 442.889C509.898 478.492 511.072 511.978 502.224 551.543C466.873 522.344 431.932 496.886 387.985 482.014C381.25 479.735 358.193 468.482 352.419 475.503C344.307 485.366 373.887 494.667 379.659 497.195C386.443 500.186 393.14 503.367 399.744 506.736C426.763 520.381 446.339 534.016 469.306 553.437C477.807 560.605 483.531 567.102 491.042 575.382C476.584 600.7 453.484 619.958 425.978 629.626C395.077 640.598 358.147 637.769 328.735 623.233C253.52 586.058 210.161 502.676 181.261 427.685C176.412 415.103 172.678 401.625 168.179 388.882C202.606 377.39 262.485 373.148 299.425 371.216Z"/>
+              </g>
+            </svg>
+            <header class="plan__head">
+              <span class="plan__name">Plan Anual</span>
+              <span class="plan__tagline">El plan más elegido.</span>
+            </header>
+            <div class="plan__price">
+              <span class="plan__amount">US$ 39,99</span>
+              <span class="plan__per">/ año</span>
+            </div>
+            <span class="plan__sub">US$ 3,33 / mes · hasta 4 personas</span>
+            <span class="plan__ribbon">Ahorrás US$ 19,89 al año · −33%</span>
+            <ul class="plan__features">
+              <li>Todo lo del plan mensual, para hasta 4 personas</li>
+              <li>Atención prioritaria por correo</li>
+              <li>Estrenás las nuevas funciones antes que nadie</li>
+            </ul>
+          </article>
+        </div>
+
+        <p class="plans__foot reveal">
+          Precios de referencia en dólares; el valor final lo muestra la App
+          Store en tu moneda antes de confirmar. Se cobra al hogar, no por persona.
+        </p>
+      </div>
+    </section>
+
     <!-- ── PRINCIPLES ───────────────────────────────────── -->
     <section class="section" id="principios">
       <div class="shell">
@@ -475,10 +728,12 @@
               </svg>
             </summary>
             <p>
-              El uso básico de la app es gratis. Más adelante vamos a
-              ofrecer un plan Pro con funcionalidades extra; te avisamos
-              dentro de la app antes de que ningún precio cambie. Sin
-              prueba que se transforma en cobro sin avisar.
+              Manifiesto es una suscripción por hogar, no por persona: Plan
+              Mensual (US$ 4,99) o Plan Anual (US$ 39,99, el más elegido).
+              Empezás con 14 días de acceso completo para conocer toda la app,
+              y cancelás cuando quieras. Un solo plan cubre a todo el hogar
+              (hasta 2 o 4 personas según el plan). No hay funciones a medias:
+              tenés la app entera desde el primer día.
             </p>
           </details>
           <details class="faq__item reveal">
@@ -613,7 +868,7 @@
         </div>
 
         <div class="footer__col">
-          <h4>Documentos</h4>
+          <h3>Documentos</h3>
           <ul>
             <li><a href="/privacy/">Política de privacidad</a></li>
             <li><a href="/terms/">Términos de uso</a></li>
@@ -621,7 +876,7 @@
         </div>
 
         <div class="footer__col">
-          <h4>Contacto</h4>
+          <h3>Contacto</h3>
           <ul>
             <li><a href="mailto:soporte@manifiestoapp.com">soporte@manifiestoapp.com</a></li>
           </ul>
@@ -635,8 +890,8 @@
     </div>
   </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
-  <script src="/assets/main.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
+  <script defer src="/assets/main.js"></script>
 </body>
 </html>

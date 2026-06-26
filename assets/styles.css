@@ -33,6 +33,14 @@
   --peach-soft: #FADFC8;
   --peach-deep: #B84014;
 
+  /* Garden / streak accents — one coherent set, mirrors the real
+     glyph fills so legend · bullet dots · brotes all speak the same. */
+  --g-seed:  #C29A5E;   /* seed husk (tan) */
+  --g-grow:  #9FD580;   /* young leaf */
+  --g-root:  #3C7D34;   /* established stem / deep leaf */
+  --g-bloom: #E2935E;   /* flower coral — the one warm accent of the band */
+  --g-skip:  #CBC6B6;   /* skipped day (no guilt) */
+
   /* Paper */
   --cream: #FFFBF2;            /* canonical surfaceCream from palette */
   --paper: #F4FDF2;
@@ -41,7 +49,7 @@
   /* Text */
   --text-ink: #0E1A12;
   --text-muted: #4A5A4F;
-  --text-soft: #738174;
+  --text-soft: #5E6C5F;   /* AA on cream 4.6:1 (was #738174 = 3.97 fail) */
   --text-on-dark: #FFFBF2;
   --text-on-dark-muted: rgba(255, 251, 242, 0.62);
   --text-on-dark-soft: rgba(255, 251, 242, 0.40);
@@ -102,7 +110,6 @@ html, body { margin: 0; padding: 0; }
 html {
   background: var(--welcome-bg);
   color: var(--text-ink);
-  scroll-behavior: smooth;
   text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
   /* iOS Safari: keep momentum scrolling, prevent overscroll bounce
@@ -130,6 +137,7 @@ body {
 
 a { color: inherit; text-decoration: none; }
 img, svg { display: block; max-width: 100%; }
+img { height: auto; }   /* never let a CSS width leave the attribute height → stretched img */
 
 button {
   font: inherit;
@@ -363,8 +371,8 @@ button {
   top: 6%;
   width: clamp(280px, 36vw, 520px);
   aspect-ratio: 1;
-  background: radial-gradient(closest-side, rgba(242, 181, 138, 0.36), transparent 72%);
-  animation-duration: 11s;
+  background: radial-gradient(closest-side, rgba(214, 150, 120, 0.14), transparent 72%);
+  animation-duration: 18s;
 }
 
 .aurora__blob--bottom {
@@ -372,14 +380,15 @@ button {
   top: 52%;
   width: clamp(300px, 42vw, 600px);
   aspect-ratio: 1;
-  background: radial-gradient(closest-side, rgba(199, 238, 156, 0.28), transparent 72%);
-  animation-duration: 13s;
+  background: radial-gradient(closest-side, rgba(150, 195, 150, 0.14), transparent 72%);
+  animation-duration: 20s;
   animation-delay: -5.5s;
 }
 
 @keyframes aurora-breath {
-  0%   { transform: translate3d(0, 0, 0) scale(0.94); opacity: 0.32; }
-  100% { transform: translate3d(4vw, -3vh, 0) scale(1.10); opacity: 0.50; }
+  /* no scale() — re-rastering a blur(56–74px) every frame is the cost; drift + fade only */
+  0%   { transform: translate3d(0, 0, 0);       opacity: 0.22; }
+  100% { transform: translate3d(4vw, -3vh, 0);  opacity: 0.36; }
 }
 
 /* Firefly layer — JS injects N <i.firefly> with --mx/--my/--dur/--delay.
@@ -400,11 +409,9 @@ button {
   width: 2.5px;
   height: 2.5px;
   border-radius: 50%;
-  background: var(--fc, #C7EE9C);
-  color: var(--fc, #C7EE9C);
-  box-shadow:
-    0 0 6px currentColor,
-    0 0 14px currentColor;
+  background: var(--fc, #A9C98E);
+  color: var(--fc, #A9C98E);
+  box-shadow: 0 0 4px currentColor;
   opacity: 0;
   will-change: transform, opacity;
   animation:
@@ -417,9 +424,8 @@ button {
   width: 3px;
   height: 3px;
   box-shadow:
-    0 0 8px currentColor,
-    0 0 22px currentColor,
-    0 0 36px rgba(255, 251, 242, 0.3);
+    0 0 5px currentColor,
+    0 0 12px rgba(255, 251, 242, 0.18);
 }
 
 @keyframes firefly-drift {
@@ -432,9 +438,9 @@ button {
 
 @keyframes firefly-twinkle {
   0%   { opacity: 0.12; }
-  25%  { opacity: 0.55; }
-  60%  { opacity: 0.85; }
-  100% { opacity: 0.18; }
+  25%  { opacity: 0.42; }
+  60%  { opacity: 0.6; }
+  100% { opacity: 0.14; }
 }
 
 /* Hero composition · single column, vertical, fern behind wordmark.
@@ -502,8 +508,8 @@ button {
 .hero__fern {
   position: relative;
   width: clamp(180px, 56vw, 220px);
-  aspect-ratio: 1;
-  color: var(--cream);
+  aspect-ratio: 841 / 742; /* the fern's own ratio — matches the app's FernLogo (height = w × 742/841) */
+  color: #FDFEF9;          /* fern silhouette + stem-tracer cream — FIXED, must not flip to dark via --cream */
   --fern-leaf: var(--leaf);
   filter: drop-shadow(0 24px 60px rgba(8, 34, 26, 0.45));
   z-index: 1;
@@ -517,17 +523,20 @@ button {
 .hero__fern svg { width: 100%; height: 100%; display: block; }
 
 .fern-silhouette { transition: opacity 800ms var(--ease-out); }
-.fern-leaf       { transform-box: fill-box; }
+/* No transform-box here: the leaves carry a baked `scale(0.725 …)` attribute
+   that must pivot on the SVG origin (0,0), exactly like the silhouette, so the
+   green fills register inside the cream outline. `fill-box` re-pivoted the
+   scale to each leaf's own box and shoved the leaves off the silhouette. */
 
 /* Halo behind the fern — gives the leaves a luminous edge */
 .hero__monument::before {
   content: '';
   position: absolute;
   inset: 8%;
-  background: radial-gradient(closest-side, rgba(166, 239, 143, 0.32), transparent 72%);
+  background: radial-gradient(closest-side, rgba(166, 239, 143, 0.22), transparent 72%);
   filter: blur(36px);
   z-index: 0;
-  opacity: 0.7;
+  opacity: 0.6;
   pointer-events: none;
 }
 
@@ -561,19 +570,9 @@ button {
   display: inline-block;
   color: var(--peach);
   transform: translate(0.02em, -0.04em);
-  position: relative;
-}
-
-/* Faint peach glow behind the dot */
-.hero__wordmark .dot::after {
-  content: '';
-  position: absolute;
-  inset: -40%;
-  background: radial-gradient(closest-side, rgba(242, 181, 138, 0.55), transparent 65%);
-  filter: blur(10px);
-  z-index: -1;
-  border-radius: 50%;
-  pointer-events: none;
+  /* A tight glint of warmth, not a radial smudge — the peach period already
+     carries the accent; this just lets it catch the light. */
+  text-shadow: 0 0 6px rgba(242, 181, 138, 0.22);
 }
 
 /* Tagline — keep the italic Fraunces feel (it's the soft brand
@@ -910,14 +909,14 @@ main { background: var(--cream); position: relative; }
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(70% 60% at 100% 0%, rgba(242, 181, 138, 0.18), transparent 65%);
+  background: radial-gradient(70% 60% at 100% 0%, rgba(242, 181, 138, 0.12), transparent 65%);
   opacity: 0;
   transition: opacity 360ms var(--ease-out);
   z-index: -1;
 }
 
 .legal-card:nth-child(2)::before {
-  background: radial-gradient(70% 60% at 100% 0%, rgba(166, 239, 143, 0.22), transparent 65%);
+  background: radial-gradient(70% 60% at 100% 0%, rgba(166, 239, 143, 0.14), transparent 65%);
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -1098,7 +1097,7 @@ main { background: var(--cream); position: relative; }
   line-height: 1.6;
 }
 
-.footer__col h4 {
+.footer__col h3 {
   font-family: var(--font-mono);
   font-size: 11px;
   font-weight: 500;
@@ -1115,8 +1114,8 @@ main { background: var(--cream); position: relative; }
   align-items: center;
   font-size: 15px;
   color: var(--text-on-dark-muted);
-  padding-block: 8px;
-  min-height: 36px;
+  padding-block: 10px;
+  min-height: 44px;
   transition: color 220ms var(--ease-out);
 }
 
@@ -1260,281 +1259,6 @@ main { background: var(--cream); position: relative; }
     gap: clamp(48px, 6vw, 96px);
   }
 }
-
-/* ── Device frame (stylized iPhone) ────────────────────────── */
-
-.device {
-  position: relative;
-  width: 100%;
-  max-width: 320px;
-  margin-inline: auto;
-  aspect-ratio: 9 / 19;
-}
-
-@media (min-width: 880px) {
-  .device { max-width: none; }
-}
-
-.device__glow {
-  position: absolute;
-  inset: -20% -10% -15% -10%;
-  background:
-    radial-gradient(50% 40% at 50% 50%, rgba(166, 239, 143, 0.22), transparent 70%),
-    radial-gradient(40% 30% at 30% 70%, rgba(242, 181, 138, 0.18), transparent 70%);
-  filter: blur(36px);
-  z-index: -1;
-  pointer-events: none;
-}
-
-.device__frame {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(180deg, #1B1F1C, #0D1310);
-  border-radius: 42px;
-  padding: 10px;
-  box-shadow:
-    inset 0 0 0 1px rgba(255, 251, 242, 0.06),
-    0 30px 80px -32px rgba(8, 34, 26, 0.45);
-}
-
-.device__notch {
-  position: absolute;
-  left: 50%;
-  top: 18px;
-  width: 90px;
-  height: 24px;
-  background: #000;
-  border-radius: 14px;
-  transform: translateX(-50%);
-  z-index: 2;
-}
-
-.device__screen {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  background: var(--cream);
-  border-radius: 34px;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  padding: 50px 16px 12px;
-  gap: 14px;
-}
-
-.device__status {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-family: var(--font-sans);
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--text-ink);
-  padding: 0 6px;
-}
-
-.device__status-icons { display: inline-flex; gap: 4px; }
-.device__status-icons .dot {
-  width: 5px; height: 5px;
-  background: var(--text-ink);
-  border-radius: 50%;
-  opacity: 0.7;
-}
-
-/* Hero card inside the device — mimics the home cupo summary */
-.device__hero {
-  background: linear-gradient(180deg, var(--brand-strong), var(--brand-deep));
-  color: var(--text-on-dark);
-  border-radius: 22px;
-  padding: 18px 18px 16px;
-  display: grid;
-  gap: 10px;
-  position: relative;
-  isolation: isolate;
-  overflow: hidden;
-}
-
-.device__hero::before {
-  content: '';
-  position: absolute;
-  inset: -30% -10% auto auto;
-  width: 80%;
-  aspect-ratio: 1;
-  background: radial-gradient(closest-side, rgba(166, 239, 143, 0.30), transparent 70%);
-  filter: blur(18px);
-  z-index: -1;
-}
-
-.device__hero-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: rgba(255, 251, 242, 0.7);
-}
-
-.device__hero-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  background: rgba(242, 181, 138, 0.16);
-  color: var(--peach);
-  padding: 4px 8px;
-  border-radius: 999px;
-  font-family: var(--font-sans);
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0;
-  text-transform: none;
-}
-
-.device__hero-amount {
-  display: flex;
-  align-items: baseline;
-  gap: 4px;
-  font-family: var(--font-serif);
-  font-weight: 350;
-  font-variation-settings: 'opsz' 144, 'SOFT' 50;
-  letter-spacing: -0.04em;
-  line-height: 1;
-}
-
-.device__currency { font-size: 18px; color: rgba(255, 251, 242, 0.7); }
-.device__amount   { font-size: 38px; color: var(--text-on-dark); }
-.device__per      {
-  font-family: var(--font-sans); font-style: normal;
-  font-size: 12px; font-weight: 500;
-  color: rgba(255, 251, 242, 0.6);
-  margin-left: 2px;
-  letter-spacing: -0.01em;
-}
-
-.device__bar {
-  height: 6px;
-  border-radius: 3px;
-  background: rgba(255, 251, 242, 0.16);
-  overflow: hidden;
-  margin-top: 4px;
-}
-
-.device__bar span {
-  display: block;
-  height: 100%;
-  background: linear-gradient(90deg, var(--brand-bright), var(--peach));
-  border-radius: 3px;
-  transform-origin: left;
-  animation: bar-fill 1.6s var(--ease-out) 1.2s both;
-}
-
-@keyframes bar-fill {
-  from { transform: scaleX(0); }
-  to   { transform: scaleX(1); }
-}
-
-.device__hero-foot {
-  display: flex;
-  justify-content: space-between;
-  font-family: var(--font-sans);
-  font-size: 11px;
-  color: rgba(255, 251, 242, 0.7);
-  letter-spacing: -0.005em;
-}
-
-/* Expense / fixed rows */
-.device__cards {
-  display: grid;
-  gap: 8px;
-  flex: 1;
-  min-height: 0;
-}
-
-.device__card {
-  background: rgba(255, 251, 242, 0.6);
-  border: 1px solid var(--line-warm);
-  border-radius: 14px;
-  padding: 10px 12px;
-}
-
-.device__card--fixed {
-  background: rgba(242, 181, 138, 0.10);
-  border-color: rgba(242, 181, 138, 0.3);
-}
-
-.device__card-row {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.device__card-emoji {
-  width: 32px;
-  height: 32px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(255, 251, 242, 0.9);
-  border-radius: 10px;
-  font-size: 16px;
-}
-
-.device__card-info {
-  flex: 1;
-  display: grid;
-  gap: 1px;
-  min-width: 0;
-}
-
-.device__card-title {
-  font-family: var(--font-sans);
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  color: var(--text-ink);
-}
-
-.device__card-sub {
-  font-family: var(--font-sans);
-  font-size: 11px;
-  color: var(--text-soft);
-}
-
-.device__card-amount {
-  font-family: var(--font-sans);
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  color: var(--text-ink);
-}
-
-.device__card--fixed .device__card-amount { color: var(--peach-deep); }
-
-/* Tabbar */
-.device__tabbar {
-  display: flex;
-  justify-content: space-around;
-  padding: 8px 4px 6px;
-  border-top: 1px solid var(--line-warm);
-  margin: 4px -16px -12px;
-  background: rgba(255, 251, 242, 0.6);
-  border-bottom-left-radius: 30px;
-  border-bottom-right-radius: 30px;
-}
-
-.device__tab {
-  font-family: var(--font-sans);
-  font-size: 10px;
-  font-weight: 500;
-  color: var(--text-soft);
-  letter-spacing: -0.005em;
-}
-
-.device__tab.is-active { color: var(--brand-strong); font-weight: 700; }
-
-/* ── Features list ────────────────────────────────────────── */
 
 .features { max-width: 60ch; }
 
@@ -2006,7 +1730,8 @@ main { background: var(--cream); position: relative; }
    No-JS fallback always shows content.
    ───────────────────────────────────────────────────────── */
 
-.reveal { will-change: opacity, transform; }
+/* .reveal: no permanent will-change — it promoted dozens of nodes to GPU layers for life */
+.reveal { }
 .no-js .reveal { opacity: 1 !important; transform: none !important; }
 
 @media (prefers-reduced-motion: reduce) {
@@ -2026,4 +1751,607 @@ main { background: var(--cream); position: relative; }
 @keyframes firefly-twinkle-fallback {
   0%   { opacity: 0.18; }
   100% { opacity: 0.55; }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   GARDEN · ACHIEVEMENTS · PLANS   (added 2026-06)
+   Forest interlude that recreates the app's "Mi jardín" streak
+   grid, the real achievement icons, the Floración celebration,
+   and the two real subscription plans. Reuses the site tokens,
+   eases, fireflies and aurora so it reads as one piece.
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── Forest band ── a dark interlude between the cream sections */
+.section--forest {
+  background: #0E3A26;
+  color: var(--text-on-dark);
+  overflow: hidden;
+}
+.section--forest > .shell { position: relative; z-index: 4; }
+/* peach hairline seam at the top edge (cream → forest) */
+.section--forest::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 80vw; max-width: 1100px; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--peach), transparent);
+  opacity: 0.42;
+  z-index: 3;
+}
+/* second forest section (logros) continues the same band — no top
+   seam, tighter top gap, and a hairline at the bottom edge (→ cream) */
+.section--forest-seam { padding-top: 0; }
+.section--forest-seam::before { display: none; }
+.section--forest-seam::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 80vw; max-width: 1100px; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--peach), transparent);
+  opacity: 0.42;
+}
+/* softer aurora so the content stays legible on the band */
+.aurora--soft .aurora__blob { filter: blur(74px); }
+.aurora--soft .aurora__blob--top {
+  background: radial-gradient(closest-side, rgba(214, 150, 120, 0.11), transparent 72%);
+}
+.aurora--soft .aurora__blob--bottom {
+  background: radial-gradient(closest-side, rgba(150, 195, 150, 0.10), transparent 72%);
+}
+/* on-dark text treatments (reuse the title/lede scale) */
+.eyebrow--on-dark { color: var(--leaf); }
+.section__title--on-dark { color: var(--text-on-dark); }
+.section__title--on-dark em { color: var(--leaf); }
+.section__lede--on-dark { color: var(--text-on-dark-muted); }
+.section__lede--on-dark strong { color: var(--text-on-dark); font-weight: 600; }
+
+/* ── Garden layout ── copy + the real grid card */
+.garden-grid-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(36px, 6vw, 72px);
+  align-items: center;
+}
+@media (min-width: 880px) {
+  .garden-grid-layout { grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr); }
+}
+.garden-copy .section__title { margin-top: 16px; }
+.garden-points {
+  list-style: none;
+  margin: 30px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 15px;
+}
+.garden-points li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--text-on-dark-muted);
+}
+.garden-points__dot {
+  flex: none;
+  width: 9px; height: 9px;
+  margin-top: 6px;
+  border-radius: 50%;
+}
+
+/* ── Garden card ── cream card floating on the forest band, like the app */
+.garden-card {
+  background: var(--cream);
+  border-radius: var(--radius-lg);
+  padding: clamp(18px, 3vw, 26px);
+  border: 1px solid rgba(255, 251, 242, 0.06);
+  box-shadow: 0 34px 64px -34px rgba(0, 0, 0, 0.55);
+  min-width: 0; /* let the grid cells shrink on narrow screens */
+}
+.garden-copy { min-width: 0; }
+.garden-card__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+.garden-card__title {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--text-ink);
+}
+.garden-card__meta {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--text-soft);
+}
+.garden-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 7px;
+  margin-bottom: 8px;
+}
+.garden-weekdays span {
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text-soft);
+}
+.garden-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 7px;
+  min-height: 232px; /* hold the card's shape if JS hasn't built the cells */
+}
+.garden-cell {
+  aspect-ratio: 1;
+  border-radius: 12px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 9%;
+  background: rgba(28, 58, 35, 0.045);
+  transform-origin: 50% 88%;
+}
+.garden-cell svg { display: block; width: auto; height: 58%; max-width: 72%; }
+.garden-cell--seed,
+.garden-cell--germ,
+.garden-cell--recovered {
+  background: #E3F1D4;
+  box-shadow: inset 0 -7px 11px -6px rgba(60, 125, 52, 0.20);
+}
+.garden-cell--fern,
+.garden-cell--bloom {
+  background: #D2E9BF;
+  box-shadow: inset 0 -7px 11px -6px rgba(60, 125, 52, 0.24);
+}
+.garden-cell--pending { background: #E8F3DF; }
+.garden-cell--missed  { background: #ECE7DB; }
+.garden-cell--pre     { background: rgba(28, 58, 35, 0.05); }
+.garden-cell.is-growing {
+  animation: gardenGrowIn 640ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  animation-delay: var(--cell-delay, 0ms);
+}
+@keyframes gardenGrowIn {
+  0%   { opacity: 0; transform: scale(0.2); }
+  60%  { opacity: 1; transform: scale(1.12); }
+  100% { opacity: 1; transform: scale(1); }
+}
+.garden-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line-warm);
+}
+.garden-legend__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.03em;
+  color: var(--text-soft);
+}
+.garden-legend__item i { width: 8px; height: 8px; border-radius: 50%; }
+
+/* ── Achievements ── floración + the 5 families */
+.achievements {
+  display: grid;
+  gap: clamp(40px, 6vw, 64px);
+  justify-items: start;
+}
+/* Floración — the celebration moment, recreated */
+.floracion {
+  position: relative;
+  margin: 0;
+  width: 100%;
+  max-width: 560px;
+  display: grid;
+  justify-items: center;
+  gap: 22px;
+  padding: clamp(34px, 5vw, 56px) clamp(24px, 4vw, 48px);
+  border-radius: var(--radius-lg);
+  background: radial-gradient(120% 92% at 50% 28%, #1B4A28, #133420 72%);
+  border: 1px solid rgba(166, 239, 143, 0.12);
+  overflow: hidden;
+}
+.floracion__fireflies { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
+.floracion__aura {
+  position: absolute;
+  top: clamp(30px, 5vw, 50px);
+  left: 50%;
+  width: 210px; height: 210px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(46, 107, 52, 0.30), rgba(46, 107, 52, 0.14) 56%, transparent 74%);
+  filter: blur(20px);
+  z-index: 0;
+  animation: auraBreath 6000ms var(--ease-soft) infinite alternate;
+}
+@keyframes auraBreath {
+  0%   { transform: translateX(-50%) scale(1);    opacity: 0.55; }
+  100% { transform: translateX(-50%) scale(1.04); opacity: 0.72; }
+}
+.floracion__medallion {
+  position: relative;
+  width: 118px; height: 118px;
+  border-radius: 50%;
+  background: #FFFBF2;
+  border: 2px solid rgba(240, 180, 136, 0.48);
+  box-shadow: 0 0 0 1px rgba(240, 180, 136, 0.20), 0 14px 30px -16px rgba(8, 34, 26, 0.55);
+  overflow: hidden;
+  display: grid; place-items: center;
+  z-index: 1;
+}
+.floracion__medallion svg { width: 100%; height: 100%; display: block; }
+/* coral blooms that drift + pulse near the medallion (siblings, not clipped) */
+.floracion__bloom {
+  position: absolute;
+  border-radius: 50%;
+  z-index: 2;
+  pointer-events: none;
+}
+.floracion__bloom--1 {
+  width: 13px; height: 13px;
+  left: 32%; top: 20%;
+  background: #E2935E;
+  box-shadow: 0 0 6px rgba(226, 147, 94, 0.30);
+  animation: bloomFlit 11s ease-in-out infinite;
+}
+.floracion__bloom--2 {
+  width: 11px; height: 11px;
+  left: 63%; top: 15%;
+  background: #F0B488;
+  box-shadow: 0 0 5px rgba(240, 180, 136, 0.28);
+  animation: bloomFlit 13.5s ease-in-out infinite;
+}
+@keyframes bloomFlit {
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.78; }
+  30%      { transform: translate(4px, -5px) scale(1.05); opacity: 0.80; }
+  60%      { transform: translate(-3px, 4px) scale(0.98); opacity: 0.82; }
+}
+.floracion__caption {
+  position: relative;
+  display: grid; justify-items: center; gap: 9px;
+  text-align: center;
+  z-index: 1;
+}
+.floracion__eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: #9FCB93;
+}
+/* The celebration title carries the site's editorial gesture —
+   Fraunces italic, same as the section-title 'em', not SF Pro. */
+.floracion__title {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-variation-settings: 'opsz' 64, 'SOFT' 100, 'WONK' 1;
+  font-size: clamp(25px, 3vw, 34px);
+  letter-spacing: -0.012em;
+  color: #FFFFFF;
+}
+/* The 5 families — real line icons as a strip of medallions on the
+   forest band (NOT a card grid; the band is already the container). */
+.badge-row {
+  list-style: none; margin: 0; padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(22px, 4vw, 46px);
+}
+.badge {
+  display: grid; justify-items: center; gap: 13px;
+  width: 86px;
+}
+.badge__icon { transition: transform 240ms var(--ease-out); }
+@media (hover: hover) and (pointer: fine) {
+  .badge:hover .badge__icon { transform: translateY(-4px); }
+}
+.badge__icon {
+  width: 54px; height: 54px;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  background: #FFFBF2;
+  box-shadow: 0 8px 20px -12px rgba(0, 0, 0, 0.6);
+}
+.badge__icon svg { width: 34px; height: 34px; display: block; }
+.badge__label {
+  font-size: 12.5px; font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--text-on-dark-muted);
+  text-align: center;
+}
+
+/* ── Plans ── two real tiles: monthly quiet, annual hero */
+.plans {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(16px, 2.5vw, 22px);
+  align-items: stretch;
+  max-width: 780px;
+}
+@media (min-width: 720px) { .plans { grid-template-columns: 1fr 1fr; } }
+.plan {
+  position: relative;
+  display: flex; flex-direction: column;
+  padding: clamp(24px, 3vw, 34px);
+  border-radius: var(--radius-lg);
+  background: var(--cream);
+  border: 1px solid var(--line-warm);
+  overflow: hidden;
+}
+.plan__head, .plan__price, .plan__sub, .plan__ribbon, .plan__features {
+  position: relative; z-index: 1;
+}
+.plan__head { display: grid; gap: 5px; margin-bottom: 4px; }
+.plan__name { font-size: clamp(18px, 2vw, 21px); font-weight: 800; letter-spacing: -0.02em; color: var(--text-ink); }
+.plan__tagline { font-size: 13.5px; color: var(--text-soft); }
+.plan__price { display: flex; align-items: baseline; gap: 5px; margin: 16px 0 4px; }
+.plan__amount { font-size: clamp(30px, 4vw, 38px); font-weight: 800; letter-spacing: -0.03em; color: var(--text-ink); }
+.plan__per { font-size: 14px; color: var(--text-muted); }
+.plan__sub { font-size: 12.5px; color: var(--text-soft); }
+.plan__ribbon {
+  display: inline-flex; align-self: flex-start;
+  margin-top: 13px;
+  padding: 5px 11px; border-radius: var(--radius-pill);
+  background: rgba(41, 120, 17, 0.10);
+  font-size: 11.5px; font-weight: 600;
+  color: var(--brand-strong);
+}
+.plan__features {
+  list-style: none; margin: 22px 0 0; padding: 19px 0 0;
+  border-top: 1px solid var(--line-warm);
+  display: grid; gap: 11px;
+}
+.plan__features li {
+  position: relative; padding-left: 27px;
+  font-size: 13.5px; line-height: 1.45; color: var(--text-muted);
+}
+.plan__features li::before {
+  content: '';
+  position: absolute; left: 0; top: 1px;
+  width: 17px; height: 17px;
+  border-radius: 50%;
+  background: rgba(41, 120, 17, 0.12) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2.6 6.2l2 2 4.7-5' fill='none' stroke='%23297811' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 11px no-repeat;
+}
+/* Annual — the hero tile, forest gradient + fern watermark + fireflies */
+.plan--hero {
+  background: linear-gradient(150deg, #244235, #1F590D 55%, #297811);
+  border-color: rgba(166, 239, 143, 0.24);
+  color: var(--text-on-dark);
+}
+.plan--hero .plan__name,
+.plan--hero .plan__amount { color: var(--text-on-dark); }
+.plan--hero .plan__tagline { color: rgba(242, 234, 211, 0.78); }
+.plan--hero .plan__per,
+.plan--hero .plan__sub { color: rgba(242, 234, 211, 0.72); }
+.plan--hero .plan__ribbon { background: rgba(166, 239, 143, 0.16); color: #C7EE9C; }
+.plan--hero .plan__features { border-top-color: rgba(255, 251, 242, 0.14); }
+.plan--hero .plan__features li { color: rgba(242, 234, 211, 0.88); }
+.plan--hero .plan__features li::before {
+  background: rgba(166, 239, 143, 0.18) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2.6 6.2l2 2 4.7-5' fill='none' stroke='%23A6EF8F' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 11px no-repeat;
+}
+.plan__badge {
+  position: absolute; top: 16px; right: 16px;
+  padding: 5px 11px; border-radius: var(--radius-pill);
+  background: var(--brand-300);
+  font-family: var(--font-mono);
+  font-size: 9.5px; font-weight: 700;
+  letter-spacing: 0.10em; text-transform: uppercase;
+  color: #0E3A26;
+  z-index: 3;
+}
+.plan__fern {
+  position: absolute;
+  right: -30px; bottom: -36px;
+  width: 184px; height: auto;
+  opacity: 0.13;
+  z-index: 0;
+  pointer-events: none;
+}
+.plan__fireflies { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+.plans__foot {
+  margin: clamp(24px, 3vw, 36px) 0 0;
+  max-width: 62ch;
+  font-size: 12.5px; line-height: 1.55;
+  color: var(--text-soft);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   FULL-SPACE — sections command more of the viewport
+   ═══════════════════════════════════════════════════════════ */
+.section { padding-block: clamp(104px, 17vh, 200px); }
+.section__title { font-size: clamp(30px, 4.8vw, 60px); }
+/* the four flagship sections fill the screen and center their content */
+.section--showcase, .section--forest, #planes {
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+}
+.section--forest-seam { min-height: auto; } /* logros continues the band */
+.section--showcase > .shell, .section--forest > .shell, #planes > .shell { width: 100%; }
+
+/* ═══════════════════════════════════════════════════════════
+   DARK MODE — JS sets data-theme on <html> (default = system).
+   Forest zones (hero, jardín, logros band) are already dark and
+   stay put; the cream sections + their cards flip.
+   ═══════════════════════════════════════════════════════════ */
+[data-theme="dark"] {
+  --cream:        #0D1712;
+  --paper:        #0D1712;
+  --paper-warm:   #12201A;
+  --text-ink:     #F2EAD3;
+  --text-muted:   #A6B6A1;
+  --text-soft:    #82917C;   /* AA on dark canvas/cards (was #71806C = 3.66 fail) */
+  --line-warm:    rgba(242, 234, 211, 0.10);
+  --line-strong:  rgba(242, 234, 211, 0.18);
+  --brand-strong: #A6EF8F;
+}
+/* elevated card surfaces so cards don't melt into the dark canvas */
+[data-theme="dark"] .plan:not(.plan--hero),
+[data-theme="dark"] .legal-card { background: #16241C; }
+[data-theme="dark"] .garden-card { background: #15291D; border-color: rgba(166, 239, 143, 0.12); }
+/* garden tiles → the app's dark-garden tones (translucent mint on dark) */
+[data-theme="dark"] .garden-cell { background: rgba(255, 255, 255, 0.03); }
+[data-theme="dark"] .garden-cell--seed,
+[data-theme="dark"] .garden-cell--germ,
+[data-theme="dark"] .garden-cell--recovered { background: rgba(166, 239, 143, 0.14); box-shadow: none; }
+[data-theme="dark"] .garden-cell--fern,
+[data-theme="dark"] .garden-cell--bloom { background: rgba(166, 239, 143, 0.23); box-shadow: none; }
+[data-theme="dark"] .garden-cell--pending { background: rgba(166, 239, 143, 0.18); }
+[data-theme="dark"] .garden-cell--missed  { background: rgba(255, 255, 255, 0.07); }
+[data-theme="dark"] .garden-cell--pre     { background: rgba(255, 255, 255, 0.03); }
+/* nav glass over the (now dark) paper */
+[data-theme="dark"] .site-nav.is-glass--paper {
+  background: rgba(13, 23, 18, 0.82);
+  border-bottom-color: rgba(242, 234, 211, 0.10);
+}
+[data-theme="dark"] .site-nav.is-glass--paper .site-nav__brand { color: var(--text-ink); }
+[data-theme="dark"] .site-nav.is-glass--paper .site-nav__brand-mark { color: #A6EF8F; }
+[data-theme="dark"] .site-nav.is-glass--paper .site-nav__links { color: var(--text-muted); }
+
+/* ── Theme toggle button (in the nav) ── */
+.site-nav__theme {
+  position: absolute;
+  right: var(--gutter);
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px; height: 44px;   /* ≥44px touch target (WCAG 2.5.5 / Apple HIG) */
+  display: grid; place-items: center;
+  border-radius: 50%;
+  border: 1px solid var(--line-on-dark);
+  background: rgba(255, 251, 242, 0.06);
+  color: var(--text-on-dark);
+  cursor: pointer;
+  pointer-events: auto;
+  transition: background-color 200ms var(--ease-out), transform 160ms var(--ease-out), border-color 200ms var(--ease-out);
+  -webkit-tap-highlight-color: transparent;
+}
+.site-nav__theme:active { transform: translateY(-50%) scale(0.92); }
+.site-nav.is-glass--paper .site-nav__theme { border-color: var(--line-strong); background: rgba(20, 42, 30, 0.06); color: var(--text-ink); }
+[data-theme="dark"] .site-nav.is-glass--paper .site-nav__theme { background: rgba(242, 234, 211, 0.06); color: var(--text-on-dark); border-color: rgba(242, 234, 211, 0.16); }
+.site-nav__theme svg { width: 18px; height: 18px; display: block; }
+.site-nav__theme .theme-moon { display: none; }
+[data-theme="dark"] .site-nav__theme .theme-sun  { display: none; }
+[data-theme="dark"] .site-nav__theme .theme-moon { display: block; }
+@media (max-width: 560px) { .site-nav__theme svg { width: 16px; height: 16px; } }
+
+/* ═══════════════════════════════════════════════════════════
+   AUDIT FIXES (2026-06) — a11y focus, motion-safe scroll, mobile blur
+   ═══════════════════════════════════════════════════════════ */
+
+/* Keyboard focus ring — was entirely absent. Peach on light, mint on dark/forest. */
+:where(a, button, summary, .legal-card, .cta, .site-nav__theme):focus-visible {
+  outline: 2px solid var(--peach);
+  outline-offset: 3px;
+  border-radius: 10px;
+}
+.on-dark :focus-visible,
+.section--forest :focus-visible,
+[data-theme="dark"] :focus-visible { outline-color: var(--brand-300); }
+/* the legal-card has its own radius; match it so the ring hugs the card */
+.legal-card:focus-visible { border-radius: var(--radius-lg); outline-offset: 4px; }
+
+/* Smooth anchor scroll only when motion is welcome */
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+
+/* Aurora blur is expensive on mobile GPUs — halve it under 720px */
+@media (max-width: 720px) {
+  .aurora__blob { filter: blur(34px); }
+  .aurora--soft .aurora__blob { filter: blur(40px); }
+}
+
+/* Skip-link — off-screen until focused, then slides into the top-left */
+.skip-link {
+  position: fixed;
+  left: 12px; top: -64px;
+  z-index: 100;
+  padding: 11px 18px;
+  border-radius: 12px;
+  background: var(--cream);
+  color: var(--text-ink);
+  font-weight: 600;
+  font-size: 14px;
+  box-shadow: 0 12px 30px -10px rgba(8, 34, 26, 0.5);
+  transition: top 220ms var(--ease-out);
+}
+.skip-link:focus-visible { top: calc(12px + var(--safe-top)); }
+main:focus-visible { outline: none; }
+
+/* ═══════════════════════════════════════════════════════════
+   REAL SCREENSHOTS — clean phone bezel + horizontal gallery
+   ═══════════════════════════════════════════════════════════ */
+.phone {
+  position: relative;
+  width: 100%;
+  border-radius: 40px;
+  padding: 7px;
+  background: linear-gradient(180deg, #1B1F1C, #0D1310);
+  box-shadow: inset 0 0 0 1px rgba(255, 251, 242, 0.07), 0 36px 70px -34px rgba(8, 34, 26, 0.5);
+}
+.phone__shot { display: block; width: 100%; height: auto; border-radius: 33px; }
+.phone--hero { max-width: 300px; margin-inline: auto; }
+@media (min-width: 880px) { .phone--hero { max-width: none; } }
+.phone__glow {
+  position: absolute; inset: -10% -8% -8% -8%;
+  background: radial-gradient(50% 42% at 50% 50%, rgba(150, 195, 150, 0.10), transparent 72%);
+  filter: blur(38px); z-index: -1; pointer-events: none;
+}
+@media (max-width: 720px) { .phone__glow { filter: blur(24px); } }
+
+.gallery {
+  display: flex;
+  gap: clamp(18px, 3vw, 34px);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  /* fade the right edge so the clipped next card reads as "there's more, scroll" */
+  -webkit-mask-image: linear-gradient(90deg, #000 0, #000 calc(100% - 56px), transparent 100%);
+          mask-image: linear-gradient(90deg, #000 0, #000 calc(100% - 56px), transparent 100%);
+  padding-block: 6px 24px;
+  margin-inline: calc(-1 * var(--gutter));
+  padding-inline: var(--gutter);
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: var(--line-strong) transparent;
+  overscroll-behavior-x: contain;
+}
+.gallery::-webkit-scrollbar { height: 6px; }
+.gallery::-webkit-scrollbar-thumb { background: var(--line-strong); border-radius: 999px; }
+.gallery__item {
+  flex: 0 0 auto;
+  width: clamp(216px, 62vw, 248px);
+  scroll-snap-align: center;
+  margin: 0;
+  display: grid;
+  gap: 14px;
+}
+.gallery__cap {
+  display: grid; gap: 3px;
+  font-size: 13px; line-height: 1.4;
+  color: var(--text-muted);
+}
+.gallery__cap strong {
+  font-size: 15px; font-weight: 700; letter-spacing: -0.01em;
+  color: var(--text-ink);
+}
+
+/* Theme crossfade via the View Transitions API — smooths the light↔dark flip */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 340ms;
+  animation-timing-function: var(--ease-out-quart);
+}
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) { animation: none; }
 }
