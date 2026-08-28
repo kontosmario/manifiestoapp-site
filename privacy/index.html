@@ -1,71 +1,377 @@
 <!doctype html>
-<html lang="es-AR" class="no-js">
+<html lang="es-419">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <meta name="theme-color" content="#1F590D" />
+  <meta name="theme-color" content="#DCDFCD" />
   <meta name="color-scheme" content="light dark" />
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('manifiesto-theme');
+        if (t === 'light' || t === 'dark') {
+          document.documentElement.setAttribute('data-theme', t);
+        }
+      } catch (e) {}
+    })();
+  </script>
   <title>Política de privacidad · Manifiesto</title>
-  <meta name="description" content="Cómo Manifiesto recolecta, usa, comparte y protege tus datos personales y financieros." />
+  <meta name="description" content="Qué datos personales recolecta Manifiesto, para qué los usa, con quién los comparte y cómo ejercer tus derechos." />
+  <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://manifiestoapp.com/privacy/" />
-  <link rel="alternate" hreflang="es" href="https://manifiestoapp.com/privacy/" />
-  <link rel="alternate" hreflang="en" href="https://manifiestoapp.com/en/privacy/" />
-  <link rel="alternate" hreflang="x-default" href="https://manifiestoapp.com/privacy/" />
-
+  <link rel="apple-touch-icon" href="/assets/fern.svg" />
+  <link rel="icon" type="image/svg+xml" href="/assets/fern.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="/assets/styles.css" />
-  <link rel="icon" type="image/svg+xml" href="/assets/fern.svg" />
-</head>
-<body class="is-policy">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&display=swap" />
+<style>
+  :root {
+    --bg: #DCDFCD;
+    --surface: #E9EBE0;
+    --raised-a: #F0F2E7;
+    --raised-b: #E1E4D6;
+    --sheet: #F0EFE3;
+    --well: #E9EBE0;
+    --text: #24382A;
+    --muted: #54644F;
+    --green: #2E7C39;
+    --green-link: #1F5429;
+    --warm-bright: #D97E4F;
+    --sh-sm: 5px 5px 10px rgba(151,160,136,0.35), -5px -5px 10px rgba(255,255,255,0.85);
+    --sh-lg: 8px 8px 18px rgba(151,160,136,0.42), -8px -8px 18px rgba(255,255,255,0.92);
+    --in-sm: inset 2px 2px 5px rgba(151,160,136,0.3), inset -2px -2px 5px rgba(255,255,255,0.8);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0F1A13;
+      --surface: #1D3426;
+      --raised-a: #1D3426;
+      --raised-b: #132318;
+      --sheet: #1B2F22;
+      --well: #142519;
+      --text: #F1EEDD;
+      --muted: #93A78F;
+      --green: #A4E3A6;
+      --green-link: #A4E3A6;
+      --warm-bright: #F2A87E;
+      --sh-sm: 5px 5px 10px rgba(0,0,0,0.45), -5px -5px 10px rgba(101,152,113,0.08);
+      --sh-lg: 8px 8px 18px rgba(0,0,0,0.5), -8px -8px 18px rgba(101,152,113,0.1);
+      --in-sm: inset 2px 2px 5px rgba(0,0,0,0.45), inset -2px -2px 5px rgba(101,152,113,0.07);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0F1A13;
+    --surface: #1D3426;
+    --raised-a: #1D3426;
+    --raised-b: #132318;
+    --sheet: #1B2F22;
+    --well: #142519;
+    --text: #F1EEDD;
+    --muted: #93A78F;
+    --green: #A4E3A6;
+    --green-link: #A4E3A6;
+    --warm-bright: #F2A87E;
+    --sh-sm: 5px 5px 10px rgba(0,0,0,0.45), -5px -5px 10px rgba(101,152,113,0.08);
+    --sh-lg: 8px 8px 18px rgba(0,0,0,0.5), -8px -8px 18px rgba(101,152,113,0.1);
+    --in-sm: inset 2px 2px 5px rgba(0,0,0,0.45), inset -2px -2px 5px rgba(101,152,113,0.07);
+  }
 
-  <nav class="site-nav" aria-label="Principal">
-    <div class="site-nav__inner">
-      <a class="site-nav__brand" href="/">
-        <svg class="site-nav__brand-mark" viewBox="0 0 841 742" aria-hidden="true">
-          <path fill="currentColor" d="M674.43 117.27c16.43-1.25 95.99 0.5 105.99 9.66 2.21 2.02 2.56 5.38 2.59 8.21 0.14 14.3-4.37 28.84-7.43 42.71-13.76 62.39-36.42 126.31-74.27 178.32-6.5 8.93-13.28 17.61-21 25.52-33.41 34.26-74.79 58.51-123.69 59.06-45.6 0.51-75.83-19.66-107.27-50.41-5.63 9.71-10.75 19.59-14.8 30.08-26.51 68.77-16.13 148.43-17.51 220.7-0.1 5.01-0.28 6.59-4.29 10.22-1.85 1.68-4.18 2.36-6.66 2.15-4.5-0.37-7.48-3.19-10.28-6.41-0.75-34.85-3.78-69.46-4.06-104.27-0.12-15.81 0.46-35.24-1.86-50.66-3.11-20.69-13.02-49.74-27.04-65.62-24.83 34.62-59.94 51.72-102.76 45.58-1.71-0.31-3.41-0.65-5.11-1.02-46.97-10.00-79.66-42.32-105.00-81.45-7.17-11.25-13.69-22.89-19.52-34.88-6.73-13.66-33.32-74.5-30.28-86.51 0.38-1.51 1.24-2.39 2.57-3.16 5.71-3.31 21.51-6.21 28.65-7.53 47.14-8.74 110.30-12.87 156.91-0.72 33.37 8.69 61.13 27.23 78.71 57.32 19.08 32.66 15.27 60.42 6.14 95.08 7.03 10.17 14.10 19.99 19.81 30.97 1.68 3.23 3.32 6.73 5.25 9.77 5.66-21.55 11.52-39.95 21.50-59.91 3.72-7.49 7.82-14.74 11.76-21.85-2.15-5.00-5.25-11.22-7.59-16.22-8.12-17.32-11.59-31.83-12.78-50.89-2.18-40.94 11.94-81.05 39.32-111.59 53.13-60.16 144.74-71.59 220.18-76.22z" />
-        </svg>
-        <span>Manifiesto<span class="site-nav__brand-dot">.</span></span>
-      </a>
-      <div class="site-nav__links">
-        <a href="/privacy/" aria-current="page">Privacidad</a>
-        <a href="/terms/">Términos</a>
-      </div>
-    </div>
+  *, *::before, *::after { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Nunito', ui-rounded, 'Avenir Next', system-ui, -apple-system, sans-serif;
+    font-weight: 600;
+    font-size: 16.5px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { max-width: 760px; margin: 0 auto; padding: 0 20px; }
+
+  strong { font-weight: 800; }
+
+  :focus-visible {
+    outline: 2.5px solid var(--green);
+    outline-offset: 2px;
+    border-radius: 8px;
+  }
+
+  /* Skip link */
+  .skip-link {
+    position: fixed;
+    top: 14px; left: 14px;
+    z-index: 60;
+    transform: translateY(-300%);
+    background: linear-gradient(145deg, var(--raised-a), var(--raised-b));
+    color: var(--text);
+    font-weight: 800;
+    font-size: 14px;
+    padding: 10px 18px;
+    border-radius: 32px;
+    box-shadow: var(--sh-sm);
+    text-decoration: none;
+  }
+  .skip-link:focus { transform: none; }
+
+  /* Sticky nav pill */
+  .topbar {
+    position: sticky;
+    top: 14px;
+    z-index: 40;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: 16px;
+    padding: 12px 22px;
+    border-radius: 32px;
+    background: linear-gradient(145deg, var(--raised-a), var(--raised-b));
+    box-shadow: var(--sh-sm);
+  }
+  .wordmark {
+    font-weight: 900;
+    letter-spacing: -0.4px;
+    font-size: 19px;
+    color: var(--text);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .wordmark .dot { color: var(--warm-bright); }
+  .topbar__back {
+    color: var(--muted);
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 14px;
+    white-space: nowrap;
+  }
+  .topbar__back:hover { color: var(--text); }
+
+  /* Document header */
+  .doc-head { padding: 54px 0 34px; }
+  .eyebrow {
+    margin: 0 0 14px;
+    text-transform: uppercase;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    font-size: 11px;
+    color: var(--muted);
+  }
+  h1 {
+    margin: 0 0 18px;
+    font-weight: 900;
+    font-size: clamp(30px, 5vw, 44px);
+    letter-spacing: -0.02em;
+    line-height: 1.12;
+  }
+  h1 em { color: var(--green); }
+  .doc-head__lede {
+    margin: 0 0 26px;
+    color: var(--muted);
+    font-size: 17.5px;
+    max-width: 62ch;
+  }
+  .doc-head__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 32px;
+  }
+  .doc-head__meta > div {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-weight: 800;
+    color: var(--muted);
+  }
+  .doc-head__meta strong {
+    display: block;
+    margin-top: 3px;
+    font-size: 15px;
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--text);
+    font-weight: 800;
+  }
+
+  /* Sheet card */
+  main { padding-bottom: 8px; }
+  .sheet {
+    background: var(--sheet);
+    border-radius: 26px;
+    box-shadow: var(--sh-lg);
+    padding: clamp(26px, 5vw, 50px);
+  }
+
+  .sheet p, .sheet ul { max-width: 70ch; }
+  .sheet p { margin: 0 0 16px; }
+  .sheet ul { margin: 0 0 20px; padding-left: 22px; }
+  .sheet li { margin: 0 0 10px; }
+  .sheet ul li::marker { color: var(--green); }
+
+  .sheet a,
+  .indice a {
+    color: var(--green-link);
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  h2 {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 44px 0 14px;
+    font-weight: 900;
+    font-size: 20px;
+    letter-spacing: -0.01em;
+    line-height: 1.3;
+    max-width: 70ch;
+    scroll-margin-top: 110px;
+  }
+  .sheet h2:first-of-type { margin-top: 34px; }
+  .h-index {
+    flex: none;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    color: var(--muted);
+    background: var(--well);
+    box-shadow: var(--in-sm);
+    border-radius: 999px;
+    padding: 5px 12px;
+  }
+  h3 {
+    margin: 28px 0 10px;
+    font-weight: 900;
+    font-size: 17px;
+    max-width: 70ch;
+    scroll-margin-top: 110px;
+  }
+
+  /* Index (table of contents) */
+  .indice {
+    background: var(--well);
+    box-shadow: var(--in-sm);
+    border-radius: 18px;
+    padding: 20px 24px;
+  }
+  .indice__title {
+    text-transform: uppercase;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    font-size: 11px;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+  .indice ol {
+    margin: 0;
+    padding-left: 24px;
+    columns: 2;
+    column-gap: 36px;
+  }
+  .indice li {
+    margin: 0 0 8px;
+    font-size: 15px;
+    break-inside: avoid;
+  }
+  .indice li::marker { color: var(--muted); font-weight: 800; }
+
+  /* Callouts */
+  .callout {
+    margin: 26px 0;
+    max-width: 70ch;
+    background: var(--well);
+    box-shadow: var(--in-sm);
+    border-radius: 18px;
+    padding: 20px 22px;
+  }
+  .callout-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-transform: uppercase;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    font-size: 11px;
+    color: var(--muted);
+    margin: 0 0 10px;
+  }
+  .callout-eyebrow::before {
+    content: "";
+    flex: none;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--warm-bright);
+  }
+  .callout p { margin: 0 0 12px; }
+  .callout p:last-child { margin-bottom: 0; }
+
+  /* Footer */
+  .site-footer { padding: 38px 0 48px; }
+  .site-footer__inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px 24px;
+    color: var(--muted);
+    font-size: 14px;
+    font-weight: 700;
+  }
+  .site-footer .wordmark { font-size: 17px; }
+  .site-footer__links { display: flex; gap: 18px; }
+  .site-footer__links a {
+    color: var(--muted);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .site-footer__links a:hover { color: var(--text); }
+
+  @media (max-width: 720px) {
+    .sheet { padding: 24px 20px; }
+    .doc-head { padding-top: 44px; }
+  }
+  @media (max-width: 560px) {
+    .indice ol { columns: 1; }
+    .topbar { padding: 10px 18px; }
+  }
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+<div class="wrap">
+
+  <nav class="topbar" aria-label="Principal">
+    <a class="wordmark" href="/">Manifiesto<span class="dot">.</span></a>
+    <a class="topbar__back" href="/">&larr; Volver al sitio</a>
   </nav>
 
-  <!-- Policy hero -->
-  <header class="policy-hero">
-    <!-- Subtle firefly accent — quieter than the landing -->
-    <div class="fireflies" id="policy-fireflies" aria-hidden="true"></div>
-    <div class="policy-hero__inner">
-      <a class="policy-hero__back" href="/">
-        <svg viewBox="0 0 14 14" fill="none" aria-hidden="true">
-          <path d="M12 7H2M6 11l-4-4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
-        </svg>
-        Volver al inicio
-      </a>
-      <div class="eyebrow">documento legal · 01</div>
-      <h1 class="policy-hero__title">Política de <em>privacidad</em></h1>
-      <p class="policy-hero__lede">
-        Esta política explica qué datos personales recolecta Manifiesto,
-        para qué los usa, con quién los comparte y cómo puedes ejercer
-        tus derechos sobre ellos. Está pensada para leerse en menos de
-        diez minutos.
-      </p>
-      <div class="policy-hero__meta">
-        <div>Vigente desde<strong>9 de junio de 2026</strong></div>
-        <div>Última actualización<strong>25 de junio de 2026</strong></div>
-        <div>Versión<strong>1.1</strong></div>
-      </div>
+  <header class="doc-head">
+    <p class="eyebrow">documento legal · 01</p>
+    <h1>Política de <em>privacidad</em></h1>
+    <p class="doc-head__lede">
+      Esta política explica qué datos personales recolecta Manifiesto,
+      para qué los usa, con quién los comparte y cómo puedes ejercer
+      tus derechos sobre ellos. Está pensada para leerse en menos de
+      diez minutos.
+    </p>
+    <div class="doc-head__meta">
+      <div>Vigente desde<strong>9 de junio de 2026</strong></div>
+      <div>Última actualización<strong>25 de junio de 2026</strong></div>
+      <div>Versión<strong>1.1</strong></div>
     </div>
   </header>
 
-  <!-- Policy body with sticky ToC -->
-  <section class="policy-body">
-    <div class="policy-grid">
-      <aside class="policy-toc" aria-label="Índice de la política">
-        <div class="policy-toc__title">índice</div>
+  <main id="contenido">
+    <article class="sheet">
+
+      <nav class="indice" aria-label="Índice de la política">
+        <div class="indice__title">índice</div>
         <ol>
           <li><a href="#identidad">Quiénes somos</a></li>
           <li><a href="#datos">Qué datos recolectamos</a></li>
@@ -80,349 +386,322 @@
           <li><a href="#cambios">Cambios a esta política</a></li>
           <li><a href="#contacto">Contacto</a></li>
         </ol>
-      </aside>
+      </nav>
 
-      <article class="policy-content">
+      <h2 id="identidad">
+        <span class="h-index">01</span>
+        Quiénes somos
+      </h2>
+      <p>
+        Manifiesto es una aplicación móvil de gestión de finanzas
+        personales y familiares operada por <strong>Manifiesto</strong>
+        ("Manifiesto", "nosotros", "nuestro"), un proyecto independiente
+        radicado en la República Argentina. Esta política se aplica al
+        uso de la aplicación móvil Manifiesto en iOS y, próximamente,
+        Android, así como a este sitio web (<a href="/">manifiestoapp.com</a>).
+      </p>
+      <p>
+        A los efectos de la legislación argentina (Ley 25.326 de
+        Protección de los Datos Personales) y del Reglamento General
+        de Protección de Datos europeo (GDPR), Manifiesto actúa como
+        <strong>responsable del tratamiento</strong> de tus datos
+        personales.
+      </p>
 
-        <h2 id="identidad">
-          <span class="h-index">01</span>
-          Quiénes somos
-        </h2>
+      <h2 id="datos">
+        <span class="h-index">02</span>
+        Qué datos recolectamos
+      </h2>
+      <p>
+        Manifiesto recolecta únicamente los datos que necesita para
+        que la app funcione. Los agrupamos por categoría:
+      </p>
+
+      <h3>Datos de cuenta</h3>
+      <ul>
+        <li><strong>Email</strong> — para crear tu cuenta, recuperar contraseña y comunicarte cambios importantes.</li>
+        <li><strong>Nombre de usuario</strong> que tú eliges mostrar dentro de tu hogar.</li>
+        <li><strong>Avatar</strong> — un identificador visual elegido de una lista predefinida (no subes fotos).</li>
+        <li><strong>Contraseña</strong> — guardada de forma cifrada (hash) por nuestro proveedor de autenticación. Nadie en Manifiesto la ve en texto plano.</li>
+        <li><strong>Identificador de proveedor social</strong> — si entras con Apple o Google, guardamos el identificador único que esos proveedores nos devuelven para reconocerte. No accedemos a tus contactos, fotos ni a ningún otro dato de tu cuenta de Apple o Google.</li>
+      </ul>
+
+      <h3>Datos financieros que tú cargas</h3>
+      <ul>
+        <li><strong>Ingresos mensuales</strong> declarados (cifras numéricas, sin información del empleador).</li>
+        <li><strong>Día de cobro</strong> y configuración de tu ciclo mensual.</li>
+        <li><strong>Gastos</strong> — monto, categoría, fecha y, opcionalmente, una nota corta.</li>
+        <li><strong>Gastos fijos / suscripciones</strong> — nombre, monto y frecuencia y, si los cargas, el nombre del acreedor, el saldo pendiente y las cuotas de un préstamo. Si incluyes el nombre de otra persona, eres responsable de hacerlo conforme a la ley.</li>
+        <li><strong>Metas de ahorro</strong> y aportes a esas metas.</li>
+        <li><strong>Composición de tu hogar</strong> — los otros usuarios de Manifiesto con los que decidiste compartir tu economía y, si corresponde, el aporte mensual de cada uno. Si le envías un aviso o recordatorio a otro miembro, ese mensaje se guarda y se le muestra a esa persona.</li>
+        <li><strong>Importar desde una captura (opcional)</strong> — si eliges cargar un movimiento desde una foto de tu galería, leemos los montos con reconocimiento de texto que corre <strong>en tu propio dispositivo</strong>. La imagen no se sube a nuestros servidores ni se guarda: solo quedan los datos que tú confirmas.</li>
+      </ul>
+
+      <h3>Datos técnicos</h3>
+      <ul>
+        <li><strong>Token de notificaciones push</strong> — un identificador del dispositivo, asociado a tu cuenta, que nos da Apple o Google para enviarte avisos. Si desactivas las notificaciones o cierras sesión, lo eliminamos.</li>
+        <li><strong>Plataforma y versión</strong> — el sistema operativo y la versión de la app que usas (lo recibimos al registrar tu dispositivo para notificaciones), para dar soporte y priorizar mejoras.</li>
+        <li><strong>Zona horaria del dispositivo</strong> — para programar tus avisos y los cierres de ciclo en tu horario local.</li>
+        <li><strong>Eventos de uso</strong> — qué sugerencias del asistente te mostramos y cómo interactúas con ellas (las ves, las aplicas o las descartas). Están <strong>asociados a tu cuenta</strong> —no son anónimos— y pueden incluir el monto o el nombre del ítem sobre el que actuó la sugerencia. Viven en nuestra propia base y no se exportan a terceros.</li>
+      </ul>
+
+      <div class="callout">
+        <div class="callout-eyebrow">Lo que no recolectamos</div>
         <p>
-          Manifiesto es una aplicación móvil de gestión de finanzas
-          personales y familiares operada por <strong>Manifiesto</strong>
-          ("Manifiesto", "nosotros", "nuestro"), un proyecto independiente
-          radicado en la República Argentina. Esta política se aplica al
-          uso de la aplicación móvil Manifiesto en iOS y, próximamente,
-          Android, así como a este sitio web (<a href="https://manifiestoapp.com">manifiestoapp.com</a>).
+          No accedemos a tu cámara, contactos, ubicación ni calendario.
+          Manifiesto no se conecta a tus cuentas bancarias, tarjetas ni
+          billeteras, ni lee tu información financiera desde bancos u
+          otras instituciones. Toda la información financiera la cargas
+          tú, manualmente.
         </p>
         <p>
-          A los efectos de la legislación argentina (Ley 25.326 de
-          Protección de los Datos Personales) y del Reglamento General
-          de Protección de Datos europeo (GDPR), Manifiesto actúa como
-          <strong>responsable del tratamiento</strong> de tus datos
-          personales.
+          Tampoco escaneamos tu galería: el único acceso a tus fotos
+          ocurre cuando tú eliges importar una captura (lo explicamos
+          más arriba), y esa imagen se procesa en tu dispositivo.
         </p>
+      </div>
 
-        <h2 id="datos">
-          <span class="h-index">02</span>
-          Qué datos recolectamos
-        </h2>
+      <div class="callout">
+        <div class="callout-eyebrow">Sobre inteligencia artificial</div>
         <p>
-          Manifiesto recolecta únicamente los datos que necesita para
-          que la app funcione. Los agrupamos por categoría:
-        </p>
-
-        <h3>Datos de cuenta</h3>
-        <ul>
-          <li><strong>Email</strong> — para crear tu cuenta, recuperar contraseña y comunicarte cambios importantes.</li>
-          <li><strong>Nombre de usuario</strong> que tú eliges mostrar dentro de tu hogar.</li>
-          <li><strong>Avatar</strong> — un identificador visual elegido de una lista predefinida (no subes fotos).</li>
-          <li><strong>Contraseña</strong> — guardada de forma cifrada (hash) por nuestro proveedor de autenticación. Nadie en Manifiesto la ve en texto plano.</li>
-          <li><strong>Identificador de proveedor social</strong> — si entras con Apple o Google, guardamos el identificador único que esos proveedores nos devuelven para reconocerte. No accedemos a tus contactos, fotos ni a ningún otro dato de tu cuenta de Apple o Google.</li>
-        </ul>
-
-        <h3>Datos financieros que tú cargas</h3>
-        <ul>
-          <li><strong>Ingresos mensuales</strong> declarados (cifras numéricas, sin información del empleador).</li>
-          <li><strong>Día de cobro</strong> y configuración de tu ciclo mensual.</li>
-          <li><strong>Gastos</strong> — monto, categoría, fecha y, opcionalmente, una nota corta.</li>
-          <li><strong>Gastos fijos / suscripciones</strong> — nombre, monto y frecuencia y, si los cargas, el nombre del acreedor, el saldo pendiente y las cuotas de un préstamo. Si incluyes el nombre de otra persona, eres responsable de hacerlo conforme a la ley.</li>
-          <li><strong>Metas de ahorro</strong> y aportes a esas metas.</li>
-          <li><strong>Composición de tu hogar</strong> — los otros usuarios de Manifiesto con los que decidiste compartir tu economía y, si corresponde, el aporte mensual de cada uno. Si le envías un aviso o recordatorio a otro miembro, ese mensaje se guarda y se le muestra a esa persona.</li>
-          <li><strong>Importar desde una captura (opcional)</strong> — si eliges cargar un movimiento desde una foto de tu galería, leemos los montos con reconocimiento de texto que corre <strong>en tu propio dispositivo</strong>. La imagen no se sube a nuestros servidores ni se guarda: solo quedan los datos que tú confirmas.</li>
-        </ul>
-
-        <h3>Datos técnicos</h3>
-        <ul>
-          <li><strong>Token de notificaciones push</strong> — un identificador del dispositivo, asociado a tu cuenta, que nos da Apple o Google para enviarte avisos. Si desactivas las notificaciones o cierras sesión, lo eliminamos.</li>
-          <li><strong>Plataforma y versión</strong> — el sistema operativo y la versión de la app que usas (lo recibimos al registrar tu dispositivo para notificaciones), para dar soporte y priorizar mejoras.</li>
-          <li><strong>Zona horaria del dispositivo</strong> — para programar tus avisos y los cierres de ciclo en tu horario local.</li>
-          <li><strong>Eventos de uso</strong> — qué sugerencias del asistente te mostramos y cómo interactúas con ellas (las ves, las aplicas o las descartas). Están <strong>asociados a tu cuenta</strong> —no son anónimos— y pueden incluir el monto o el nombre del ítem sobre el que actuó la sugerencia. Viven en nuestra propia base y no se exportan a terceros.</li>
-        </ul>
-
-        <div class="callout">
-          <div class="callout-eyebrow">Lo que no recolectamos</div>
-          <p>
-            No accedemos a tu cámara, contactos, ubicación ni calendario.
-            Manifiesto no se conecta a tus cuentas bancarias, tarjetas ni
-            billeteras, ni lee tu información financiera desde bancos u
-            otras instituciones. Toda la información financiera la cargas
-            tú, manualmente.
-          </p>
-          <p>
-            Tampoco escaneamos tu galería: el único acceso a tus fotos
-            ocurre cuando tú eliges importar una captura (lo explicamos
-            más arriba), y esa imagen se procesa en tu dispositivo.
-          </p>
-        </div>
-
-        <div class="callout">
-          <div class="callout-eyebrow">Sobre inteligencia artificial</div>
-          <p>
-            Hoy Manifiesto <strong>no usa modelos de lenguaje (LLM) ni
-            IA generativa</strong> para procesar tus datos. El asistente
-            arma sus sugerencias con reglas y cálculos determinísticos
-            sobre tus propios números, dentro de nuestra infraestructura,
-            y el reconocimiento de texto al importar una captura corre en
-            tu dispositivo.
-          </p>
-          <p>
-            Si en el futuro incorporáramos IA que procese tus datos,
-            actualizaríamos esta política y te lo informaríamos antes de
-            hacerlo.
-          </p>
-        </div>
-
-        <h2 id="usos">
-          <span class="h-index">03</span>
-          Para qué usamos tus datos
-        </h2>
-        <ul>
-          <li><strong>Operar la app:</strong> mostrarte tus gastos, calcular tu cupo diario, sincronizar con tu pareja o conviviente.</li>
-          <li><strong>Notificaciones funcionales:</strong> avisarte cuando se acerca un gasto fijo, cuando estás por superar tu cupo o cuando tu pareja registró un gasto.</li>
-          <li><strong>Asistente financiero:</strong> generar sugerencias en base a tu propio patrón de gasto. El cálculo es determinístico (reglas y matemática sobre tus números) y corre dentro de nuestra infraestructura; tus datos no se envían a modelos de lenguaje (LLM) ni a IA generativa de terceros.</li>
-          <li><strong>Soporte:</strong> responder cuando nos escribes a <a href="mailto:soporte@manifiestoapp.com">soporte@manifiestoapp.com</a>.</li>
-          <li><strong>Mejorar el producto:</strong> entender qué funciona y qué no, en agregado (sin identificarte individualmente).</li>
-          <li><strong>Cumplir con la ley:</strong> responder pedidos judiciales válidos y obligaciones impositivas (cuando corresponda).</li>
-        </ul>
-        <p>
-          <strong>Nunca</strong> usamos tus datos para venderlos,
-          alquilarlos, mostrarte publicidad de terceros, ni para
-          "perfilar" tu comportamiento financiero con fines comerciales.
-        </p>
-
-        <h2 id="bases-legales">
-          <span class="h-index">04</span>
-          Bases legales del tratamiento
-        </h2>
-        <p>
-          Tratamos tus datos en base a las siguientes justificaciones,
-          según la Ley 25.326 (Argentina), el GDPR (Unión Europea) y la
-          CCPA (California, EE.UU.):
-        </p>
-        <ul>
-          <li><strong>Ejecución de un contrato:</strong> los datos que necesitamos para que la app funcione cuando aceptas los Términos.</li>
-          <li><strong>Consentimiento:</strong> notificaciones push, sincronización con otros miembros del hogar, y cualquier otro uso opcional.</li>
-          <li><strong>Interés legítimo:</strong> proteger la app contra abuso, mejorar el producto en agregado.</li>
-          <li><strong>Obligación legal:</strong> conservación de información impositiva o respuesta a requerimientos de autoridades.</li>
-        </ul>
-
-        <h2 id="terceros">
-          <span class="h-index">05</span>
-          Servicios de terceros que tocan tus datos
-        </h2>
-        <p>
-          Para operar la app dependemos de proveedores de
-          infraestructura. Cada uno trata únicamente la porción de
-          datos que necesita y bajo contratos que les exigen el mismo
-          estándar de protección que aplicamos nosotros.
-        </p>
-
-        <h3>Supabase (hosting de base de datos y autenticación)</h3>
-        <p>
-          Almacena toda la información de tu cuenta y de tu hogar.
-          Servidores ubicados en Estados Unidos (región us-east-1).
-          <a href="https://supabase.com/privacy" target="_blank" rel="noopener">Política de privacidad de Supabase</a>.
-        </p>
-
-        <h3>Apple y Google (autenticación social, opcional)</h3>
-        <p>
-          Si eliges entrar con Apple o Google, nos devuelven un
-          identificador único para tu cuenta. No accedemos a más
-          información que esa.
-        </p>
-
-        <h3>Expo (notificaciones push)</h3>
-        <p>
-          Procesa el envío de notificaciones desde nuestros servidores
-          hasta tu dispositivo, vía Apple Push Notification service
-          (APNs) y Firebase Cloud Messaging (FCM) según tu plataforma.
-          <a href="https://expo.dev/privacy" target="_blank" rel="noopener">Política de privacidad de Expo</a>.
-        </p>
-
-        <h3>App Store y Google Play</h3>
-        <p>
-          Manifiesto se distribuye a través de la App Store de Apple y,
-          próximamente, Google Play. Esos servicios recolectan métricas
-          de descarga e instalación bajo sus propias políticas.
-        </p>
-
-        <h3>Proveedores de tipo de cambio (opcional)</h3>
-        <p>
-          Si activas la conversión a dólares, consultamos la cotización a
-          fuentes públicas de tipo de cambio (por ejemplo, dolarapi.com y
-          open.er-api.com). Solo les pedimos el valor de la cotización:
-          <strong>no les enviamos ningún dato personal ni financiero
-          tuyo</strong>.
-        </p>
-
-        <div class="callout">
-          <div class="callout-eyebrow">Sin terceros publicitarios</div>
-          <p>
-            No usamos Google Analytics, Facebook Pixel, ni ningún SDK
-            publicitario o de tracking. No vendemos tus datos a brokers.
-            No cargamos píxeles de redes sociales en la app ni en este
-            sitio.
-          </p>
-        </div>
-
-        <h2 id="retencion">
-          <span class="h-index">06</span>
-          Cuánto tiempo guardamos tus datos
-        </h2>
-        <ul>
-          <li><strong>Cuenta activa:</strong> mientras tengas cuenta abierta, tus datos viven en la app y en tu base.</li>
-          <li><strong>Notificaciones:</strong> se conservan hasta 14 días (las que ya leíste, menos), después se purgan automáticamente.</li>
-          <li><strong>Gastos archivados:</strong> los gastos de un ciclo cerrado quedan disponibles en tu historial durante unos 14 días tras el cierre; después se eliminan automáticamente (conservamos algunos pagos recientes de gastos fijos para el seguimiento de tus cuotas).</li>
-          <li><strong>Eventos de telemetría:</strong> 30 días, después se purgan.</li>
-          <li><strong>Backups operacionales:</strong> retenemos copias de respaldo de la base por hasta 30 días para poder recuperar el servicio ante fallas.</li>
-          <li><strong>Solicitud de baja:</strong> cuando pides borrar tu cuenta desde Configuración → Cuenta → Eliminar cuenta, programamos el borrado para 30 días después. Durante esa ventana puedes cancelar la baja entrando otra vez. Pasados los 30 días, tus datos personales se borran de forma irreversible. Los registros que hayas cargado en un hogar compartido (por ejemplo, gastos de una economía conjunta) pueden permanecer visibles para los demás miembros, desvinculados de tu identidad. También podemos conservar información que la ley nos obligue a guardar (por ejemplo, comprobantes de pago durante el plazo impositivo).</li>
-        </ul>
-
-        <h2 id="seguridad">
-          <span class="h-index">07</span>
-          Cómo protegemos tus datos
-        </h2>
-        <ul>
-          <li><strong>Cifrado en tránsito:</strong> toda la comunicación entre la app y nuestros servidores usa TLS 1.2 o superior.</li>
-          <li><strong>Cifrado en reposo:</strong> la base de datos está cifrada a nivel disco por nuestro proveedor.</li>
-          <li><strong>Row-Level Security:</strong> nuestras tablas tienen reglas que impiden que un usuario lea o modifique datos de otro hogar. Cualquier acceso valida tu identidad antes de devolver resultados.</li>
-          <li><strong>Autenticación con PKCE:</strong> el flujo de login usa Proof Key for Code Exchange para evitar ataques de fijación de sesión.</li>
-          <li><strong>Biometría local:</strong> la app puede pedir Face ID o Touch ID antes de abrir tus datos si tú lo activas. Las credenciales biométricas no salen nunca de tu dispositivo.</li>
-          <li><strong>Almacenamiento local cifrado:</strong> en tu dispositivo guardamos en el almacén seguro del sistema (Keychain en iOS, Keystore en Android) tus tokens de sesión y una copia de tus datos para que la app pueda funcionar sin conexión.</li>
-          <li><strong>Auditorías internas:</strong> revisiones periódicas de seguridad sobre nuestra propia base de código y nuestras políticas de acceso.</li>
-        </ul>
-        <p>
-          Pese a todo lo anterior, ningún sistema es 100% impenetrable.
-          Si detectamos una brecha que afecta tus datos personales, te
-          lo notificaremos por email dentro de los plazos exigidos por
-          la legislación aplicable.
-        </p>
-
-        <h2 id="derechos">
-          <span class="h-index">08</span>
-          Tus derechos sobre tus datos
-        </h2>
-        <p>
-          Como titular de tus datos personales, tienes derecho a:
-        </p>
-        <ul>
-          <li><strong>Acceder</strong> a una copia de los datos que tenemos sobre tú.</li>
-          <li><strong>Rectificar</strong> datos incorrectos o desactualizados (la mayoría puedes editarlos directamente en la app, en Configuración).</li>
-          <li><strong>Eliminar</strong> tu cuenta y los datos asociados (Configuración → Cuenta → Eliminar cuenta dentro de la app, o escribiéndonos).</li>
-          <li><strong>Portar</strong> tus datos en un formato estructurado y legible por máquina.</li>
-          <li><strong>Oponerte</strong> a determinados tratamientos (por ejemplo, retirar el consentimiento para push notifications).</li>
-          <li><strong>Limitar</strong> el tratamiento mientras se revisa una disputa.</li>
-        </ul>
-        <p>
-          Para ejercer cualquiera de estos derechos, escribinos a
-          <a href="mailto:soporte@manifiestoapp.com">soporte@manifiestoapp.com</a>.
-          Te respondemos en un plazo máximo de 30 días corridos.
+          Hoy Manifiesto <strong>no usa modelos de lenguaje (LLM) ni
+          IA generativa</strong> para procesar tus datos. El asistente
+          arma sus sugerencias con reglas y cálculos determinísticos
+          sobre tus propios números, dentro de nuestra infraestructura,
+          y el reconocimiento de texto al importar una captura corre en
+          tu dispositivo.
         </p>
         <p>
-          Si consideras que no estamos cumpliendo, puedes presentar un
-          reclamo ante la <strong>Agencia de Acceso a la Información
-          Pública</strong> (Argentina) o ante la autoridad de protección
-          de datos de tu país de residencia.
+          Si en el futuro incorporáramos IA que procese tus datos,
+          actualizaríamos esta política y te lo informaríamos antes de
+          hacerlo.
         </p>
+      </div>
 
-        <h2 id="nineteen">
-          <span class="h-index">09</span>
-          Menores de edad
-        </h2>
+      <h2 id="usos">
+        <span class="h-index">03</span>
+        Para qué usamos tus datos
+      </h2>
+      <ul>
+        <li><strong>Operar la app:</strong> mostrarte tus gastos, calcular tu cupo diario, sincronizar con tu pareja o conviviente.</li>
+        <li><strong>Notificaciones funcionales:</strong> avisarte cuando se acerca un gasto fijo, cuando estás por superar tu cupo o cuando tu pareja registró un gasto.</li>
+        <li><strong>Asistente financiero:</strong> generar sugerencias en base a tu propio patrón de gasto. El cálculo es determinístico (reglas y matemática sobre tus números) y corre dentro de nuestra infraestructura; tus datos no se envían a modelos de lenguaje (LLM) ni a IA generativa de terceros.</li>
+        <li><strong>Soporte:</strong> responder cuando nos escribes a <a href="mailto:soporte@manifiestoapp.com">soporte@manifiestoapp.com</a>.</li>
+        <li><strong>Mejorar el producto:</strong> entender qué funciona y qué no, en agregado (sin identificarte individualmente).</li>
+        <li><strong>Cumplir con la ley:</strong> responder pedidos judiciales válidos y obligaciones impositivas (cuando corresponda).</li>
+      </ul>
+      <p>
+        <strong>Nunca</strong> usamos tus datos para venderlos,
+        alquilarlos, mostrarte publicidad de terceros, ni para
+        "perfilar" tu comportamiento financiero con fines comerciales.
+      </p>
+
+      <h2 id="bases-legales">
+        <span class="h-index">04</span>
+        Bases legales del tratamiento
+      </h2>
+      <p>
+        Tratamos tus datos en base a las siguientes justificaciones,
+        según la Ley 25.326 (Argentina), el GDPR (Unión Europea) y la
+        CCPA (California, EE.UU.):
+      </p>
+      <ul>
+        <li><strong>Ejecución de un contrato:</strong> los datos que necesitamos para que la app funcione cuando aceptas los Términos.</li>
+        <li><strong>Consentimiento:</strong> notificaciones push, sincronización con otros miembros del hogar, y cualquier otro uso opcional.</li>
+        <li><strong>Interés legítimo:</strong> proteger la app contra abuso, mejorar el producto en agregado.</li>
+        <li><strong>Obligación legal:</strong> conservación de información impositiva o respuesta a requerimientos de autoridades.</li>
+      </ul>
+
+      <h2 id="terceros">
+        <span class="h-index">05</span>
+        Servicios de terceros que tocan tus datos
+      </h2>
+      <p>
+        Para operar la app dependemos de proveedores de
+        infraestructura. Cada uno trata únicamente la porción de
+        datos que necesita y bajo contratos que les exigen el mismo
+        estándar de protección que aplicamos nosotros.
+      </p>
+
+      <h3>Supabase (hosting de base de datos y autenticación)</h3>
+      <p>
+        Almacena toda la información de tu cuenta y de tu hogar.
+        Servidores ubicados en Estados Unidos (región us-east-1).
+        <a href="https://supabase.com/privacy" target="_blank" rel="noopener">Política de privacidad de Supabase</a>.
+      </p>
+
+      <h3>Apple y Google (autenticación social, opcional)</h3>
+      <p>
+        Si eliges entrar con Apple o Google, nos devuelven un
+        identificador único para tu cuenta. No accedemos a más
+        información que esa.
+      </p>
+
+      <h3>Expo (notificaciones push)</h3>
+      <p>
+        Procesa el envío de notificaciones desde nuestros servidores
+        hasta tu dispositivo, vía Apple Push Notification service
+        (APNs) y Firebase Cloud Messaging (FCM) según tu plataforma.
+        <a href="https://expo.dev/privacy" target="_blank" rel="noopener">Política de privacidad de Expo</a>.
+      </p>
+
+      <h3>App Store y Google Play</h3>
+      <p>
+        Manifiesto se distribuye a través de la App Store de Apple y,
+        próximamente, Google Play. Esos servicios recolectan métricas
+        de descarga e instalación bajo sus propias políticas.
+      </p>
+
+      <h3>Proveedores de tipo de cambio (opcional)</h3>
+      <p>
+        Si activas la conversión a dólares, consultamos la cotización a
+        fuentes públicas de tipo de cambio (por ejemplo, dolarapi.com y
+        open.er-api.com). Solo les pedimos el valor de la cotización:
+        <strong>no les enviamos ningún dato personal ni financiero
+        tuyo</strong>.
+      </p>
+
+      <div class="callout">
+        <div class="callout-eyebrow">Sin terceros publicitarios</div>
         <p>
-          Manifiesto está pensada para personas mayores de 18 años. No
-          recolectamos a sabiendas datos de menores de 13 años. Si
-          identificamos que un menor de 13 creó una cuenta sin
-          autorización parental, la borramos junto con todos sus datos
-          asociados.
+          No usamos Google Analytics, Facebook Pixel, ni ningún SDK
+          publicitario o de tracking. No vendemos tus datos a brokers.
+          No cargamos píxeles de redes sociales en la app ni en este
+          sitio.
         </p>
+      </div>
 
-        <h2 id="transferencias">
-          <span class="h-index">10</span>
-          Transferencias internacionales
-        </h2>
-        <p>
-          Nuestra infraestructura principal (Supabase) opera en
-          Estados Unidos. Cuando usas Manifiesto desde Argentina o
-          desde la Unión Europea, tus datos viajan a esos servidores.
-          Estas transferencias se realizan bajo:
-        </p>
-        <ul>
-          <li>Las cláusulas contractuales tipo (SCC) aprobadas por la Comisión Europea para transferencias hacia EE.UU.</li>
-          <li>Los compromisos contractuales de seguridad y confidencialidad asumidos por el proveedor.</li>
-        </ul>
+      <h2 id="retencion">
+        <span class="h-index">06</span>
+        Cuánto tiempo guardamos tus datos
+      </h2>
+      <ul>
+        <li><strong>Cuenta activa:</strong> mientras tengas cuenta abierta, tus datos viven en la app y en tu base.</li>
+        <li><strong>Notificaciones:</strong> se conservan hasta 14 días (las que ya leíste, menos), después se purgan automáticamente.</li>
+        <li><strong>Gastos archivados:</strong> los gastos de un ciclo cerrado quedan disponibles en tu historial durante unos 14 días tras el cierre; después se eliminan automáticamente (conservamos algunos pagos recientes de gastos fijos para el seguimiento de tus cuotas).</li>
+        <li><strong>Eventos de telemetría:</strong> 30 días, después se purgan.</li>
+        <li><strong>Backups operacionales:</strong> retenemos copias de respaldo de la base por hasta 30 días para poder recuperar el servicio ante fallas.</li>
+        <li><strong>Solicitud de baja:</strong> cuando pides borrar tu cuenta desde Configuración → Cuenta → Eliminar cuenta, programamos el borrado para 30 días después. Durante esa ventana puedes cancelar la baja entrando otra vez. Pasados los 30 días, tus datos personales se borran de forma irreversible. Los registros que hayas cargado en un hogar compartido (por ejemplo, gastos de una economía conjunta) pueden permanecer visibles para los demás miembros, desvinculados de tu identidad. También podemos conservar información que la ley nos obligue a guardar (por ejemplo, comprobantes de pago durante el plazo impositivo).</li>
+      </ul>
 
-        <h2 id="cambios">
-          <span class="h-index">11</span>
-          Cambios a esta política
-        </h2>
-        <p>
-          Si actualizamos esta política, mostramos la fecha de la
-          nueva versión arriba y, si los cambios son sustanciales, te
-          avisamos dentro de la app antes de que entren en vigencia.
-          Las versiones anteriores quedan disponibles bajo pedido a
-          soporte.
-        </p>
+      <h2 id="seguridad">
+        <span class="h-index">07</span>
+        Cómo protegemos tus datos
+      </h2>
+      <ul>
+        <li><strong>Cifrado en tránsito:</strong> toda la comunicación entre la app y nuestros servidores usa TLS 1.2 o superior.</li>
+        <li><strong>Cifrado en reposo:</strong> la base de datos está cifrada a nivel disco por nuestro proveedor.</li>
+        <li><strong>Row-Level Security:</strong> nuestras tablas tienen reglas que impiden que un usuario lea o modifique datos de otro hogar. Cualquier acceso valida tu identidad antes de devolver resultados.</li>
+        <li><strong>Autenticación con PKCE:</strong> el flujo de login usa Proof Key for Code Exchange para evitar ataques de fijación de sesión.</li>
+        <li><strong>Biometría local:</strong> la app puede pedir Face ID o Touch ID antes de abrir tus datos si tú lo activas. Las credenciales biométricas no salen nunca de tu dispositivo.</li>
+        <li><strong>Almacenamiento local cifrado:</strong> en tu dispositivo guardamos en el almacén seguro del sistema (Keychain en iOS, Keystore en Android) tus tokens de sesión y una copia de tus datos para que la app pueda funcionar sin conexión.</li>
+        <li><strong>Auditorías internas:</strong> revisiones periódicas de seguridad sobre nuestra propia base de código y nuestras políticas de acceso.</li>
+      </ul>
+      <p>
+        Pese a todo lo anterior, ningún sistema es 100% impenetrable.
+        Si detectamos una brecha que afecta tus datos personales, te
+        lo notificaremos por email dentro de los plazos exigidos por
+        la legislación aplicable.
+      </p>
 
-        <h2 id="contacto">
-          <span class="h-index">12</span>
-          Contacto
-        </h2>
-        <p>
-          Para cualquier consulta, reclamo o ejercicio de derechos:
-        </p>
-        <ul>
-          <li>Email: <a href="mailto:soporte@manifiestoapp.com">soporte@manifiestoapp.com</a></li>
-        </ul>
-        <p>
-          Te respondemos en el menor tiempo posible — comprometemos un
-          máximo de 5 días hábiles para acuses de recibo y 30 días
-          para resoluciones definitivas.
-        </p>
+      <h2 id="derechos">
+        <span class="h-index">08</span>
+        Tus derechos sobre tus datos
+      </h2>
+      <p>
+        Como titular de tus datos personales, tienes derecho a:
+      </p>
+      <ul>
+        <li><strong>Acceder</strong> a una copia de los datos que tenemos sobre ti.</li>
+        <li><strong>Rectificar</strong> datos incorrectos o desactualizados (la mayoría puedes editarlos directamente en la app, en Configuración).</li>
+        <li><strong>Eliminar</strong> tu cuenta y los datos asociados (Configuración → Cuenta → Eliminar cuenta dentro de la app, o escribiéndonos).</li>
+        <li><strong>Portar</strong> tus datos en un formato estructurado y legible por máquina.</li>
+        <li><strong>Oponerte</strong> a determinados tratamientos (por ejemplo, retirar el consentimiento para push notifications).</li>
+        <li><strong>Limitar</strong> el tratamiento mientras se revisa una disputa.</li>
+      </ul>
+      <p>
+        Para ejercer cualquiera de estos derechos, escribinos a
+        <a href="mailto:soporte@manifiestoapp.com">soporte@manifiestoapp.com</a>.
+        Te respondemos en un plazo máximo de 30 días corridos.
+      </p>
+      <p>
+        Si consideras que no estamos cumpliendo, puedes presentar un
+        reclamo ante la <strong>Agencia de Acceso a la Información
+        Pública</strong> (Argentina) o ante la autoridad de protección
+        de datos de tu país de residencia.
+      </p>
 
-      </article>
-    </div>
-  </section>
+      <h2 id="nineteen">
+        <span class="h-index">09</span>
+        Menores de edad
+      </h2>
+      <p>
+        Manifiesto está pensada para personas mayores de 18 años. No
+        recolectamos a sabiendas datos de menores de 13 años. Si
+        identificamos que un menor de 13 creó una cuenta sin
+        autorización parental, la borramos junto con todos sus datos
+        asociados.
+      </p>
 
-  <!-- FOOTER ────────────────────────────────────────────── -->
+      <h2 id="transferencias">
+        <span class="h-index">10</span>
+        Transferencias internacionales
+      </h2>
+      <p>
+        Nuestra infraestructura principal (Supabase) opera en
+        Estados Unidos. Cuando usas Manifiesto desde Argentina o
+        desde la Unión Europea, tus datos viajan a esos servidores.
+        Estas transferencias se realizan bajo:
+      </p>
+      <ul>
+        <li>Las cláusulas contractuales tipo (SCC) aprobadas por la Comisión Europea para transferencias hacia EE.UU.</li>
+        <li>Los compromisos contractuales de seguridad y confidencialidad asumidos por el proveedor.</li>
+      </ul>
+
+      <h2 id="cambios">
+        <span class="h-index">11</span>
+        Cambios a esta política
+      </h2>
+      <p>
+        Si actualizamos esta política, mostramos la fecha de la
+        nueva versión arriba y, si los cambios son sustanciales, te
+        avisamos dentro de la app antes de que entren en vigencia.
+        Las versiones anteriores quedan disponibles bajo pedido a
+        soporte.
+      </p>
+
+      <h2 id="contacto">
+        <span class="h-index">12</span>
+        Contacto
+      </h2>
+      <p>
+        Para cualquier consulta, reclamo o ejercicio de derechos:
+      </p>
+      <ul>
+        <li>Email: <a href="mailto:soporte@manifiestoapp.com">soporte@manifiestoapp.com</a></li>
+      </ul>
+      <p>
+        Te respondemos en el menor tiempo posible — comprometemos un
+        máximo de 5 días hábiles para acuses de recibo y 30 días
+        para resoluciones definitivas.
+      </p>
+
+    </article>
+  </main>
+
   <footer class="site-footer">
-    <div class="shell">
-      <div class="footer-grid">
-        <div>
-          <div class="footer__brand">Manifiesto<span class="dot">.</span></div>
-          <p class="footer__tag">
-            Una sola app para que el dinero de la familia tenga
-            claridad, calma y dirección.
-          </p>
-        </div>
-
-        <div class="footer__col">
-          <h4>Documentos</h4>
-          <ul>
-            <li><a href="/privacy/">Política de privacidad</a></li>
-            <li><a href="/terms/">Términos de uso</a></li>
-          </ul>
-        </div>
-
-        <div class="footer__col">
-          <h4>Contacto</h4>
-          <ul>
-            <li><a href="mailto:soporte@manifiestoapp.com">soporte@manifiestoapp.com</a></li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="footer-bottom">
-        <span>© 2026 Manifiesto</span>
-        <span>Hecho en Argentina</span>
-      </div>
+    <div class="site-footer__inner">
+      <a class="wordmark" href="/">Manifiesto<span class="dot">.</span></a>
+      <span>&copy; 2026 Manifiesto</span>
+      <nav class="site-footer__links" aria-label="Legal">
+        <a href="/privacy/">Privacidad</a>
+        <a href="/terms/">Términos</a>
+      </nav>
     </div>
   </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
-  <script src="/assets/main.js"></script>
+</div>
+
+
 </body>
 </html>
