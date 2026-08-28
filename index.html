@@ -630,9 +630,41 @@
     .footer .shell { grid-template-columns: 1fr; gap: 32px; }
     .nav__links { display: none; }
   }
+  .nav__cta-short { display: none; }
+
+  /* Anchos angostos: la barra tiene que entrar entera (sin scroll lateral) */
+  @media (max-width: 560px) {
+    .nav { padding: 0 12px; }
+    .nav__bar { gap: 8px; padding: 8px 8px 8px 16px; }
+    .wordmark { font-size: 18px; }
+    .nav__lang { margin-left: auto; padding: 9px 10px; font-size: 12px; }
+    .theme-btn { width: 38px; height: 38px; }
+    .nav__cta { font-size: 13px; padding: 10px 15px; }
+    .nav__cta-full { display: none; }
+    .nav__cta-short { display: inline; }
+    .shell { padding: 0 16px; }
+  }
   @media (max-width: 430px) {
-    .show-phone { width: 316px; }
-    .show-slot .fx-shot { transform: scale(0.804); }
+    .gl-titleline { flex-wrap: wrap; gap: 6px; }
+    .gl-title { overflow: visible; text-overflow: clip; white-space: normal; }
+  }
+  @media (max-width: 380px) {
+    .nav__bar { gap: 6px; padding: 7px 7px 7px 13px; }
+    .wordmark { font-size: 17px; }
+    .nav__lang { padding: 8px 8px; }
+    .theme-btn { width: 36px; height: 36px; }
+    .nav__cta { font-size: 12.5px; padding: 9px 12px; }
+  }
+
+  /* El teléfono del showcase se escala junto con su marco por breakpoint
+     (el shot mide 393px reales y se achica por transform). */
+  @media (max-width: 560px) {
+    .show-phone { width: 300px; }
+    .show-slot .fx-shot { transform: scale(0.7634); }
+  }
+  @media (max-width: 380px) {
+    .show-phone { width: 272px; }
+    .show-slot .fx-shot { transform: scale(0.6921); }
   }
   @media (max-width: 720px) {
     .section { padding: 84px 0; }
@@ -668,7 +700,7 @@
         <path d="M12 2.5v2.4M12 19.1v2.4M2.5 12h2.4M19.1 12h2.4M4.8 4.8l1.7 1.7M17.5 17.5l1.7 1.7M19.2 4.8l-1.7 1.7M6.5 17.5l-1.7 1.7"></path>
       </svg>
     </button>
-    <a class="nav__cta" href="https://apps.apple.com/us/app/manifiesto/id6776033487" target="_blank" rel="noopener">Conseguir la app</a>
+    <a class="nav__cta" href="https://apps.apple.com/us/app/manifiesto/id6776033487" target="_blank" rel="noopener"><span class="nav__cta-full">Conseguir la app</span><span class="nav__cta-short">Descargar</span></a>
   </div>
 </header>
 
@@ -2577,16 +2609,7 @@
     .gl-texts { flex: 1; min-width: 0; }
     .gl-titleline { display: flex; align-items: center; gap: 8px; min-width: 0; }
     /* rowTitle 14.5/900 · cardTitleInk oscuro */
-    .gl-title {
-      font-size: 14.5px;
-      font-weight: 900;
-      line-height: 20px;
-      color: #EFF6E2;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      min-width: 0;
-    }
+    .gl-title { font-size: 14.5px; font-weight: 900; line-height: 20px; color: #EFF6E2; white-space: normal; min-width: 0; }
     .gl-title--secret { color: #7C917A; }
     /* rowBody 11.5/700 lh 15 · cardSubInk oscuro; 2 líneas máx */
     .gl-body {
@@ -3937,8 +3960,20 @@
           c.setAttribute('stroke-dashoffset', c.dataset.target);
         }, 150 + i * 80);
       });
-    }, { threshold: 0.35 });
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
     io.observe(band);
+    // Cinturón de seguridad: si el observer no dispara (bloque más alto que el
+    // viewport, pestaña en background), los aros igual llegan a su valor real —
+    // un aro vacío contradiría el chip "65% regado".
+    setTimeout(() => {
+      io.disconnect();
+      rings.forEach((c) => {
+        if (c.getAttribute('stroke-dashoffset') !== c.dataset.target) {
+          c.style.transition = 'stroke-dashoffset 600ms ease';
+          c.setAttribute('stroke-dashoffset', c.dataset.target);
+        }
+      });
+    }, 2600);
   })();
 
   // ── Parallax sutil del hero (solo desktop, gateado por RM) ──

@@ -1,460 +1,652 @@
 <!doctype html>
-<html lang="en" class="no-js">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <meta name="theme-color" content="#1F590D" />
+  <meta name="theme-color" content="#DCDFCD" />
   <meta name="color-scheme" content="light dark" />
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('manifiesto-theme');
+        if (t === 'light' || t === 'dark') {
+          document.documentElement.setAttribute('data-theme', t);
+        }
+      } catch (e) {}
+    })();
+  </script>
   <title>Terms of Use · Manifiesto</title>
-  <meta name="description" content="Manifiesto's terms of use: account, acceptable use, subscriptions, liability and jurisdiction." />
+  <meta name="description" content="The conditions for using Manifiesto: account, shared households, subscriptions, liability and contact." />
+  <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://manifiestoapp.com/en/terms/" />
-  <link rel="alternate" hreflang="es" href="https://manifiestoapp.com/terms/" />
+  <link rel="alternate" hreflang="es-419" href="https://manifiestoapp.com/terms/" />
   <link rel="alternate" hreflang="en" href="https://manifiestoapp.com/en/terms/" />
   <link rel="alternate" hreflang="x-default" href="https://manifiestoapp.com/terms/" />
-
+  <link rel="apple-touch-icon" href="/assets/fern.svg" />
+  <link rel="icon" type="image/svg+xml" href="/assets/fern.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="/assets/styles.css" />
-  <link rel="icon" type="image/svg+xml" href="/assets/fern.svg" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&display=swap" />
+<style>
+  :root {
+    --bg: #DCDFCD;
+    --surface: #E9EBE0;
+    --raised-a: #F0F2E7;
+    --raised-b: #E1E4D6;
+    --sheet: #F0EFE3;
+    --well: #E9EBE0;
+    --text: #24382A;
+    --muted: #54644F;
+    --green: #2E7C39;
+    --green-link: #1F5429;
+    --warm-bright: #D97E4F;
+    --sh-sm: 5px 5px 10px rgba(151,160,136,0.35), -5px -5px 10px rgba(255,255,255,0.85);
+    --sh-lg: 8px 8px 18px rgba(151,160,136,0.42), -8px -8px 18px rgba(255,255,255,0.92);
+    --in-sm: inset 2px 2px 5px rgba(151,160,136,0.3), inset -2px -2px 5px rgba(255,255,255,0.8);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0F1A13;
+      --surface: #1D3426;
+      --raised-a: #1D3426;
+      --raised-b: #132318;
+      --sheet: #1B2F22;
+      --well: #142519;
+      --text: #F1EEDD;
+      --muted: #93A78F;
+      --green: #A4E3A6;
+      --green-link: #A4E3A6;
+      --warm-bright: #F2A87E;
+      --sh-sm: 5px 5px 10px rgba(0,0,0,0.45), -5px -5px 10px rgba(101,152,113,0.08);
+      --sh-lg: 8px 8px 18px rgba(0,0,0,0.5), -8px -8px 18px rgba(101,152,113,0.1);
+      --in-sm: inset 2px 2px 5px rgba(0,0,0,0.45), inset -2px -2px 5px rgba(101,152,113,0.07);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #0F1A13;
+    --surface: #1D3426;
+    --raised-a: #1D3426;
+    --raised-b: #132318;
+    --sheet: #1B2F22;
+    --well: #142519;
+    --text: #F1EEDD;
+    --muted: #93A78F;
+    --green: #A4E3A6;
+    --green-link: #A4E3A6;
+    --warm-bright: #F2A87E;
+    --sh-sm: 5px 5px 10px rgba(0,0,0,0.45), -5px -5px 10px rgba(101,152,113,0.08);
+    --sh-lg: 8px 8px 18px rgba(0,0,0,0.5), -8px -8px 18px rgba(101,152,113,0.1);
+    --in-sm: inset 2px 2px 5px rgba(0,0,0,0.45), inset -2px -2px 5px rgba(101,152,113,0.07);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Nunito', 'Avenir Next', 'Segoe UI', system-ui, -apple-system, sans-serif;
+    font-weight: 600;
+    font-size: 16.5px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    width: min(760px, calc(100% - 40px));
+    margin-inline: auto;
+  }
+
+  /* ── Skip link ─────────────────────────────── */
+  .skip-link {
+    position: absolute;
+    top: -100px;
+    left: 20px;
+    z-index: 100;
+    background: var(--sheet);
+    color: var(--text);
+    font-weight: 800;
+    font-size: 14px;
+    padding: 12px 20px;
+    border-radius: 16px;
+    box-shadow: var(--sh-sm);
+    text-decoration: none;
+  }
+  .skip-link:focus-visible { top: 16px; }
+
+  :focus-visible {
+    outline: 2.5px solid var(--green);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+
+  /* ── Nav pill ──────────────────────────────── */
+  .topnav {
+    position: sticky;
+    top: 14px;
+    z-index: 50;
+    margin-top: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 13px 24px;
+    border-radius: 32px;
+    background: linear-gradient(145deg, var(--raised-a), var(--raised-b));
+    box-shadow: var(--sh-sm);
+  }
+
+  .wordmark {
+    font-weight: 900;
+    letter-spacing: -0.4px;
+    font-size: 19px;
+    color: var(--text);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .wordmark .dot { color: var(--warm-bright); }
+
+  .topnav__back {
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--muted);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .topnav__back:hover { color: var(--text); }
+
+  /* ── Document header ───────────────────────── */
+  .doc-head {
+    text-align: center;
+    margin: 46px auto 30px;
+  }
+
+  .eyebrow {
+    text-transform: uppercase;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    font-size: 11px;
+    color: var(--green-link);
+    margin: 0 0 14px;
+  }
+
+  h1 {
+    font-weight: 900;
+    font-size: clamp(30px, 5vw, 44px);
+    letter-spacing: -0.02em;
+    line-height: 1.12;
+    margin: 0 0 18px;
+  }
+  h1 em { font-style: italic; }
+
+  .doc-lede {
+    color: var(--muted);
+    max-width: 56ch;
+    margin: 0 auto 24px;
+  }
+
+  .doc-meta {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 14px 34px;
+    margin: 0 auto;
+  }
+  .doc-meta > div {
+    font-size: 15px;
+  }
+  .doc-meta span {
+    display: block;
+    text-transform: uppercase;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    font-size: 11px;
+    color: var(--muted);
+    margin-bottom: 2px;
+  }
+  .doc-meta strong { font-weight: 800; }
+
+  /* ── Sheet card ────────────────────────────── */
+  .sheet {
+    background: var(--sheet);
+    border-radius: 26px;
+    box-shadow: var(--sh-lg);
+    padding: clamp(26px, 5.5vw, 56px);
+    margin-bottom: 52px;
+  }
+
+  .sheet p, .sheet ul, .sheet ol { max-width: 70ch; }
+
+  .sheet a {
+    color: var(--green-link);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    text-decoration-thickness: 1.5px;
+  }
+
+  .sheet strong { font-weight: 800; }
+
+  .sheet h2 {
+    font-weight: 900;
+    font-size: 20px;
+    line-height: 1.3;
+    margin: 2.4em 0 0.7em;
+    scroll-margin-top: 95px;
+  }
+  .sheet h2:first-of-type { margin-top: 1.6em; }
+
+  .sheet h3 {
+    font-weight: 900;
+    font-size: 17px;
+    margin: 1.8em 0 0.5em;
+  }
+
+  .h-index {
+    display: block;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    color: var(--green-link);
+    margin-bottom: 4px;
+  }
+
+  .sheet ul {
+    padding-left: 1.3em;
+    margin: 0.8em 0 1.2em;
+  }
+  .sheet li { margin: 0.5em 0; }
+  .sheet li::marker { color: var(--green); }
+
+  .sheet p { margin: 0.9em 0; }
+
+  /* ── ToC well ──────────────────────────────── */
+  .toc {
+    background: var(--well);
+    box-shadow: var(--in-sm);
+    border-radius: 18px;
+    padding: 22px 28px;
+    margin: 0;
+  }
+  .toc__title {
+    text-transform: uppercase;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    font-size: 11px;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .toc ol {
+    margin: 0;
+    padding-left: 1.4em;
+    columns: 2;
+    column-gap: 40px;
+    max-width: none;
+  }
+  .toc li {
+    margin: 0.35em 0;
+    break-inside: avoid;
+    font-size: 15px;
+  }
+  .toc li::marker {
+    color: var(--muted);
+    font-weight: 700;
+  }
+  .toc a {
+    color: var(--green-link);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    text-decoration-thickness: 1.5px;
+  }
+
+  /* ── Callout ───────────────────────────────── */
+  .callout {
+    background: var(--well);
+    box-shadow: var(--in-sm);
+    border-left: 4px solid var(--warm-bright);
+    border-radius: 18px;
+    padding: 20px 26px;
+    margin: 1.4em 0;
+    max-width: 70ch;
+  }
+  .callout-eyebrow {
+    text-transform: uppercase;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    font-size: 11px;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+  .callout p:first-of-type { margin-top: 0.3em; }
+  .callout p:last-child { margin-bottom: 0.2em; }
+
+  /* ── Footer ────────────────────────────────── */
+  .site-footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px 24px;
+    margin-bottom: 44px;
+    color: var(--muted);
+    font-size: 14px;
+  }
+  .site-footer .wordmark { font-size: 17px; }
+  .site-footer__legal {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px 18px;
+  }
+  .site-footer a:not(.wordmark) {
+    color: var(--muted);
+    font-weight: 800;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    text-decoration-thickness: 1.5px;
+  }
+  .site-footer a:not(.wordmark):hover { color: var(--text); }
+
+  /* ── Mobile ────────────────────────────────── */
+  @media (max-width: 720px) {
+    .wrap { width: calc(100% - 40px); }
+    .sheet { padding: 20px; }
+    .toc ol { columns: 1; }
+    .topnav { padding: 11px 18px; }
+    .doc-meta { gap: 10px 22px; }
+  }
+</style>
 </head>
-<body class="is-policy">
+<body>
 
-  <nav class="site-nav" aria-label="Main">
-    <div class="site-nav__inner">
-      <a class="site-nav__brand" href="/en/">
-        <svg class="site-nav__brand-mark" viewBox="0 0 841 742" aria-hidden="true">
-          <path fill="currentColor" d="M674.43 117.27c16.43-1.25 95.99 0.5 105.99 9.66 2.21 2.02 2.56 5.38 2.59 8.21 0.14 14.3-4.37 28.84-7.43 42.71-13.76 62.39-36.42 126.31-74.27 178.32-6.5 8.93-13.28 17.61-21 25.52-33.41 34.26-74.79 58.51-123.69 59.06-45.6 0.51-75.83-19.66-107.27-50.41-5.63 9.71-10.75 19.59-14.8 30.08-26.51 68.77-16.13 148.43-17.51 220.7-0.1 5.01-0.28 6.59-4.29 10.22-1.85 1.68-4.18 2.36-6.66 2.15-4.5-0.37-7.48-3.19-10.28-6.41-0.75-34.85-3.78-69.46-4.06-104.27-0.12-15.81 0.46-35.24-1.86-50.66-3.11-20.69-13.02-49.74-27.04-65.62-24.83 34.62-59.94 51.72-102.76 45.58-1.71-0.31-3.41-0.65-5.11-1.02-46.97-10.00-79.66-42.32-105.00-81.45-7.17-11.25-13.69-22.89-19.52-34.88-6.73-13.66-33.32-74.5-30.28-86.51 0.38-1.51 1.24-2.39 2.57-3.16 5.71-3.31 21.51-6.21 28.65-7.53 47.14-8.74 110.30-12.87 156.91-0.72 33.37 8.69 61.13 27.23 78.71 57.32 19.08 32.66 15.27 60.42 6.14 95.08 7.03 10.17 14.10 19.99 19.81 30.97 1.68 3.23 3.32 6.73 5.25 9.77 5.66-21.55 11.52-39.95 21.50-59.91 3.72-7.49 7.82-14.74 11.76-21.85-2.15-5.00-5.25-11.22-7.59-16.22-8.12-17.32-11.59-31.83-12.78-50.89-2.18-40.94 11.94-81.05 39.32-111.59 53.13-60.16 144.74-71.59 220.18-76.22z" />
-        </svg>
-        <span>Manifiesto<span class="site-nav__brand-dot">.</span></span>
-      </a>
-      <div class="site-nav__links">
-        <a href="/en/privacy/">Privacy</a>
-        <a href="/en/terms/" aria-current="page">Terms</a>
-      </div>
-    </div>
-  </nav>
+<a class="skip-link" href="#contenido-principal">Skip to content</a>
 
-  <!-- Policy hero -->
-  <header class="policy-hero">
-    <div class="fireflies" id="policy-fireflies" aria-hidden="true"></div>
-    <div class="policy-hero__inner">
-      <a class="policy-hero__back" href="/en/">
-        <svg viewBox="0 0 14 14" fill="none" aria-hidden="true">
-          <path d="M12 7H2M6 11l-4-4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
-        </svg>
-        Back to home
-      </a>
-      <div class="eyebrow">legal document · 02</div>
-      <h1 class="policy-hero__title">Terms <em>of use</em></h1>
-      <p class="policy-hero__lede">
-        These are the conditions under which you use Manifiesto. By
-        creating an account or opening the app, you accept these terms. If
-        you do not agree, we cannot offer you the service.
+<nav class="topnav wrap" aria-label="Main">
+  <a class="wordmark" href="/en/">Manifiesto<span class="dot">.</span></a>
+  <a class="topnav__back" href="/en/">&larr; Back to home</a>
+</nav>
+
+<header class="doc-head wrap">
+  <p class="eyebrow">legal document · 02</p>
+  <h1>Terms <em>of use</em></h1>
+  <p class="doc-lede">
+    These are the conditions under which you use Manifiesto. By creating an account or opening the app, you accept these terms. If you do not agree, we cannot offer you the service.
+  </p>
+  <div class="doc-meta">
+    <div><span>Effective from</span><strong>June 9, 2026</strong></div>
+    <div><span>Last updated</span><strong>June 25, 2026</strong></div>
+    <div><span>Version</span><strong>1.1</strong></div>
+  </div>
+</header>
+
+<main id="contenido-principal" class="wrap">
+  <article class="sheet">
+
+    <nav class="toc" aria-label="Terms index">
+      <div class="toc__title">index</div>
+      <ol>
+        <li><a href="#aceptacion">Acceptance</a></li>
+        <li><a href="#descripcion">What Manifiesto is</a></li>
+        <li><a href="#cuenta">Your account</a></li>
+        <li><a href="#uso-aceptable">Acceptable use</a></li>
+        <li><a href="#hogar">Shared households</a></li>
+        <li><a href="#contenido">Your content</a></li>
+        <li><a href="#suscripciones">Subscriptions and payments</a></li>
+        <li><a href="#disclaimers">Nature of the service</a></li>
+        <li><a href="#disponibilidad">Availability</a></li>
+        <li><a href="#terminacion">Termination</a></li>
+        <li><a href="#responsabilidad">Limitation of liability</a></li>
+        <li><a href="#cambios">Changes to these terms</a></li>
+        <li><a href="#jurisdiccion">Governing law and jurisdiction</a></li>
+        <li><a href="#apple">Apple-specific clauses</a></li>
+        <li><a href="#contacto">Contact</a></li>
+      </ol>
+    </nav>
+
+    <h2 id="aceptacion">
+      <span class="h-index">01</span>
+      Acceptance of the terms
+    </h2>
+    <p>
+      By creating an account on Manifiesto, downloading the app or using this site, you fully and unreservedly accept these Terms of Use and our
+      <a href="/en/privacy/">Privacy Policy</a>. If you do not agree, you may not use the service.
+    </p>
+    <p>
+      You must be <strong>over 18 years old</strong> and have full legal capacity to enter into this agreement. If you act on behalf of another person (for example, a dependent family member), you represent that you have the authority to do so.
+    </p>
+
+    <h2 id="descripcion">
+      <span class="h-index">02</span>
+      What Manifiesto is
+    </h2>
+    <p>
+      Manifiesto is a mobile application for <strong>personal and family finance management</strong>. It lets you record income, variable expenses, fixed expenses, savings goals and share that information with another person in the household (typically your partner or cohabitant).
+    </p>
+    <p>
+      Manifiesto <strong>is not</strong>:
+    </p>
+    <ul>
+      <li>A financial institution, bank or digital wallet.</li>
+      <li>A provider of financial, accounting, tax or legal advice.</li>
+      <li>An intermediary in payment transactions.</li>
+      <li>An investment platform.</li>
+    </ul>
+    <p>
+      Manifiesto is a personal organization tool:
+      <strong>it does not connect to your bank accounts, cards, digital wallets or any financial platform</strong>, and it does not access banking information of yours or of anyone else. You enter all the information manually and it serves only to help you organize and control your
+      <strong>personal and household finances</strong>.
+    </p>
+
+    <h2 id="cuenta">
+      <span class="h-index">03</span>
+      Your account
+    </h2>
+    <p>
+      To use Manifiesto you create an account with email + password or via Apple/Google Sign-In. You are responsible for:
+    </p>
+    <ul>
+      <li>Keeping your credentials secret and not sharing them.</li>
+      <li>Notifying us immediately if you suspect unauthorized access.</li>
+      <li>Any activity that occurs under your account.</li>
+    </ul>
+    <p>
+      We reserve the right to suspend or close accounts that violate these terms or that compromise the security of the service.
+    </p>
+
+    <h2 id="uso-aceptable">
+      <span class="h-index">04</span>
+      Acceptable use
+    </h2>
+    <p>
+      By using Manifiesto you agree not to:
+    </p>
+    <ul>
+      <li>Use the app for illegal, fraudulent activities or activities that infringe third-party rights.</li>
+      <li>Attempt to access accounts, data or systems that do not belong to you.</li>
+      <li>Reverse engineer, decompile or modify the app beyond what is permitted by law.</li>
+      <li>Overload our systems with automated traffic, unauthorized scraping or abnormal requests.</li>
+      <li>Upload content (notes, names) that is offensive, illegal or that violates third-party rights.</li>
+      <li>Share your account with people outside your household.</li>
+    </ul>
+
+    <h2 id="hogar">
+      <span class="h-index">05</span>
+      Shared households
+    </h2>
+    <p>
+      Manifiesto allows two or more users to share the financial information of the same household. When you create a household, you are the "owner" and you can invite other people. The information uploaded by any member remains visible to all active members of the household.
+    </p>
+    <p>
+      If you invite another person to your household, you represent that you have obtained their consent to share financial information with them. Manifiesto is not responsible for conflicts between members of the household.
+    </p>
+    <p>
+      If you leave a household of which you are a member but not the owner, you lose access to that household. The records you uploaded to the shared economy (for example, expenses) may remain visible to the other members.
+    </p>
+    <p>
+      If you are the owner and you delete the household, it is
+      <strong>closed for all its members</strong>: the shared economy data is erased and we notify the other people so that they can continue with their own account. Manifiesto is not responsible for the resulting loss of access; coordinate with your household before doing so.
+    </p>
+
+    <h2 id="contenido">
+      <span class="h-index">06</span>
+      Your content
+    </h2>
+    <p>
+      All the information you upload to Manifiesto (expenses, fixed expenses, goals, notes, amounts) is <strong>yours</strong>. We only store and process it so that the app works, as detailed in the
+      <a href="/en/privacy/">Privacy Policy</a>.
+    </p>
+    <p>
+      You grant us a limited, non-exclusive, worldwide, royalty-free and revocable license to store, process, synchronize and display your content to the other members of your household, for the sole purpose of operating the service. This license terminates when you delete your account.
+    </p>
+    <p>
+      <strong>We do not use your content for our own commercial purposes nor do we sell, assign or share it with third parties so that they profit from it.</strong> Your financial information is used solely to make Manifiesto work for you and your household, as detailed in the
+      <a href="/en/privacy/">Privacy Policy</a>.
+    </p>
+
+    <h2 id="suscripciones">
+      <span class="h-index">07</span>
+      Subscriptions and payments
+    </h2>
+    <p>
+      Manifiesto may offer paid plans ("Manifiesto Pro", "Manifiesto Familia", or others we define). If they are active, these rules apply:
+    </p>
+    <ul>
+      <li><strong>Purchase:</strong> subscriptions are managed exclusively through Apple's App Store or Google Play, depending on your platform. Manifiesto does not process direct payments.</li>
+      <li><strong>Automatic renewal:</strong> subscriptions renew automatically at the end of each period, unless you cancel at least 24 hours before the next charge.</li>
+      <li><strong>Cancellation:</strong> you can cancel the renewal from the Settings of your App Store or Google Play account at any time. Cancellation takes effect at the end of the paid period.</li>
+      <li><strong>Refunds:</strong> refunds are managed according to Apple's or Google's policies. Manifiesto does not process direct refunds.</li>
+      <li><strong>Initial full access:</strong> new accounts receive 30 days of full access. We do not offer an App Store free trial: the subscription is charged when you confirm the purchase and renews automatically.</li>
+      <li><strong>Price changes:</strong> we notify you in advance in the app or by email. Changes only apply to the following cycle, never retroactively.</li>
+    </ul>
+
+    <h2 id="disclaimers">
+      <span class="h-index">08</span>
+      Nature of the service · not financial advice
+    </h2>
+    <div class="callout">
+      <div class="callout-eyebrow">Important</div>
+      <p>
+        The information, suggestions, alerts and "financial assistant" that Manifiesto shows you are
+        <strong>for guidance only</strong> and are based on what you upload. They are generated with deterministic rules and calculations on your own numbers —today no language models (LLM) or generative AI are involved—. They do not constitute financial, accounting, tax, legal or investment advice.
       </p>
-      <div class="policy-hero__meta">
-        <div>Effective from<strong>June 9, 2026</strong></div>
-        <div>Last updated<strong>June 25, 2026</strong></div>
-        <div>Version<strong>1.1</strong></div>
-      </div>
+      <p>
+        For important decisions (investments, loans, tax planning, legal questions) consult a licensed professional.
+      </p>
     </div>
-  </header>
+    <p>
+      The calculations you see (daily allowance, projections, summaries and suggestions) are <strong>estimates</strong> based on the data you upload and may contain errors or fail to account for your full situation. The decisions you make based on the information in Manifiesto are your <strong>sole responsibility</strong>; we are not liable for economic losses, debts, fines or harm resulting from those decisions.
+    </p>
+    <p>
+      Manifiesto is offered "as is" and "as available", without express or implied warranties beyond those required by law.
+    </p>
 
-  <!-- Policy body with sticky ToC -->
-  <section class="policy-body">
-    <div class="policy-grid">
-      <aside class="policy-toc" aria-label="Terms index">
-        <div class="policy-toc__title">index</div>
-        <ol>
-          <li><a href="#aceptacion">Acceptance</a></li>
-          <li><a href="#descripcion">What Manifiesto is</a></li>
-          <li><a href="#cuenta">Your account</a></li>
-          <li><a href="#uso-aceptable">Acceptable use</a></li>
-          <li><a href="#hogar">Shared households</a></li>
-          <li><a href="#contenido">Your content</a></li>
-          <li><a href="#suscripciones">Subscriptions and payments</a></li>
-          <li><a href="#disclaimers">Nature of the service</a></li>
-          <li><a href="#disponibilidad">Availability</a></li>
-          <li><a href="#terminacion">Termination</a></li>
-          <li><a href="#responsabilidad">Limitation of liability</a></li>
-          <li><a href="#cambios">Changes to these terms</a></li>
-          <li><a href="#jurisdiccion">Governing law and jurisdiction</a></li>
-          <li><a href="#apple">Apple-specific clauses</a></li>
-          <li><a href="#contacto">Contact</a></li>
-        </ol>
-      </aside>
+    <h2 id="disponibilidad">
+      <span class="h-index">09</span>
+      Service availability
+    </h2>
+    <p>
+      We make reasonable efforts to keep Manifiesto operational, but we do not guarantee uninterrupted availability. Interruptions may occur due to: maintenance, updates, technical failures, problems with infrastructure providers, or force majeure causes.
+    </p>
+    <p>
+      We recommend not using Manifiesto as the sole source of your financial records. Make your own copies if the data is critical for you.
+    </p>
 
-      <article class="policy-content">
+    <h2 id="terminacion">
+      <span class="h-index">10</span>
+      Termination
+    </h2>
+    <p>
+      You may stop using Manifiesto at any time. To delete your account and all associated data, go to
+      <strong>Settings → Account → Delete account</strong>
+      within the app. The deletion is processed according to the timeframes described in the <a href="/en/privacy/">Privacy Policy</a>
+      (30-day grace period, then irreversible deletion).
+    </p>
+    <p>
+      We may suspend or terminate your account if you breach these terms, if your use puts other users or the service at risk, or if a competent authority requires us to do so. In those cases we will notify you by email when reasonable.
+    </p>
 
-        <h2 id="aceptacion">
-          <span class="h-index">01</span>
-          Acceptance of the terms
-        </h2>
-        <p>
-          By creating an account on Manifiesto, downloading the app or
-          using this site, you fully and unreservedly accept
-          these Terms of Use and our
-          <a href="/en/privacy/">Privacy Policy</a>. If you do not
-          agree, you may not use the service.
-        </p>
-        <p>
-          You must be <strong>over 18 years old</strong> and have
-          full legal capacity to enter into this agreement. If you act
-          on behalf of another person (for example, a dependent
-          family member), you represent that you have the authority to do so.
-        </p>
+    <h2 id="responsabilidad">
+      <span class="h-index">11</span>
+      Limitation of liability
+    </h2>
+    <p>
+      To the maximum extent permitted by applicable law, Manifiesto will not be liable for indirect, incidental, special, consequential or punitive damages (including lost profits, loss of data, loss of opportunities) arising from the use or inability to use the service.
+    </p>
+    <p>
+      Our aggregate liability for any claim related to the service is limited to the greater of: (a) the amount you have paid to Manifiesto in the 12 months prior to the event that gave rise to the claim, or (b) one hundred United States dollars (USD 100).
+    </p>
+    <p>
+      <strong>Indemnity.</strong> You agree to hold Manifiesto, its owners and collaborators harmless from any claim, demand, loss or expense (including reasonable legal fees) arising from your use of the service, from the content you upload, from the breach of these terms, or from the violation of third-party rights or of the law on your part.
+    </p>
+    <p>
+      Nothing in these terms limits liabilities that applicable law does not allow to be limited (for example, damages caused by willful misconduct or gross negligence, or non-waivable consumer rights).
+    </p>
 
-        <h2 id="descripcion">
-          <span class="h-index">02</span>
-          What Manifiesto is
-        </h2>
-        <p>
-          Manifiesto is a mobile application for <strong>personal and
-          family finance management</strong>. It lets you
-          record income, variable expenses, fixed expenses, savings
-          goals and share that information with another person in the
-          household (typically your partner or cohabitant).
-        </p>
-        <p>
-          Manifiesto <strong>is not</strong>:
-        </p>
-        <ul>
-          <li>A financial institution, bank or digital wallet.</li>
-          <li>A provider of financial, accounting, tax or legal advice.</li>
-          <li>An intermediary in payment transactions.</li>
-          <li>An investment platform.</li>
-        </ul>
-        <p>
-          Manifiesto is a personal organization tool:
-          <strong>it does not connect to your bank accounts, cards,
-          digital wallets or any financial platform</strong>,
-          and it does not access banking information of yours or of
-          anyone else. You enter all the information manually and it serves only to
-          help you organize and control your
-          <strong>personal and household</strong> finances.
-        </p>
+    <h2 id="cambios">
+      <span class="h-index">12</span>
+      Changes to these terms
+    </h2>
+    <p>
+      We may update these terms. When we do:
+    </p>
+    <ul>
+      <li>We post the new version to this page and update the "last updated" date.</li>
+      <li>If the changes are substantial, we notify you within the app or by email before they take effect.</li>
+      <li>If you continue using the service after it takes effect, you are deemed to have accepted the new terms. If you do not agree, you can close your account.</li>
+    </ul>
 
-        <h2 id="cuenta">
-          <span class="h-index">03</span>
-          Your account
-        </h2>
-        <p>
-          To use Manifiesto you create an account with email + password
-          or via Apple/Google Sign-In. You are responsible for:
-        </p>
-        <ul>
-          <li>Keeping your credentials secret and not sharing them.</li>
-          <li>Notifying us immediately if you suspect unauthorized access.</li>
-          <li>Any activity that occurs under your account.</li>
-        </ul>
-        <p>
-          We reserve the right to suspend or close accounts that
-          violate these terms or that compromise the security of the
-          service.
-        </p>
+    <h2 id="jurisdiccion">
+      <span class="h-index">13</span>
+      Governing law and jurisdiction
+    </h2>
+    <p>
+      These terms are governed by the laws of the Republic of Argentina. Any dispute related to Manifiesto shall be submitted to the ordinary courts of the Autonomous City of Buenos Aires, unless applicable law establishes a protective jurisdiction for consumers (in which case that jurisdiction shall apply).
+    </p>
 
-        <h2 id="uso-aceptable">
-          <span class="h-index">04</span>
-          Acceptable use
-        </h2>
-        <p>
-          By using Manifiesto you agree not to:
-        </p>
-        <ul>
-          <li>Use the app for illegal, fraudulent activities or activities that infringe third-party rights.</li>
-          <li>Attempt to access accounts, data or systems that do not belong to you.</li>
-          <li>Reverse engineer, decompile or modify the app beyond what is permitted by law.</li>
-          <li>Overload our systems with automated traffic, unauthorized scraping or abnormal requests.</li>
-          <li>Upload content (notes, names) that is offensive, illegal or that violates third-party rights.</li>
-          <li>Share your account with people outside your household.</li>
-        </ul>
+    <h2 id="apple">
+      <span class="h-index">14</span>
+      Specific clauses for users of Apple's App Store
+    </h2>
+    <p>
+      If you downloaded Manifiesto from Apple's App Store, the following additional clauses apply and prevail over any conflicting provision of these terms:
+    </p>
+    <ul>
+      <li><strong>Relationship with Apple:</strong> these terms are entered into between you and Manifiesto, not between you and Apple. Apple is not a party to this agreement and is not responsible for the app or its content.</li>
+      <li><strong>Scope of the license:</strong> Apple grants you a limited, non-transferable license to use Manifiesto on any iOS device you own or control, in accordance with the Usage Rules set out in the App Store Terms of Service.</li>
+      <li><strong>Support and maintenance:</strong> Manifiesto is responsible for providing support and maintenance for the app. Apple has no obligation whatsoever in this regard.</li>
+      <li><strong>Warranty:</strong> Manifiesto is responsible for any product warranty. Apple does not warrant the app. If the app does not comply with the applicable warranty, you may notify Apple and Apple will refund the purchase price (if any); beyond that, Apple has no warranty obligation.</li>
+      <li><strong>Product claims:</strong> Manifiesto, not Apple, is responsible for addressing any claims of users or third parties related to the app (including product liability, legal or regulatory non-compliance, and consumer claims).</li>
+      <li><strong>Intellectual property rights:</strong> in the event of third-party claims alleging that the app infringes intellectual property rights, Manifiesto is responsible for investigating, defending, settling and indemnifying the claim. Apple has no responsibility in this respect.</li>
+      <li><strong>Regulatory compliance:</strong> you represent that you are not located in a country subject to a U.S. government embargo nor listed on a prohibited or restricted parties list.</li>
+      <li><strong>Third-party beneficiaries:</strong> Apple and its subsidiaries are third-party beneficiaries of these terms, and by accepting them they will have the right to enforce these terms against you.</li>
+    </ul>
 
-        <h2 id="hogar">
-          <span class="h-index">05</span>
-          Shared households
-        </h2>
-        <p>
-          Manifiesto allows two or more users to share the
-          financial information of the same household. When you create a
-          household, you are the "owner" and you can invite other people. The
-          information uploaded by any member remains visible
-          to all active members of the household.
-        </p>
-        <p>
-          If you invite another person to your household, you represent that you have
-          obtained their consent to share financial information
-          with them. Manifiesto is not responsible for
-          conflicts between members of the household.
-        </p>
-        <p>
-          If you leave a household of which you are a member but not the owner, you lose
-          access to that household. The records you uploaded to the
-          shared economy (for example, expenses) may remain
-          visible to the other members.
-        </p>
-        <p>
-          If you are the owner and you delete the household, it is
-          <strong>closed for all its members</strong>: the
-          shared economy data is erased and we notify the other
-          people so that they can continue with their own account.
-          Manifiesto is not responsible for the resulting loss of access;
-          coordinate with your household before doing so.
-        </p>
+    <h2 id="contacto">
+      <span class="h-index">15</span>
+      Contact
+    </h2>
+    <p>
+      For questions about these terms, legal notices, or any inquiry:
+    </p>
+    <ul>
+      <li>Email: <a href="mailto:soporte@manifiestoapp.com">soporte@manifiestoapp.com</a></li>
+    </ul>
 
-        <h2 id="contenido">
-          <span class="h-index">06</span>
-          Your content
-        </h2>
-        <p>
-          All the information you upload to Manifiesto (expenses,
-          fixed expenses, goals, notes, amounts) is <strong>yours</strong>.
-          We only store and process it so that the app
-          works, as detailed in the
-          <a href="/en/privacy/">Privacy Policy</a>.
-        </p>
-        <p>
-          You grant us a limited, non-exclusive, worldwide,
-          royalty-free and revocable license to store, process,
-          synchronize and display your content to the other members of
-          your household, for the sole purpose of operating the service. This
-          license terminates when you delete your account.
-        </p>
-        <p>
-          <strong>We do not use your content for our own commercial purposes
-          nor do we sell, assign or share it with third parties so that they
-          profit from it.</strong> Your financial information is used
-          solely to make Manifiesto work for you and your
-          household, as detailed in the
-          <a href="/en/privacy/">Privacy Policy</a>.
-        </p>
+  </article>
+</main>
 
-        <h2 id="suscripciones">
-          <span class="h-index">07</span>
-          Subscriptions and payments
-        </h2>
-        <p>
-          Manifiesto may offer paid plans ("Manifiesto Pro",
-          "Manifiesto Familia", or others we define). If they are
-          active, these rules apply:
-        </p>
-        <ul>
-          <li><strong>Purchase:</strong> subscriptions are managed exclusively through Apple's App Store or Google Play, depending on your platform. Manifiesto does not process direct payments.</li>
-          <li><strong>Automatic renewal:</strong> subscriptions renew automatically at the end of each period, unless you cancel at least 24 hours before the next charge.</li>
-          <li><strong>Cancellation:</strong> you can cancel the renewal from the Settings of your App Store or Google Play account at any time. Cancellation takes effect at the end of the paid period.</li>
-          <li><strong>Refunds:</strong> refunds are managed according to Apple's or Google's policies. Manifiesto does not process direct refunds.</li>
-          <li><strong>Initial full access:</strong> new accounts receive 30 days of full access. We do not offer an App Store free trial: the subscription is charged when you confirm the purchase and renews automatically.</li>
-          <li><strong>Price changes:</strong> we notify you in advance in the app or by email. Changes only apply to the following cycle, never retroactively.</li>
-        </ul>
+<footer class="site-footer wrap">
+  <div class="site-footer__legal">
+    <a class="wordmark" href="/en/">Manifiesto<span class="dot">.</span></a>
+    <span>© 2026 Manifiesto</span>
+  </div>
+  <div class="site-footer__legal">
+    <a href="/en/privacy/">Privacy</a>
+    <a href="/en/terms/">Terms</a>
+  </div>
+</footer>
 
-        <h2 id="disclaimers">
-          <span class="h-index">08</span>
-          Nature of the service · not financial advice
-        </h2>
-        <div class="callout">
-          <div class="callout-eyebrow">Important</div>
-          <p>
-            The information, suggestions, alerts and "financial
-            assistant" that Manifiesto shows you are
-            <strong>for guidance only</strong> and are based on what you
-            upload. They are generated with deterministic rules and calculations
-            on your own numbers —today no language models
-            (LLM) or generative AI are involved—. They do not constitute
-            financial, accounting, tax, legal or
-            investment advice.
-          </p>
-          <p>
-            For important decisions (investments, loans,
-            tax planning, legal questions) consult a
-            licensed professional.
-          </p>
-        </div>
-        <p>
-          The calculations you see (daily allowance, projections, summaries and
-          suggestions) are <strong>estimates</strong> based on the
-          data you upload and may contain errors or fail to account for your
-          full situation. The decisions you make based on the
-          information in Manifiesto are your <strong>sole
-          responsibility</strong>; we are not liable for economic
-          losses, debts, fines or harm resulting from those
-          decisions.
-        </p>
-        <p>
-          Manifiesto is offered "as is" and "as available",
-          without express or implied warranties beyond those
-          required by law.
-        </p>
 
-        <h2 id="disponibilidad">
-          <span class="h-index">09</span>
-          Service availability
-        </h2>
-        <p>
-          We make reasonable efforts to keep Manifiesto
-          operational, but we do not guarantee uninterrupted
-          availability. Interruptions may occur due to:
-          maintenance, updates, technical failures, problems
-          with infrastructure providers, or force
-          majeure causes.
-        </p>
-        <p>
-          We recommend not using Manifiesto as the sole source of
-          your financial records. Make your own copies if the
-          data is critical for you.
-        </p>
-
-        <h2 id="terminacion">
-          <span class="h-index">10</span>
-          Termination
-        </h2>
-        <p>
-          You may stop using Manifiesto at any time. To
-          delete your account and all associated data, go to
-          <strong>Settings → Account → Delete account</strong>
-          within the app. The deletion is processed according to the timeframes
-          described in the <a href="/en/privacy/">Privacy Policy</a>
-          (30-day grace period, then irreversible deletion).
-        </p>
-        <p>
-          We may suspend or terminate your account if you
-          breach these terms, if your use puts other
-          users or the service at risk, or if a competent authority
-          requires us to do so. In those cases we will notify you by email when
-          reasonable.
-        </p>
-
-        <h2 id="responsabilidad">
-          <span class="h-index">11</span>
-          Limitation of liability
-        </h2>
-        <p>
-          To the maximum extent permitted by applicable law,
-          Manifiesto will not be liable for indirect,
-          incidental, special, consequential or punitive damages
-          (including lost profits, loss of data, loss of
-          opportunities) arising from the use or inability to use
-          the service.
-        </p>
-        <p>
-          Our aggregate liability for any claim
-          related to the service is limited to the greater of:
-          (a) the amount you have paid to Manifiesto in the 12
-          months prior to the event that gave rise to the claim, or
-          (b) one hundred United States dollars (USD 100).
-        </p>
-        <p>
-          <strong>Indemnity.</strong> You agree to hold
-          Manifiesto, its owners and collaborators harmless from
-          any claim, demand, loss or expense (including
-          reasonable legal fees) arising from your use of the
-          service, from the content you upload, from the breach of
-          these terms, or from the violation of third-party rights or
-          of the law on your part.
-        </p>
-        <p>
-          Nothing in these terms limits liabilities that applicable
-          law does not allow to be limited (for example, damages caused
-          by willful misconduct or gross negligence, or non-waivable
-          consumer rights).
-        </p>
-
-        <h2 id="cambios">
-          <span class="h-index">12</span>
-          Changes to these terms
-        </h2>
-        <p>
-          We may update these terms. When we do:
-        </p>
-        <ul>
-          <li>We post the new version to this page and update the "last updated" date.</li>
-          <li>If the changes are substantial, we notify you within the app or by email before they take effect.</li>
-          <li>If you continue using the service after it takes effect, you are deemed to have accepted the new terms. If you do not agree, you can close your account.</li>
-        </ul>
-
-        <h2 id="jurisdiccion">
-          <span class="h-index">13</span>
-          Governing law and jurisdiction
-        </h2>
-        <p>
-          These terms are governed by the laws of the Republic of
-          Argentina. Any dispute related to Manifiesto shall be
-          submitted to the ordinary courts of the Autonomous
-          City of Buenos Aires, unless applicable law
-          establishes a protective jurisdiction for consumers
-          (in which case that jurisdiction shall apply).
-        </p>
-
-        <h2 id="apple">
-          <span class="h-index">14</span>
-          Specific clauses for users of Apple's App Store
-        </h2>
-        <p>
-          If you downloaded Manifiesto from Apple's App Store, the
-          following additional clauses apply and prevail over
-          any conflicting provision of these terms:
-        </p>
-        <ul>
-          <li><strong>Relationship with Apple:</strong> these terms are entered into between you and Manifiesto, not between you and Apple. Apple is not a party to this agreement and is not responsible for the app or its content.</li>
-          <li><strong>Scope of the license:</strong> Apple grants you a limited, non-transferable license to use Manifiesto on any iOS device you own or control, in accordance with the Usage Rules set out in the App Store Terms of Service.</li>
-          <li><strong>Support and maintenance:</strong> Manifiesto is responsible for providing support and maintenance for the app. Apple has no obligation whatsoever in this regard.</li>
-          <li><strong>Warranty:</strong> Manifiesto is responsible for any product warranty. Apple does not warrant the app. If the app does not comply with the applicable warranty, you may notify Apple and Apple will refund the purchase price (if any); beyond that, Apple has no warranty obligation.</li>
-          <li><strong>Product claims:</strong> Manifiesto, not Apple, is responsible for addressing any claims of users or third parties related to the app (including product liability, legal or regulatory non-compliance, and consumer claims).</li>
-          <li><strong>Intellectual property rights:</strong> in the event of third-party claims alleging that the app infringes intellectual property rights, Manifiesto is responsible for investigating, defending, settling and indemnifying the claim. Apple has no responsibility in this respect.</li>
-          <li><strong>Regulatory compliance:</strong> you represent that you are not located in a country subject to a U.S. government embargo nor listed on a prohibited or restricted parties list.</li>
-          <li><strong>Third-party beneficiaries:</strong> Apple and its subsidiaries are third-party beneficiaries of these terms, and by accepting them they will have the right to enforce these terms against you.</li>
-        </ul>
-
-        <h2 id="contacto">
-          <span class="h-index">15</span>
-          Contact
-        </h2>
-        <p>
-          For questions about these terms, legal
-          notices, or any inquiry:
-        </p>
-        <ul>
-          <li>Email: <a href="mailto:soporte@manifiestoapp.com">soporte@manifiestoapp.com</a></li>
-        </ul>
-
-      </article>
-    </div>
-  </section>
-
-  <!-- FOOTER ────────────────────────────────────────────── -->
-  <footer class="site-footer">
-    <div class="shell">
-      <div class="footer-grid">
-        <div>
-          <div class="footer__brand">Manifiesto<span class="dot">.</span></div>
-          <p class="footer__tag">
-            A single app so that the family's money has
-            clarity, calm and direction.
-          </p>
-        </div>
-
-        <div class="footer__col">
-          <h4>Documents</h4>
-          <ul>
-            <li><a href="/en/privacy/">Privacy Policy</a></li>
-            <li><a href="/en/terms/">Terms of Use</a></li>
-          </ul>
-        </div>
-
-        <div class="footer__col">
-          <h4>Contact</h4>
-          <ul>
-            <li><a href="mailto:soporte@manifiestoapp.com">soporte@manifiestoapp.com</a></li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="footer-bottom">
-        <span>© 2026 Manifiesto</span>
-        <span>Made in Argentina</span>
-      </div>
-    </div>
-  </footer>
-
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
-  <script src="/assets/main.js"></script>
 </body>
 </html>
