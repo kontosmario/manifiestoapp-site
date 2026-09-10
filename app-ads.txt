@@ -1,0 +1,20 @@
+# app-ads.txt — autorización de vendedores para publicidad en la app.
+#
+# QUÉ ES. El estándar de IAB Tech Lab contra el fraude de inventario: quien
+# compra un anuncio "en Manifiesto" comprueba contra este archivo que quien se
+# lo está vendiendo tiene permiso. Sin él, la mayoría de los compradores
+# programáticos no pujan, y el inventario se vende barato o no se vende.
+#
+# DÓNDE TIENE QUE VIVIR. En la RAÍZ del dominio que la ficha de la App Store
+# declara como sitio del desarrollador: https://manifiestoapp.com/app-ads.txt
+# Si esa URL de la ficha apunta a otro dominio, este archivo no lo lee nadie.
+#
+# EL ID NO ES SECRETO. `pub-3140581830122924` es el identificador público de
+# editor de AdMob; el estándar exige que sea legible por cualquiera. Lo mismo
+# `f08c47fec0942fa0`, que es el identificador de Google en el registro de
+# autoridades de certificación de TAG.
+#
+# CÓMO SE VERIFICA que quedó bien: en AdMob, Configuración → app-ads.txt
+# muestra el estado del rastreo. Google lo revisa cada 24 h.
+
+google.com, pub-3140581830122924, DIRECT, f08c47fec0942fa0

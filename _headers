@@ -11,3 +11,9 @@
 /.well-known/assetlinks.json
   Content-Type: application/json
   X-Content-Type-Options: nosniff
+
+# app-ads.txt tiene que llegar como texto plano: el rastreador de Google lo
+# descarta si el Content-Type dice otra cosa.
+/app-ads.txt
+  Content-Type: text/plain; charset=utf-8
+  X-Content-Type-Options: nosniff
