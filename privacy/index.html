@@ -365,8 +365,8 @@
     </p>
     <div class="doc-head__meta">
       <div>Vigente desde<strong>9 de junio de 2026</strong></div>
-      <div>Última actualización<strong>25 de junio de 2026</strong></div>
-      <div>Versión<strong>1.1</strong></div>
+      <div>Última actualización<strong>27 de septiembre de 2026</strong></div>
+      <div>Versión<strong>1.2</strong></div>
     </div>
   </header>
 
@@ -427,6 +427,7 @@
         <li><strong>Avatar</strong> — un identificador visual elegido de una lista predefinida (no subes fotos).</li>
         <li><strong>Contraseña</strong> — guardada de forma cifrada (hash) por nuestro proveedor de autenticación. Nadie en Manifiesto la ve en texto plano.</li>
         <li><strong>Identificador de proveedor social</strong> — si entras con Apple o Google, guardamos el identificador único que esos proveedores nos devuelven para reconocerte. No accedemos a tus contactos, fotos ni a ningún otro dato de tu cuenta de Apple o Google.</li>
+        <li><strong>Suscripción</strong> — si contratas un plan, Apple nos confirma la compra (qué plan es, el identificador de la transacción y hasta cuándo está vigente) para activarte el acceso. El pago lo procesa Apple: nunca vemos los datos de tu tarjeta.</li>
       </ul>
 
       <h3>Datos financieros que tú cargas</h3>
@@ -438,6 +439,7 @@
         <li><strong>Metas de ahorro</strong> y aportes a esas metas.</li>
         <li><strong>Composición de tu hogar</strong> — los otros usuarios de Manifiesto con los que decidiste compartir tu economía y, si corresponde, el aporte mensual de cada uno. Si le envías un aviso o recordatorio a otro miembro, ese mensaje se guarda y se le muestra a esa persona.</li>
         <li><strong>Importar desde una captura (opcional)</strong> — si eliges cargar un movimiento desde una foto de tu galería, leemos los montos con reconocimiento de texto que corre <strong>en tu propio dispositivo</strong>. La imagen no se sube a nuestros servidores ni se guarda: solo quedan los datos que tú confirmas.</li>
+        <li><strong>Pagos con Apple Pay (opcional)</strong> — si configuras el atajo de Apple Pay en la app Atajos de tu iPhone, cada vez que pagas con Apple Pay el atajo le envía a Manifiesto el comercio y el monto de ese pago. Manifiesto no accede a tu Wallet ni a tus tarjetas, y el gasto se guarda recién cuando tú lo confirmas.</li>
       </ul>
 
       <h3>Datos técnicos</h3>
@@ -455,12 +457,19 @@
           Manifiesto no se conecta a tus cuentas bancarias, tarjetas ni
           billeteras, ni lee tu información financiera desde bancos u
           otras instituciones. Toda la información financiera la cargas
-          tú, manualmente.
+          tú: a mano, desde una captura o con el atajo de Apple Pay que
+          tú mismo configuras.
         </p>
         <p>
           Tampoco escaneamos tu galería: el único acceso a tus fotos
           ocurre cuando tú eliges importar una captura (lo explicamos
           más arriba), y esa imagen se procesa en tu dispositivo.
+        </p>
+        <p>
+          No te rastreamos: desde la versión 2.1.0, la app no pide el
+          permiso de rastreo de Apple ni accede al identificador de
+          publicidad de tu dispositivo (más detalles en "Meta", en la
+          sección 05).
         </p>
       </div>
 
@@ -491,6 +500,7 @@
         <li><strong>Asistente financiero:</strong> generar sugerencias en base a tu propio patrón de gasto. El cálculo es determinístico (reglas y matemática sobre tus números) y corre dentro de nuestra infraestructura; tus datos no se envían a modelos de lenguaje (LLM) ni a IA generativa de terceros.</li>
         <li><strong>Soporte:</strong> responder cuando nos escribes a <a href="mailto:soporte@manifiestoapp.com">soporte@manifiestoapp.com</a>.</li>
         <li><strong>Mejorar el producto:</strong> entender qué funciona y qué no, en agregado (sin identificarte individualmente).</li>
+        <li><strong>Medir nuestros anuncios:</strong> saber, en conjunto, cuántas instalaciones y suscripciones llegan desde nuestras campañas en Instagram y Facebook (lo explicamos en "Meta", en la sección 05).</li>
         <li><strong>Cumplir con la ley:</strong> responder pedidos judiciales válidos y obligaciones impositivas (cuando corresponda).</li>
       </ul>
       <p>
@@ -511,7 +521,7 @@
       <ul>
         <li><strong>Ejecución de un contrato:</strong> los datos que necesitamos para que la app funcione cuando aceptas los Términos.</li>
         <li><strong>Consentimiento:</strong> notificaciones push, sincronización con otros miembros del hogar, y cualquier otro uso opcional.</li>
-        <li><strong>Interés legítimo:</strong> proteger la app contra abuso, mejorar el producto en agregado.</li>
+        <li><strong>Interés legítimo:</strong> proteger la app contra abuso, mejorar el producto en agregado y medir en conjunto el resultado de nuestras campañas.</li>
         <li><strong>Obligación legal:</strong> conservación de información impositiva o respuesta a requerimientos de autoridades.</li>
       </ul>
 
@@ -552,7 +562,9 @@
       <p>
         Manifiesto se distribuye a través de la App Store de Apple y,
         próximamente, Google Play. Esos servicios recolectan métricas
-        de descarga e instalación bajo sus propias políticas.
+        de descarga e instalación bajo sus propias políticas. Las
+        suscripciones se contratan y se pagan en la App Store: Apple
+        procesa el pago y nos confirma la compra.
       </p>
 
       <h3>Proveedores de tipo de cambio (opcional)</h3>
@@ -564,15 +576,35 @@
         tuyo</strong>.
       </p>
 
-      <div class="callout">
-        <div class="callout-eyebrow">Sin terceros publicitarios</div>
-        <p>
-          No usamos Google Analytics, Facebook Pixel, ni ningún SDK
-          publicitario o de tracking. No vendemos tus datos a brokers.
-          No cargamos píxeles de redes sociales en la app ni en este
-          sitio.
-        </p>
-      </div>
+      <h3>Meta (medición de nuestras campañas)</h3>
+      <p>
+        La app incluye el SDK de Meta (Facebook) para saber si nuestros
+        anuncios en Instagram y Facebook funcionan. El SDK le envía a
+        Meta eventos de la app —que se instaló, cada vez que se abre y,
+        si contratas un plan, cuál y a qué precio— junto con datos
+        técnicos del dispositivo (como el modelo, la versión del
+        sistema, el idioma y la zona horaria), un identificador
+        aleatorio que genera el propio SDK y, como cualquier servicio
+        en internet, la dirección IP de la conexión. Nunca le enviamos
+        tu email, tu nombre, tus gastos ni ningún otro dato de tu
+        cuenta. No te rastreamos: la app no pide el permiso de rastreo
+        de Apple (App Tracking Transparency), el SDK funciona con el
+        seguimiento publicitario desactivado y sin el identificador de
+        publicidad de tu dispositivo, y usamos estos datos solo para
+        medir nuestras campañas en conjunto. Así funciona desde la
+        versión 2.1.0: hasta la 2.0.1, la app pedía ese permiso y, si
+        lo concediste, el SDK también pudo enviarle a Meta el
+        identificador de publicidad. Meta trata estos datos según su
+        propia
+        <a href="https://www.facebook.com/privacy/policy/" target="_blank" rel="noopener">Política de privacidad</a>.
+      </p>
+
+      <h3>Sin venta de datos ni publicidad de terceros</h3>
+      <p>
+        No mostramos publicidad de terceros en la app ni vendemos tus
+        datos a brokers. No usamos Google Analytics ni el píxel de
+        Facebook, y este sitio no carga píxeles de redes sociales.
+      </p>
 
       <h2 id="retencion">
         <span class="h-index">06</span>
@@ -584,7 +616,7 @@
         <li><strong>Gastos archivados:</strong> los gastos de un ciclo cerrado quedan disponibles en tu historial durante unos 14 días tras el cierre; después se eliminan automáticamente (conservamos algunos pagos recientes de gastos fijos para el seguimiento de tus cuotas).</li>
         <li><strong>Eventos de telemetría:</strong> 30 días, después se purgan.</li>
         <li><strong>Backups operacionales:</strong> retenemos copias de respaldo de la base por hasta 30 días para poder recuperar el servicio ante fallas.</li>
-        <li><strong>Solicitud de baja:</strong> cuando pides borrar tu cuenta desde Configuración → Cuenta → Eliminar cuenta, programamos el borrado para 30 días después. Durante esa ventana puedes cancelar la baja entrando otra vez. Pasados los 30 días, tus datos personales se borran de forma irreversible. Los registros que hayas cargado en un hogar compartido (por ejemplo, gastos de una economía conjunta) pueden permanecer visibles para los demás miembros, desvinculados de tu identidad. También podemos conservar información que la ley nos obligue a guardar (por ejemplo, comprobantes de pago durante el plazo impositivo).</li>
+        <li><strong>Solicitud de baja:</strong> cuando pides borrar tu cuenta desde Ajustes → Cuenta → Eliminar cuenta, programamos el borrado para 30 días después. Durante esa ventana puedes cancelar la baja entrando otra vez. Pasados los 30 días, tus datos personales se borran de forma irreversible. Los registros que hayas cargado en un hogar compartido (por ejemplo, gastos de una economía conjunta) pueden permanecer visibles para los demás miembros, desvinculados de tu identidad. También podemos conservar información que la ley nos obligue a guardar (por ejemplo, comprobantes de pago durante el plazo impositivo).</li>
       </ul>
 
       <h2 id="seguridad">
@@ -616,14 +648,14 @@
       </p>
       <ul>
         <li><strong>Acceder</strong> a una copia de los datos que tenemos sobre ti.</li>
-        <li><strong>Rectificar</strong> datos incorrectos o desactualizados (la mayoría puedes editarlos directamente en la app, en Configuración).</li>
-        <li><strong>Eliminar</strong> tu cuenta y los datos asociados (Configuración → Cuenta → Eliminar cuenta dentro de la app, o escribiéndonos).</li>
+        <li><strong>Rectificar</strong> datos incorrectos o desactualizados (la mayoría puedes editarlos directamente en la app, en Ajustes).</li>
+        <li><strong>Eliminar</strong> tu cuenta y los datos asociados (Ajustes → Cuenta → Eliminar cuenta dentro de la app, o escribiéndonos).</li>
         <li><strong>Portar</strong> tus datos en un formato estructurado y legible por máquina.</li>
         <li><strong>Oponerte</strong> a determinados tratamientos (por ejemplo, retirar el consentimiento para push notifications).</li>
         <li><strong>Limitar</strong> el tratamiento mientras se revisa una disputa.</li>
       </ul>
       <p>
-        Para ejercer cualquiera de estos derechos, escribinos a
+        Para ejercer cualquiera de estos derechos, escríbenos a
         <a href="mailto:soporte@manifiestoapp.com">soporte@manifiestoapp.com</a>.
         Te respondemos en un plazo máximo de 30 días corridos.
       </p>

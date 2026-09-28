@@ -362,8 +362,8 @@
     </p>
     <div class="doc-head__meta">
       <div>Effective since<strong>June 9, 2026</strong></div>
-      <div>Last updated<strong>June 25, 2026</strong></div>
-      <div>Version<strong>1.1</strong></div>
+      <div>Last updated<strong>September 27, 2026</strong></div>
+      <div>Version<strong>1.2</strong></div>
     </div>
   </header>
 
@@ -416,6 +416,7 @@
         <li><strong>Avatar</strong> — a visual identifier chosen from a predefined list (you do not upload photos).</li>
         <li><strong>Password</strong> — stored in encrypted form (hash) by our authentication provider. No one at Manifiesto sees it in plain text.</li>
         <li><strong>Social provider identifier</strong> — if you sign in with Apple or Google, we store the unique identifier that those providers return to us in order to recognize you. We do not access your contacts, photos, or any other data from your Apple or Google account.</li>
+        <li><strong>Subscription</strong> — if you buy a plan, Apple confirms the purchase to us (which plan it is, the transaction identifier and until when it is valid) so we can activate your access. Apple processes the payment: we never see your card details.</li>
       </ul>
 
       <h3>Financial data that you enter</h3>
@@ -427,6 +428,7 @@
         <li><strong>Savings goals</strong> and contributions to those goals.</li>
         <li><strong>Composition of your household</strong> — the other Manifiesto users with whom you decided to share your finances and, where applicable, each one's monthly contribution. If you send a notice or reminder to another member, that message is stored and shown to that person.</li>
         <li><strong>Import from a screenshot (optional)</strong> — if you choose to enter a transaction from a photo in your gallery, we read the amounts with text recognition that runs <strong>on your own device</strong>. The image is not uploaded to our servers nor stored: only the data you confirm remains.</li>
+        <li><strong>Apple Pay payments (optional)</strong> — if you set up the Apple Pay shortcut in your iPhone's Shortcuts app, every time you pay with Apple Pay the shortcut sends Manifiesto the merchant and the amount of that payment. Manifiesto does not access your Wallet or your cards, and the expense is saved only when you confirm it.</li>
       </ul>
 
       <h3>Technical data</h3>
@@ -440,10 +442,13 @@
       <div class="callout">
         <div class="callout-eyebrow">What we do not collect</div>
         <p>
-          We do not access your camera, contacts, location or calendar. Manifiesto does not connect to your bank accounts, cards or wallets, nor does it read your financial information from banks or other institutions. All financial information is entered by you, manually.
+          We do not access your camera, contacts, location or calendar. Manifiesto does not connect to your bank accounts, cards or wallets, nor does it read your financial information from banks or other institutions. All financial information is entered by you: by hand, from a screenshot, or with the Apple Pay shortcut you set up yourself.
         </p>
         <p>
           Nor do we scan your gallery: the only access to your photos occurs when you choose to import a screenshot (as we explain above), and that image is processed on your device.
+        </p>
+        <p>
+          We do not track you: since version 2.1.0, the app does not ask for Apple's tracking permission nor access your device's advertising identifier (more details under "Meta", in section 05).
         </p>
       </div>
 
@@ -467,6 +472,7 @@
         <li><strong>Financial assistant:</strong> generate suggestions based on your own spending pattern. The calculation is deterministic (rules and math on your numbers) and runs within our infrastructure; your data is not sent to language models (LLMs) nor to third-party generative AI.</li>
         <li><strong>Support:</strong> respond when you write to us at <a href="mailto:soporte@manifiestoapp.com">soporte@manifiestoapp.com</a>.</li>
         <li><strong>Improve the product:</strong> understand what works and what doesn't, in aggregate (without identifying you individually).</li>
+        <li><strong>Measure our ads:</strong> know, in aggregate, how many installs and subscriptions come from our campaigns on Instagram and Facebook (explained under "Meta" in section 05).</li>
         <li><strong>Comply with the law:</strong> respond to valid judicial requests and tax obligations (where applicable).</li>
       </ul>
       <p>
@@ -483,7 +489,7 @@
       <ul>
         <li><strong>Performance of a contract:</strong> the data we need for the app to work when you accept the Terms.</li>
         <li><strong>Consent:</strong> push notifications, syncing with other household members, and any other optional use.</li>
-        <li><strong>Legitimate interest:</strong> protecting the app against abuse, improving the product in aggregate.</li>
+        <li><strong>Legitimate interest:</strong> protecting the app against abuse, improving the product in aggregate and measuring the results of our campaigns in aggregate.</li>
         <li><strong>Legal obligation:</strong> retention of tax information or response to requirements from authorities.</li>
       </ul>
 
@@ -514,7 +520,7 @@
 
       <h3>App Store and Google Play</h3>
       <p>
-        Manifiesto is distributed through Apple's App Store and, soon, Google Play. Those services collect download and installation metrics under their own policies.
+        Manifiesto is distributed through Apple's App Store and, soon, Google Play. Those services collect download and installation metrics under their own policies. Subscriptions are bought and paid for on the App Store: Apple processes the payment and confirms the purchase to us.
       </p>
 
       <h3>Exchange rate providers (optional)</h3>
@@ -523,12 +529,16 @@
         <strong>we do not send them any personal or financial data of yours</strong>.
       </p>
 
-      <div class="callout">
-        <div class="callout-eyebrow">No advertising third parties</div>
-        <p>
-          We do not use Google Analytics, Facebook Pixel, nor any advertising or tracking SDK. We do not sell your data to brokers. We do not load social media pixels in the app nor on this site.
-        </p>
-      </div>
+      <h3>Meta (measuring our campaigns)</h3>
+      <p>
+        The app includes the Meta (Facebook) SDK to learn whether our ads on Instagram and Facebook work. The SDK sends Meta app events —that the app was installed, each time it is opened and, if you buy a plan, which one and at what price— along with technical device data (such as the model, system version, language and time zone), a random identifier generated by the SDK itself and, like any internet service, the IP address of the connection. We never send it your email, your name, your expenses or any other data from your account. We do not track you: the app does not ask for Apple's tracking permission (App Tracking Transparency), the SDK runs with advertising tracking disabled and without your device's advertising identifier, and we use this data only to measure our campaigns in aggregate. This is how it works since version 2.1.0: up to 2.0.1, the app asked for that permission and, if you granted it, the SDK could also send Meta the advertising identifier. Meta processes this data under its own
+        <a href="https://www.facebook.com/privacy/policy/" target="_blank" rel="noopener">Privacy Policy</a>.
+      </p>
+
+      <h3>No data sales, no third-party ads</h3>
+      <p>
+        We do not show third-party ads in the app or sell your data to brokers. We do not use Google Analytics or the Facebook pixel, and this site does not load social media pixels.
+      </p>
 
       <h2 id="retencion">
         <span class="h-index">06</span>
