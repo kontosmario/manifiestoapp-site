@@ -365,8 +365,8 @@
     </p>
     <div class="doc-head__meta">
       <div>Vigente desde<strong>9 de junio de 2026</strong></div>
-      <div>Última actualización<strong>27 de septiembre de 2026</strong></div>
-      <div>Versión<strong>1.2</strong></div>
+      <div>Última actualización<strong>29 de septiembre de 2026</strong></div>
+      <div>Versión<strong>1.3</strong></div>
     </div>
   </header>
 
@@ -466,9 +466,9 @@
           más arriba), y esa imagen se procesa en tu dispositivo.
         </p>
         <p>
-          No te rastreamos: desde la versión 2.1.0, la app no pide el
-          permiso de rastreo de Apple ni accede al identificador de
-          publicidad de tu dispositivo (más detalles en "Meta", en la
+          Sin tu permiso, la app no accede al identificador de
+          publicidad de tu dispositivo: en el iPhone, lo decides tú con
+          el permiso de rastreo de Apple (más detalles en "Meta", en la
           sección 05).
         </p>
       </div>
@@ -587,15 +587,28 @@
         aleatorio que genera el propio SDK y, como cualquier servicio
         en internet, la dirección IP de la conexión. Nunca le enviamos
         tu email, tu nombre, tus gastos ni ningún otro dato de tu
-        cuenta. No te rastreamos: la app no pide el permiso de rastreo
-        de Apple (App Tracking Transparency), el SDK funciona con el
-        seguimiento publicitario desactivado y sin el identificador de
-        publicidad de tu dispositivo, y usamos estos datos solo para
-        medir nuestras campañas en conjunto. Así funciona desde la
-        versión 2.1.0: hasta la 2.0.1, la app pedía ese permiso y, si
-        lo concediste, el SDK también pudo enviarle a Meta el
-        identificador de publicidad. Meta trata estos datos según su
-        propia
+        cuenta. Usamos estos datos solo para medir nuestras campañas.
+      </p>
+      <p>
+        En el iPhone, la app te pide el permiso de rastreo de Apple
+        (App Tracking Transparency) la primera vez que la abres y, hasta
+        que respondes, no le envía nada a Meta. Si lo permites, el SDK
+        le envía a Meta, junto con esos eventos, el identificador de
+        publicidad de tu dispositivo (IDFA), para medir qué campaña
+        nuestra trajo la instalación. Si no lo permites, Meta recibe
+        esos eventos sin el identificador de publicidad y la atribución
+        a nuestras campañas llega de forma agregada, a través de
+        SKAdNetwork de Apple, sin identificarte; la app funciona
+        exactamente igual. Puedes cambiar tu respuesta cuando quieras
+        en Ajustes → Privacidad y seguridad → Rastreo, o en Ajustes →
+        Manifiesto → Permitir rastreo.
+      </p>
+      <p>
+        Así funciona desde la versión 2.1.0: hasta la 2.0.1, la app
+        también pedía ese permiso y, si lo concediste, el SDK pudo
+        enviarle a Meta el identificador de publicidad. En Android, el
+        SDK funciona sin el identificador de publicidad de tu
+        dispositivo. Meta trata estos datos según su propia
         <a href="https://www.facebook.com/privacy/policy/" target="_blank" rel="noopener">Política de privacidad</a>.
       </p>
 
