@@ -365,8 +365,8 @@
     </p>
     <div class="doc-head__meta">
       <div>Vigente desde<strong>9 de junio de 2026</strong></div>
-      <div>Última actualización<strong>29 de septiembre de 2026</strong></div>
-      <div>Versión<strong>1.3</strong></div>
+      <div>Última actualización<strong>8 de octubre de 2026</strong></div>
+      <div>Versión<strong>1.4</strong></div>
     </div>
   </header>
 
@@ -440,6 +440,7 @@
         <li><strong>Composición de tu hogar</strong> — los otros usuarios de Manifiesto con los que decidiste compartir tu economía y, si corresponde, el aporte mensual de cada uno. Si le envías un aviso o recordatorio a otro miembro, ese mensaje se guarda y se le muestra a esa persona.</li>
         <li><strong>Importar desde una captura (opcional)</strong> — si eliges cargar un movimiento desde una foto de tu galería, leemos los montos con reconocimiento de texto que corre <strong>en tu propio dispositivo</strong>. La imagen no se sube a nuestros servidores ni se guarda: solo quedan los datos que tú confirmas.</li>
         <li><strong>Pagos con Apple Pay (opcional)</strong> — si configuras el atajo de Apple Pay en la app Atajos de tu iPhone, cada vez que pagas con Apple Pay el atajo le envía a Manifiesto el comercio y el monto de ese pago. Manifiesto no accede a tu Wallet ni a tus tarjetas, y el gasto se guarda recién cuando tú lo confirmas.</li>
+        <li><strong>Pagos de Mercado Pago (opcional, con un plan)</strong> — desde la versión 2.2.0, en el iPhone, puedes conectar tu cuenta de Mercado Pago con su autorización oficial, de solo lectura: inicias sesión en Mercado Pago (nunca vemos tu clave) y nos das permiso para leer tus pagos. Leemos lo que pagaste y cobraste con Mercado Pago —monto, moneda, fecha, comercio o descripción, tipo de operación y, en una transferencia, el nombre de quien la recibió o la envió tal como lo informa Mercado Pago— para proponértelo como gasto o ingreso, y solo se guarda lo que tú confirmas (ese nombre puede quedar en la descripción del gasto). En nuestros servidores guardamos únicamente el identificador y el estado de cada pago ya procesado (para no ofrecértelo dos veces), el identificador, el apodo y el país de tu cuenta de Mercado Pago, la fecha en que diste tu consentimiento, los ajustes de la conexión (desde qué fecha traer tus pagos y si quieres los avisos), las horas de la última revisión, del último aviso y de tu última apertura de la app (para no avisarte de lo que ya viste) y las credenciales de acceso que nos entrega Mercado Pago, cifradas. Nunca guardamos datos de tu tarjeta, tu documento, tu saldo ni tu clave, y no podemos pagar, cobrar ni mover dinero. Manifiesto no pertenece a Mercado Pago ni está patrocinado ni avalado por él.</li>
       </ul>
 
       <h3>Datos técnicos</h3>
@@ -454,11 +455,14 @@
         <div class="callout-eyebrow">Lo que no recolectamos</div>
         <p>
           No accedemos a tu cámara, contactos, ubicación ni calendario.
-          Manifiesto no se conecta a tus cuentas bancarias, tarjetas ni
-          billeteras, ni lee tu información financiera desde bancos u
-          otras instituciones. Toda la información financiera la cargas
-          tú: a mano, desde una captura o con el atajo de Apple Pay que
-          tú mismo configuras.
+          Manifiesto no se conecta a tus cuentas bancarias ni a tus
+          tarjetas, ni lee tu información financiera desde bancos u otras
+          instituciones. Desde la versión 2.2.0, la única conexión es la de
+          Mercado Pago, opcional y de solo lectura, que explicamos más
+          arriba; hasta la versión 2.1.0 la app no se conectaba a ninguna
+          billetera. El resto de la información financiera la cargas tú: a
+          mano, desde una captura o con el atajo de Apple Pay que tú mismo
+          configuras.
         </p>
         <p>
           Tampoco escaneamos tu galería: el único acceso a tus fotos
@@ -498,6 +502,7 @@
         <li><strong>Operar la app:</strong> mostrarte tus gastos, calcular tu cupo diario, sincronizar con tu pareja o conviviente.</li>
         <li><strong>Notificaciones funcionales:</strong> avisarte cuando se acerca un gasto fijo, cuando estás por superar tu cupo o cuando tu pareja registró un gasto.</li>
         <li><strong>Asistente financiero:</strong> generar sugerencias en base a tu propio patrón de gasto. El cálculo es determinístico (reglas y matemática sobre tus números) y corre dentro de nuestra infraestructura; tus datos no se envían a modelos de lenguaje (LLM) ni a IA generativa de terceros.</li>
+        <li><strong>Mercado Pago (si lo conectas):</strong> revisar tus pagos nuevos como mucho una vez por hora, entre las 7 y las 23 de tu zona horaria, y cuando abres la app; proponértelos para que los confirmes y avisarte con una sola notificación agrupada, que puedes apagar.</li>
         <li><strong>Soporte:</strong> responder cuando nos escribes a <a href="mailto:soporte@manifiestoapp.com">soporte@manifiestoapp.com</a>.</li>
         <li><strong>Mejorar el producto:</strong> entender qué funciona y qué no, en agregado (sin identificarte individualmente).</li>
         <li><strong>Medir nuestros anuncios:</strong> saber, en conjunto, cuántas instalaciones y suscripciones llegan desde nuestras campañas en Instagram y Facebook (lo explicamos en "Meta", en la sección 05).</li>
@@ -520,7 +525,7 @@
       </p>
       <ul>
         <li><strong>Ejecución de un contrato:</strong> los datos que necesitamos para que la app funcione cuando aceptas los Términos.</li>
-        <li><strong>Consentimiento:</strong> notificaciones push, sincronización con otros miembros del hogar, el envío a Meta del identificador de publicidad de tu iPhone (que autorizas con el permiso de rastreo de Apple), y cualquier otro uso opcional.</li>
+        <li><strong>Consentimiento:</strong> notificaciones push, sincronización con otros miembros del hogar, la conexión con Mercado Pago (que autorizas en la app y en la pantalla de Mercado Pago), el envío a Meta del identificador de publicidad de tu iPhone (que autorizas con el permiso de rastreo de Apple), y cualquier otro uso opcional.</li>
         <li><strong>Interés legítimo:</strong> proteger la app contra abuso, mejorar el producto en agregado y medir en conjunto el resultado de nuestras campañas.</li>
         <li><strong>Obligación legal:</strong> conservación de información impositiva o respuesta a requerimientos de autoridades.</li>
       </ul>
@@ -612,6 +617,18 @@
         <a href="https://www.facebook.com/privacy/policy/" target="_blank" rel="noopener">Política de privacidad</a>.
       </p>
 
+      <h3>Mercado Pago (opcional, solo si lo conectas)</h3>
+      <p>
+        Si conectas tu cuenta, Mercado Pago te pide que autorices a
+        Manifiesto en su propia pantalla y nos entrega un permiso de
+        solo lectura. Con ese permiso le consultamos tus pagos. Mercado
+        Pago trata tus datos según su propia
+        <a href="https://www.mercadopago.com.ar/privacidad" target="_blank" rel="noopener">Declaración de privacidad</a>.
+        Puedes quitar el permiso desde Manifiesto (Ajustes → Gastos →
+        Gastos con Mercado Pago → Desconectar) o desde tu cuenta de
+        Mercado Pago, en las aplicaciones conectadas. Manifiesto no pertenece a Mercado Pago ni está patrocinado ni avalado por él.
+      </p>
+
       <h3>Sin venta de datos ni publicidad de terceros</h3>
       <p>
         No mostramos publicidad de terceros en la app ni vendemos tus
@@ -629,6 +646,7 @@
         <li><strong>Gastos archivados:</strong> los gastos de un ciclo cerrado quedan disponibles en tu historial durante unos 14 días tras el cierre; después se eliminan automáticamente (conservamos algunos pagos recientes de gastos fijos para el seguimiento de tus cuotas).</li>
         <li><strong>Eventos de telemetría:</strong> 30 días, después se purgan.</li>
         <li><strong>Backups operacionales:</strong> retenemos copias de respaldo de la base por hasta 30 días para poder recuperar el servicio ante fallas.</li>
+        <li><strong>Mercado Pago:</strong> mientras la conexión esté activa. Se desconecta cuando tú lo eliges, cuando cierras sesión en la app, cuando quitas el permiso desde Mercado Pago, cuando pides borrar tu cuenta, si nunca elegiste desde cuándo traer tus pagos (a los 30 días), si hubiera un incidente de seguridad o después de 30 días sin un plan que la incluya (te avisamos 3 días antes). Al desconectarse revocamos el permiso en Mercado Pago cuando corresponde y borramos las credenciales y el registro de pagos procesados; solo conservamos el motivo y la fecha de esa desconexión, para no volver a traerte lo que ya cargaste. Los gastos e ingresos que ya confirmaste quedan como cualquier otro, hasta que los borres.</li>
         <li><strong>Solicitud de baja:</strong> cuando pides borrar tu cuenta desde Ajustes → Cuenta → Eliminar cuenta, programamos el borrado para 30 días después. Durante esa ventana puedes cancelar la baja entrando otra vez. Pasados los 30 días, tus datos personales se borran de forma irreversible. Los registros que hayas cargado en un hogar compartido (por ejemplo, gastos de una economía conjunta) pueden permanecer visibles para los demás miembros, desvinculados de tu identidad. También podemos conservar información que la ley nos obligue a guardar (por ejemplo, comprobantes de pago durante el plazo impositivo).</li>
       </ul>
 
@@ -643,6 +661,7 @@
         <li><strong>Autenticación con PKCE:</strong> el flujo de login usa Proof Key for Code Exchange para evitar ataques de fijación de sesión.</li>
         <li><strong>Biometría local:</strong> la app puede pedir Face ID o Touch ID antes de abrir tus datos si tú lo activas. Las credenciales biométricas no salen nunca de tu dispositivo.</li>
         <li><strong>Almacenamiento local cifrado:</strong> en tu dispositivo guardamos en el almacén seguro del sistema (Keychain en iOS, Keystore en Android) tus tokens de sesión y una copia de tus datos para que la app pueda funcionar sin conexión.</li>
+        <li><strong>Credenciales de Mercado Pago:</strong> las guardamos cifradas (AES-256-GCM) con una clave que solo conocen nuestros servidores; nunca llegan a la app. Si hubiera un incidente que las afecte, revocamos los permisos y se lo avisamos a Mercado Pago dentro de las 24 horas.</li>
         <li><strong>Auditorías internas:</strong> revisiones periódicas de seguridad sobre nuestra propia base de código y nuestras políticas de acceso.</li>
       </ul>
       <p>
