@@ -365,7 +365,7 @@
     </p>
     <div class="doc-head__meta">
       <div>Vigente desde<strong>9 de junio de 2026</strong></div>
-      <div>Última actualización<strong>8 de octubre de 2026</strong></div>
+      <div>Última actualización<strong>23 de octubre de 2026</strong></div>
       <div>Versión<strong>1.4</strong></div>
     </div>
   </header>
@@ -438,7 +438,8 @@
         <li><strong>Gastos fijos / suscripciones</strong> — nombre, monto y frecuencia y, si los cargas, el nombre del acreedor, el saldo pendiente y las cuotas de un préstamo. Si incluyes el nombre de otra persona, eres responsable de hacerlo conforme a la ley.</li>
         <li><strong>Metas de ahorro</strong> y aportes a esas metas.</li>
         <li><strong>Composición de tu hogar</strong> — los otros usuarios de Manifiesto con los que decidiste compartir tu economía y, si corresponde, el aporte mensual de cada uno. Si le envías un aviso o recordatorio a otro miembro, ese mensaje se guarda y se le muestra a esa persona.</li>
-        <li><strong>Importar desde una captura (opcional)</strong> — si eliges cargar un movimiento desde una foto de tu galería, leemos los montos con reconocimiento de texto que corre <strong>en tu propio dispositivo</strong>. La imagen no se sube a nuestros servidores ni se guarda: solo quedan los datos que tú confirmas.</li>
+        <li><strong>Importar desde una captura o un ticket (opcional)</strong> — si eliges cargar un movimiento desde una foto de tu galería o, desde la versión 2.2.0 en el iPhone, sacándole una foto con la cámara a un ticket o una factura, leemos los montos con reconocimiento de texto que corre <strong>en tu propio dispositivo</strong>. La imagen no se sube a nuestros servidores ni se guarda: solo quedan los datos que tú confirmas.</li>
+        <li><strong>Dictar un gasto (opcional)</strong> — desde la versión 2.2.0, en el iPhone, puedes tocar el botón del micrófono al cargar un gasto y decirlo en voz alta (por ejemplo, «café 2500»). El micrófono se usa solo desde que tocas ese botón hasta que terminas la frase, y el reconocimiento de voz de Apple la pasa a texto (lo explicamos en "Apple", en la sección 05). No grabamos ni guardamos el audio, y no nos llega: la app recibe solo el texto, que queda en la descripción del gasto como si lo hubieras escrito y se guarda recién cuando lo confirmas.</li>
         <li><strong>Pagos con Apple Pay (opcional)</strong> — si configuras el atajo de Apple Pay en la app Atajos de tu iPhone, cada vez que pagas con Apple Pay el atajo le envía a Manifiesto el comercio y el monto de ese pago. Manifiesto no accede a tu Wallet ni a tus tarjetas, y el gasto se guarda recién cuando tú lo confirmas.</li>
         <li><strong>Pagos de Mercado Pago (opcional, con un plan)</strong> — desde la versión 2.2.0, en el iPhone y donde esté disponible según el país de tu cuenta de Mercado Pago, puedes conectarla con su autorización oficial: inicias sesión en Mercado Pago (nunca vemos tu clave) y nos das permiso para leer tus pagos. Le pedimos solo lectura y Manifiesto solo lee: no paga, no cobra ni mueve dinero, y nunca escribe en tu cuenta (solo quita su propio permiso cuando se desconecta). Leemos lo que pagaste y cobraste con Mercado Pago —monto, moneda, fecha, comercio o descripción, tipo de operación y, en una transferencia, el nombre de quien la recibió o la envió tal como lo informa Mercado Pago— para proponértelo como gasto o ingreso, y solo se guarda lo que tú confirmas (ese nombre puede quedar en la descripción del gasto). En nuestros servidores guardamos el identificador y el estado de cada pago ya procesado (para no ofrecértelo dos veces); el identificador, el apodo y el país de tu cuenta de Mercado Pago; la fecha en que diste tu consentimiento; los ajustes de la conexión (desde qué fecha traer tus pagos y si quieres los avisos); datos técnicos de la conexión (por ejemplo, los permisos otorgados, el último error, las fechas de la pausa por falta de plan y cuántos avisos te mandamos hoy); las horas de la última revisión, del último aviso y de tu última apertura de la app (para no avisarte de lo que ya viste); y las credenciales de acceso que nos entrega Mercado Pago, cifradas. Nunca guardamos datos de tu tarjeta, tu documento, tu saldo ni tu clave. Manifiesto no pertenece a Mercado Pago ni está patrocinado ni avalado por él.</li>
       </ul>
@@ -448,21 +449,24 @@
         <li><strong>Token de notificaciones push</strong> — un identificador del dispositivo, asociado a tu cuenta, que nos da Apple o Google para enviarte avisos. Si desactivas las notificaciones o cierras sesión, lo eliminamos.</li>
         <li><strong>Plataforma y versión</strong> — el sistema operativo y la versión de la app que usas (lo recibimos al registrar tu dispositivo para notificaciones), para dar soporte y priorizar mejoras.</li>
         <li><strong>Zona horaria del dispositivo</strong> — para programar tus avisos y los cierres de ciclo en tu horario local.</li>
-        <li><strong>Eventos de uso</strong> — qué sugerencias del asistente te mostramos y cómo interactúas con ellas (las ves, las aplicas o las descartas). Están <strong>asociados a tu cuenta</strong> —no son anónimos— y pueden incluir el monto o el nombre del ítem sobre el que actuó la sugerencia. Viven en nuestra propia base y no se exportan a terceros.</li>
+        <li><strong>Eventos de uso</strong> — qué sugerencias del asistente te mostramos y cómo interactúas con ellas (las ves, las aplicas o las descartas) y, desde la versión 2.2.0, cuántos movimientos se leyeron y cuántos cargaste en cada importación y cómo funcionó el dictado (por ejemplo, si completó el monto), siempre sin la imagen, el audio ni lo que dictaste. Están <strong>asociados a tu cuenta</strong> —no son anónimos— y pueden incluir el monto o el nombre del ítem sobre el que actuó la sugerencia. Viven en nuestra propia base y no se exportan a terceros.</li>
       </ul>
 
       <div class="callout">
         <div class="callout-eyebrow">Lo que no recolectamos</div>
         <p>
-          No accedemos a tu cámara, contactos, ubicación ni calendario.
+          No accedemos a tus contactos, ubicación ni calendario. La
+          cámara y el micrófono se usan solo cuando tú los activas, para
+          leer un ticket o dictar un gasto (lo explicamos más arriba), y
+          nunca guardamos fotos ni audio.
           Manifiesto no se conecta a tus cuentas bancarias ni a tus
           tarjetas, ni lee tu información financiera desde bancos u otras
           instituciones. Desde la versión 2.2.0, la única conexión es la de
           Mercado Pago, opcional y en la que Manifiesto solo lee, que
           explicamos más arriba; la versión 2.1.0 y las anteriores no se
           conectan a ninguna billetera. El resto de la información financiera la cargas tú: a
-          mano, desde una captura o con el atajo de Apple Pay que tú mismo
-          configuras.
+          mano o dictándola, desde una captura o un ticket, o con el atajo
+          de Apple Pay que tú mismo configuras.
         </p>
         <p>
           Tampoco escaneamos tu galería: el único acceso a tus fotos
@@ -484,8 +488,8 @@
           IA generativa</strong> para procesar tus datos. El asistente
           arma sus sugerencias con reglas y cálculos determinísticos
           sobre tus propios números, dentro de nuestra infraestructura,
-          y el reconocimiento de texto al importar una captura corre en
-          tu dispositivo.
+          y el reconocimiento de texto al importar una captura o un ticket
+          corre en tu dispositivo.
         </p>
         <p>
           Si en el futuro incorporáramos IA que procese tus datos,
@@ -553,6 +557,19 @@
         Si eliges entrar con Apple o Google, nos devuelven un
         identificador único para tu cuenta. No accedemos a más
         información que esa.
+      </p>
+
+      <h3>Apple (reconocimiento de voz, opcional)</h3>
+      <p>
+        Si dictas un gasto, la app usa el reconocimiento de voz de
+        Apple para pasar tu voz a texto. Según tu iPhone y tu idioma,
+        eso ocurre en el propio teléfono o en los servidores de Apple,
+        que trata ese audio según su propia
+        <a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener">Política de privacidad</a>.
+        Manifiesto no recibe ni guarda el audio: solo el texto. iOS te
+        pide permiso para el micrófono y para el reconocimiento de voz
+        la primera vez que tocas el botón, y puedes quitarlos cuando
+        quieras desde los Ajustes del iPhone.
       </p>
 
       <h3>Expo (notificaciones push)</h3>
