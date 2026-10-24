@@ -375,8 +375,8 @@
   </p>
   <div class="doc-meta">
     <div><span>Effective from</span><strong>June 9, 2026</strong></div>
-    <div><span>Last updated</span><strong>September 27, 2026</strong></div>
-    <div><span>Version</span><strong>1.2</strong></div>
+    <div><span>Last updated</span><strong>October 23, 2026</strong></div>
+    <div><span>Version</span><strong>1.3</strong></div>
   </div>
 </header>
 
@@ -435,12 +435,13 @@
     </ul>
     <p>
       Manifiesto is an organization tool:
-      <strong>it does not connect to your bank accounts, cards, digital wallets or any other financial platform</strong>, and it does not access your banking information or anyone else's. Everything you see in the app is entered by you, in one of these ways:
+      <strong>it does not connect to your bank accounts or your cards</strong>, and it does not access your banking information or anyone else's. Since version 2.2.0, the only connection, optional, is reading your Mercado Pago payments as described below. Everything you see in the app is entered or confirmed by you, in one of these ways:
     </p>
     <ul>
       <li><strong>By hand</strong>, in the app.</li>
-      <li><strong>From a screenshot</strong> you choose to import, for example the transaction list from your bank or wallet app. The text in the screenshot is read on your own device, and you review each entry before it goes in.</li>
+      <li><strong>From a screenshot</strong> you choose to import, for example the transaction list from your bank or wallet app, or, since version 2.2.0 on iPhone, <strong>from a photo of a receipt or an invoice</strong> you take with the camera. The text is read on your own device, and you review each entry before it goes in.</li>
       <li><strong>With the Apple Pay shortcut</strong>, if you choose to use it. It is optional: you create it yourself in Apple's Shortcuts app and, when you pay contactless with Apple Pay, that shortcut passes the merchant and the amount of the payment to Manifiesto for you to confirm. Manifiesto does not access your Wallet or your cards.</li>
+      <li><strong>With Mercado Pago</strong>, if you connect it (since version 2.2.0, on iPhone and with a plan). With your authorization, Manifiesto only reads the payments in your Mercado Pago account and suggests them as expenses or income for you to confirm. Manifiesto does not pay, charge or move money in your account. Manifiesto is not owned by, sponsored by or endorsed by Mercado Pago. Nor is it responsible for its service, which is governed by its own terms. Availability depends on the country of your Mercado Pago account, and we may suspend or withdraw it if Mercado Pago changes or closes access.</li>
     </ul>
     <p>
       That information is used only to help you organize and control your
@@ -534,7 +535,8 @@
       <li>See what's left for today, your garden, your streak and the daily recap.</li>
       <li>Use the Apple Pay shortcut and get reminders and alerts.</li>
       <li>See the current cycle and the last closed edition.</li>
-      <li>Use fixed expenses, screenshot imports and the assistant, with limits. The app shows you each limit when you reach it.</li>
+      <li>Use fixed expenses, screenshot and receipt imports, and the assistant, with limits. The app shows you each limit when you reach it.</li>
+      <li>Create up to three custom categories in each list (expenses, fixed expenses and income).</li>
     </ul>
     <p>
       <strong>A plan adds:</strong>
@@ -542,18 +544,22 @@
     <ul>
       <li>Fixed expenses with no limit.</li>
       <li>Logging expenses, and marking calm days, on any past date.</li>
-      <li>Screenshot imports with no daily limit.</li>
+      <li>Screenshot and receipt imports with no daily limit.</li>
       <li>The full assistant.</li>
       <li>All your past editions.</li>
       <li>Each cycle's report as a PDF.</li>
-      <li>Creating your own categories and renaming the existing ones.</li>
+      <li>More than three custom categories per list, and renaming the default ones or changing their icon.</li>
       <li>With Plan Huerta, inviting more people to your space, up to four in total.</li>
+      <li>Since version 2.2.0, on iPhone and where available, connecting your Mercado Pago account so your payments arrive ready to confirm. Without a plan, a connection is paused and, after 30 days, disconnected.</li>
     </ul>
     <p>
       The limits without a plan may change in new versions of the app. A limit never deletes what you already logged: if you have more fixed expenses than the limit, you keep them and just can't add more; and your past editions stay saved even if you can't open them without a plan.
     </p>
     <p>
-      <strong>Full access to start.</strong> When you create your account you get full access for a while, with no purchase and no card. There is one per account, it starts the day you create it, and the app shows you how many days you have left. It is not an Apple introductory offer: there is no purchase, nothing is charged when it ends and no subscription starts. The app keeps working with everything that doesn't need a plan, and what you logged stays saved.
+      <strong>Your first days at no charge.</strong> Since version 2.2.0, the first time you subscribe to Jardín or Huerta, Apple may offer you the first 7 days at no charge (an Apple introductory offer). Before you confirm, the app shows it to you along with the price charged afterwards, only if your Apple account can use it: it is one time only per Apple account for these plans, and Apple decides and applies it. To use it you need your Apple account with a payment method. During those days you get everything the plan includes. Unless you cancel at least 24 hours before they end, Apple charges the plan you chose, monthly or yearly, and the subscription renews automatically. If you cancel before then from your Apple account settings, nothing is charged and you keep the plan until those days end.
+    </p>
+    <p>
+      <strong>Full access for earlier accounts.</strong> Some accounts, such as those created with a version of the app earlier than 2.2.0, have full-access days, with no purchase and no card. The app shows you how many you have left. When they end nothing is charged and no subscription starts: the app keeps working with everything that doesn't need a plan, and what you logged stays saved. Those days are not the Apple introductory offer.
     </p>
 
     <h2 id="suscripciones">
@@ -574,7 +580,7 @@
       For all plans:
     </p>
     <ul>
-      <li><strong>Purchase:</strong> it is made inside the app and processed by Apple. Payment is charged to your Apple Account when you confirm the purchase. Manifiesto does not process payments or see your card details.</li>
+      <li><strong>Purchase:</strong> it is made inside the app and processed by Apple. Payment is charged to your Apple Account when you confirm the purchase or, if you use the first days at no charge, when they end. Manifiesto does not process payments or see your card details.</li>
       <li><strong>One plan per space:</strong> the subscription is linked to the space you purchased it from and covers everyone in it. Only the person who purchased it can change or cancel it.</li>
       <li><strong>Automatic renewal:</strong> the subscription renews automatically, at the same price, at the end of each period, unless you cancel it at least 24 hours before the period ends. The renewal charge happens within those 24 hours.</li>
       <li><strong>Cancellation:</strong> you can cancel it anytime from your Apple Account settings, or in the app from Settings → Your plan → Plan for your space → Manage or cancel in App Store. You keep the plan until the end of the period you already paid for.</li>
@@ -604,7 +610,7 @@
       The calculations you see (what's left for today, projections, recaps and signals) are <strong>estimates</strong> based on the data you enter and may contain errors or fail to account for your full situation. The decisions you make based on the information in Manifiesto are your <strong>sole responsibility</strong>; we are not liable for economic losses, debts, fines or harm resulting from those decisions.
     </p>
     <p>
-      Some features depend on data we don't fully control. Reading a screenshot can get an amount or a date wrong: that is why you review each entry before confirming it. The Apple Pay shortcut depends on Apple and may not log some payments, such as those made with the physical card, inside other apps or on the web. And dollar equivalents use a reference exchange rate, which may not match the one applied to you.
+      Some features depend on data we don't fully control. Reading a screenshot or a receipt can get an amount or a date wrong: that is why you review each entry before confirming it. The Apple Pay shortcut depends on Apple and may not log some payments, such as those made with the physical card, inside other apps or on the web. And dollar equivalents use a reference exchange rate, which may not match the one applied to you.
     </p>
     <p>
       Manifiesto is offered "as is" and "as available", without express or implied warranties beyond those required by law.

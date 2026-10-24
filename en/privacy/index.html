@@ -362,8 +362,8 @@
     </p>
     <div class="doc-head__meta">
       <div>Effective since<strong>June 9, 2026</strong></div>
-      <div>Last updated<strong>September 29, 2026</strong></div>
-      <div>Version<strong>1.3</strong></div>
+      <div>Last updated<strong>October 23, 2026</strong></div>
+      <div>Version<strong>1.4</strong></div>
     </div>
   </header>
 
@@ -427,8 +427,10 @@
         <li><strong>Fixed expenses / subscriptions</strong> — name, amount and frequency and, if you enter them, the name of the creditor, the outstanding balance and the installments of a loan. If you include another person's name, you are responsible for doing so in accordance with the law.</li>
         <li><strong>Savings goals</strong> and contributions to those goals.</li>
         <li><strong>Composition of your household</strong> — the other Manifiesto users with whom you decided to share your finances and, where applicable, each one's monthly contribution. If you send a notice or reminder to another member, that message is stored and shown to that person.</li>
-        <li><strong>Import from a screenshot (optional)</strong> — if you choose to enter a transaction from a photo in your gallery, we read the amounts with text recognition that runs <strong>on your own device</strong>. The image is not uploaded to our servers nor stored: only the data you confirm remains.</li>
+        <li><strong>Import from a screenshot or a receipt (optional)</strong> — if you choose to enter a transaction from a photo in your gallery or, since version 2.2.0 on iPhone, by taking a photo of a receipt or an invoice with the camera, we read the amounts with text recognition that runs <strong>on your own device</strong>. The image is not uploaded to our servers nor stored: only the data you confirm remains.</li>
+        <li><strong>Dictating an expense (optional)</strong> — since version 2.2.0, on iPhone, you can tap the microphone button when adding an expense and say it out loud (for example, "coffee 2500"). The microphone is used only from the moment you tap that button until you finish the sentence, and Apple's speech recognition turns it into text (we explain this under "Apple", in section 05). We do not record or store the audio, and it does not reach us: the app receives only the text, which goes into the expense description as if you had typed it and is saved only when you confirm it.</li>
         <li><strong>Apple Pay payments (optional)</strong> — if you set up the Apple Pay shortcut in your iPhone's Shortcuts app, every time you pay with Apple Pay the shortcut sends Manifiesto the merchant and the amount of that payment. Manifiesto does not access your Wallet or your cards, and the expense is saved only when you confirm it.</li>
+        <li><strong>Mercado Pago payments (optional, with a plan)</strong> — since version 2.2.0, on iPhone and where available depending on the country of your Mercado Pago account, you can connect it with its official authorization: you sign in on Mercado Pago (we never see your password) and give us permission to read your payments. We ask for read access only and Manifiesto only reads: it does not pay, charge or move money, and it never writes to your account (it only removes its own permission when it is disconnected). We read what you paid and received with Mercado Pago —amount, currency, date, merchant or description, type of operation and, for a transfer, the name of the person who received or sent it as Mercado Pago reports it— to suggest it as an expense or income, and only what you confirm is saved (that name may stay in the expense description). On our servers we store the ID and status of each payment already processed (so we do not offer it to you twice); the ID, nickname and country of your Mercado Pago account; the date you gave your consent; the connection settings (from which date to bring your payments and whether you want notifications); technical data of the connection (such as the permissions granted, the last error, the dates of the pause for lack of a plan and how many notifications we sent you today); the times of the last check, the last notification and your last opening of the app (so we do not notify you about what you already saw); and the access credentials Mercado Pago gives us, encrypted. We never store your card details, your ID document, your balance or your password. Manifiesto is not owned by, sponsored by or endorsed by Mercado Pago.</li>
       </ul>
 
       <h3>Technical data</h3>
@@ -436,13 +438,13 @@
         <li><strong>Push notification token</strong> — a device identifier, associated with your account, that Apple or Google gives us to send you notices. If you disable notifications or sign out, we delete it.</li>
         <li><strong>Platform and version</strong> — the operating system and the version of the app you use (we receive it when registering your device for notifications), to provide support and prioritize improvements.</li>
         <li><strong>Device time zone</strong> — to schedule your notices and cycle closings in your local time.</li>
-        <li><strong>Usage events</strong> — which assistant suggestions we show you and how you interact with them (you view them, apply them or dismiss them). They are <strong>associated with your account</strong> —they are not anonymous— and may include the amount or the name of the item the suggestion acted on. They live in our own database and are not exported to third parties.</li>
+        <li><strong>Usage events</strong> — which assistant suggestions we show you and how you interact with them (you view them, apply them or dismiss them) and, since version 2.2.0, how many transactions were read and how many you added in each import and how dictation worked (for example, whether it filled in the amount), never including the image, the audio or what you dictated. They are <strong>associated with your account</strong> —they are not anonymous— and may include the amount or the name of the item the suggestion acted on. They live in our own database and are not exported to third parties.</li>
       </ul>
 
       <div class="callout">
         <div class="callout-eyebrow">What we do not collect</div>
         <p>
-          We do not access your camera, contacts, location or calendar. Manifiesto does not connect to your bank accounts, cards or wallets, nor does it read your financial information from banks or other institutions. All financial information is entered by you: by hand, from a screenshot, or with the Apple Pay shortcut you set up yourself.
+          We do not access your contacts, location or calendar. The camera and the microphone are used only when you turn them on, to read a receipt or dictate an expense (as we explain above), and we never store photos or audio. Manifiesto does not connect to your bank accounts or your cards, nor does it read your financial information from banks or other institutions. Since version 2.2.0, the only connection is the optional Mercado Pago connection described above, in which Manifiesto only reads; version 2.1.0 and earlier do not connect to any wallet. All other financial information is entered by you: by hand or by dictating it, from a screenshot or a receipt, or with the Apple Pay shortcut you set up yourself.
         </p>
         <p>
           Nor do we scan your gallery: the only access to your photos occurs when you choose to import a screenshot (as we explain above), and that image is processed on your device.
@@ -455,7 +457,7 @@
       <div class="callout">
         <div class="callout-eyebrow">About artificial intelligence</div>
         <p>
-          Today Manifiesto <strong>does not use language models (LLMs) nor generative AI</strong> to process your data. The assistant builds its suggestions with deterministic rules and calculations on your own numbers, within our infrastructure, and the text recognition when importing a screenshot runs on your device.
+          Today Manifiesto <strong>does not use language models (LLMs) nor generative AI</strong> to process your data. The assistant builds its suggestions with deterministic rules and calculations on your own numbers, within our infrastructure, and the text recognition when importing a screenshot or a receipt runs on your device.
         </p>
         <p>
           If in the future we were to incorporate AI that processes your data, we would update this policy and inform you before doing so.
@@ -470,6 +472,7 @@
         <li><strong>Operate the app:</strong> show you your expenses, calculate your daily allowance, sync with your partner or housemate.</li>
         <li><strong>Functional notifications:</strong> notify you when a fixed expense is approaching, when you are about to exceed your allowance or when your partner recorded an expense.</li>
         <li><strong>Financial assistant:</strong> generate suggestions based on your own spending pattern. The calculation is deterministic (rules and math on your numbers) and runs within our infrastructure; your data is not sent to language models (LLMs) nor to third-party generative AI.</li>
+        <li><strong>Mercado Pago (if you connect it):</strong> check your new payments at most once an hour, between 7 a.m. and 11 p.m. in your time zone, and when you open the app; suggest them for you to confirm and notify you with a single grouped notification, which you can turn off.</li>
         <li><strong>Support:</strong> respond when you write to us at <a href="mailto:soporte@manifiestoapp.com">soporte@manifiestoapp.com</a>.</li>
         <li><strong>Improve the product:</strong> understand what works and what doesn't, in aggregate (without identifying you individually).</li>
         <li><strong>Measure our ads:</strong> know, in aggregate, how many installs and subscriptions come from our campaigns on Instagram and Facebook (explained under "Meta" in section 05).</li>
@@ -488,7 +491,7 @@
       </p>
       <ul>
         <li><strong>Performance of a contract:</strong> the data we need for the app to work when you accept the Terms.</li>
-        <li><strong>Consent:</strong> push notifications, syncing with other household members, sending your iPhone's advertising identifier to Meta (which you authorize with Apple's tracking permission), and any other optional use.</li>
+        <li><strong>Consent:</strong> push notifications, syncing with other household members, the Mercado Pago connection (which you authorize in the app and on Mercado Pago's own screen), sending your iPhone's advertising identifier to Meta (which you authorize with Apple's tracking permission), and any other optional use.</li>
         <li><strong>Legitimate interest:</strong> protecting the app against abuse, improving the product in aggregate and measuring the results of our campaigns in aggregate.</li>
         <li><strong>Legal obligation:</strong> retention of tax information or response to requirements from authorities.</li>
       </ul>
@@ -510,6 +513,13 @@
       <h3>Apple and Google (social authentication, optional)</h3>
       <p>
         If you choose to sign in with Apple or Google, they return to us a unique identifier for your account. We do not access any more information than that.
+      </p>
+
+      <h3>Apple (speech recognition, optional)</h3>
+      <p>
+        If you dictate an expense, the app uses Apple's speech recognition to turn your voice into text. Depending on your iPhone and your language, this happens on the phone itself or on Apple's servers, and Apple handles that audio under its own
+        <a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener">Privacy Policy</a>.
+        Manifiesto does not receive or store the audio: only the text. iOS asks you for permission to use the microphone and speech recognition the first time you tap the button, and you can turn them off at any time from your iPhone's Settings.
       </p>
 
       <h3>Expo (push notifications)</h3>
@@ -541,6 +551,17 @@
         <a href="https://www.facebook.com/privacy/policy/" target="_blank" rel="noopener">Privacy Policy</a>.
       </p>
 
+      <h3>Mercado Pago (optional, only if you connect it)</h3>
+      <p>
+        If you connect your account, Mercado Pago asks you to authorize
+        Manifiesto on its own screen and gives us a permission. We ask for read access only and Manifiesto never writes to your account (it only removes its own permission when it is disconnected): with that permission we ask it for your payments. Mercado Pago
+        handles your data under its own
+        <a href="https://www.mercadopago.com.ar/privacidad" target="_blank" rel="noopener">privacy statement</a>.
+        You can remove the permission from Manifiesto (Settings → Expenses
+        → Expenses from Mercado Pago → Disconnect) or from your Mercado
+        Pago account, under connected applications. Manifiesto is not owned by, sponsored by or endorsed by Mercado Pago.
+      </p>
+
       <h3>No data sales, no third-party ads</h3>
       <p>
         We do not show third-party ads in the app or sell your data to brokers. We do not use Google Analytics or the Facebook pixel, and this site does not load social media pixels.
@@ -556,6 +577,7 @@
         <li><strong>Archived expenses:</strong> the expenses of a closed cycle remain available in your history for about 14 days after the closing; afterwards they are automatically deleted (we keep some recent fixed-expense payments for tracking your installments).</li>
         <li><strong>Telemetry events:</strong> 30 days, after which they are purged.</li>
         <li><strong>Operational backups:</strong> we retain backup copies of the database for up to 30 days in order to be able to recover the service in the event of failures.</li>
+        <li><strong>Mercado Pago:</strong> while the connection is active. It is disconnected when you choose to, when you sign out of the app (since version 2.2.0), when you remove the permission from Mercado Pago, when you request to delete your account, if you never chose from which date to bring your payments (after 30 days), if there were a security incident, or after 30 days without a plan that includes it (if you have notifications turned on, we let you know 3 days before; the Mercado Pago screen shows the days left). When it is disconnected we revoke the permission on Mercado Pago where applicable and delete the credentials and the record of processed payments; we only keep the reason and the date of that disconnection, so we do not bring back what you already logged. The expenses and income you already confirmed stay like any other, until you delete them.</li>
         <li><strong>Deletion request:</strong> when you request to delete your account from Settings → Account → Delete account, we schedule the deletion for 30 days later. During that window you can cancel the deletion by signing in again. After the 30 days, your personal data is deleted irreversibly. The records you have entered in a shared household (for example, expenses of a joint household economy) may remain visible to the other members, dissociated from your identity. We may also keep information that the law requires us to keep (for example, payment receipts during the tax period).</li>
       </ul>
 
@@ -570,6 +592,7 @@
         <li><strong>Authentication with PKCE:</strong> the login flow uses Proof Key for Code Exchange to prevent session fixation attacks.</li>
         <li><strong>Local biometrics:</strong> the app can request Face ID or Touch ID before opening your data if you enable it. Biometric credentials never leave your device.</li>
         <li><strong>Encrypted local storage:</strong> on your device we store your session tokens and a copy of your data in the system's secure store (Keychain on iOS, Keystore on Android) so that the app can work offline.</li>
+        <li><strong>Mercado Pago credentials:</strong> we store them encrypted (AES-256-GCM) with a key known only to our servers; they never reach the app. If an incident affected them, we would revoke the permissions and notify Mercado Pago within 24 hours.</li>
         <li><strong>Internal audits:</strong> periodic security reviews of our own codebase and our access policies.</li>
       </ul>
       <p>
