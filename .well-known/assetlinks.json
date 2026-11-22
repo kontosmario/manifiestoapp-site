@@ -3,9 +3,12 @@
     "relation": ["delegate_permission/common.handle_all_urls"],
     "target": {
       "namespace": "android_app",
-      "package_name": "com.manifiesto.mobile.ZKYQF7UNYA",
+      "package_name": "com.manifiesto.mobile",
       "sha256_cert_fingerprints": [
-        "PLACEHOLDER_REPLACE_WITH_PLAY_CONSOLE_SHA256"
+        "3C:77:20:2D:D7:D8:DE:36:19:B4:E3:87:AE:8B:44:95:5F:90:95:07:48:DB:61:98:DE:39:5F:D7:75:5B:38:CB",
+        "D3:A3:E0:AB:80:BB:2E:B5:71:A8:C0:40:9B:BA:96:E0:72:5D:41:70:E4:5D:2B:E0:66:4D:88:B2:AE:D2:F5:AB",
+        "8C:7F:9A:9C:66:F1:00:E3:22:FF:C0:CD:94:4D:13:96:0D:33:FC:3D:4D:C8:12:9D:72:54:48:D0:8E:F0:72:0C",
+        "FF:88:77:0B:55:D2:D8:82:16:C4:7A:4A:D7:2D:8C:CC:19:43:A9:70:E8:2E:92:40:42:F5:9C:03:D8:AA:63:E7"
       ]
     }
   }

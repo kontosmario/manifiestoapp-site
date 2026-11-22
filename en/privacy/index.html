@@ -362,8 +362,8 @@
     </p>
     <div class="doc-head__meta">
       <div>Effective since<strong>June 9, 2026</strong></div>
-      <div>Last updated<strong>November 20, 2026</strong></div>
-      <div>Version<strong>1.4</strong></div>
+      <div>Last updated<strong>November 21, 2026</strong></div>
+      <div>Version<strong>1.5</strong></div>
     </div>
   </header>
 
@@ -394,7 +394,7 @@
       </h2>
       <p>
         Manifiesto is a mobile application for managing personal and family finances operated by <strong>Manifiesto</strong>
-        ("Manifiesto", "we", "us", "our"), an independent project based in the Republic of Argentina. This policy applies to the use of the Manifiesto mobile application on iOS and, soon, Android, as well as to this website (<a href="/en/">manifiestoapp.com</a>).
+        ("Manifiesto", "we", "us", "our"), an independent project based in the Republic of Argentina. This policy applies to the use of the Manifiesto mobile application on iOS and Android, as well as to this website (<a href="/en/">manifiestoapp.com</a>).
       </p>
       <p>
         For the purposes of Argentine legislation (Law No. 25.326, Personal Data Protection, Argentina) and the European General Data Protection Regulation (GDPR), Manifiesto acts as
@@ -416,7 +416,7 @@
         <li><strong>Avatar</strong> — a visual identifier chosen from a predefined list (you do not upload photos).</li>
         <li><strong>Password</strong> — stored in encrypted form (hash) by our authentication provider. No one at Manifiesto sees it in plain text.</li>
         <li><strong>Social provider identifier</strong> — if you sign in with Apple or Google, we store the unique identifier that those providers return to us in order to recognize you. We do not access your contacts, photos, or any other data from your Apple or Google account.</li>
-        <li><strong>Subscription</strong> — if you buy a plan, Apple confirms the purchase to us (which plan it is, the transaction identifier and until when it is valid) so we can activate your access. Apple processes the payment: we never see your card details.</li>
+        <li><strong>Subscription</strong> — if you buy a plan, the store where you bought it (Apple on iPhone, Google Play on Android) confirms the purchase to us (which plan it is, the transaction or purchase identifier and until when it is valid) so we can activate your access. That store processes the payment: we never see your card details.</li>
       </ul>
 
       <h3>Financial data that you enter</h3>
@@ -427,11 +427,12 @@
         <li><strong>Fixed expenses / subscriptions</strong> — name, amount and frequency and, if you enter them, the name of the creditor, the outstanding balance and the installments of a loan. If you include another person's name, you are responsible for doing so in accordance with the law.</li>
         <li><strong>Savings goals</strong> and contributions to those goals.</li>
         <li><strong>Composition of your household</strong> — the other Manifiesto users with whom you decided to share your finances and, where applicable, each one's monthly contribution. If you send a notice or reminder to another member, that message is stored and shown to that person.</li>
-        <li><strong>Import from a screenshot or a receipt (optional)</strong> — if you choose to enter a transaction from a photo in your gallery or, since version 2.2.0 on iPhone, by taking a photo of a receipt or an invoice with the camera, we read the amounts with text recognition that runs <strong>on your own device</strong>. The image is not uploaded to our servers nor stored: only the data you confirm remains.</li>
-        <li><strong>Dictating an expense (optional)</strong> — since version 2.2.0, on iPhone, you can tap the microphone button when adding an expense and say it out loud (for example, "coffee 2500"). The microphone is used only from the moment you tap that button until you finish the sentence, and Apple's speech recognition turns it into text (we explain this under "Apple", in section 05). We do not record or store the audio, and it does not reach us: the app receives only the text, which goes into the expense description as if you had typed it and is saved only when you confirm it.</li>
+        <li><strong>Import from a screenshot or a receipt (optional)</strong> — if you choose to enter a transaction from a photo in your gallery or, since version 2.2.0 on iPhone (and since 3.0.0 on Android, with Google's document scanner), by taking a photo of a receipt or an invoice with the camera, we read the amounts with text recognition that runs <strong>on your own device</strong>. The image is not uploaded to our servers nor stored: only the data you confirm remains.</li>
+        <li><strong>Dictating an expense (optional)</strong> — since version 2.2.0 on iPhone and since 3.0.0 on Android, you can tap the microphone button when adding an expense and say it out loud (for example, "coffee 2500"). The microphone is used only from the moment you tap that button until you finish the sentence, and the phone's speech recognition turns it into text: Apple's on iPhone and Google's voice service on Android (we explain this in section 05). We do not record or store the audio, and it does not reach us: the app receives only the text, which goes into the expense description as if you had typed it and is saved only when you confirm it.</li>
         <li><strong>Apple Pay payments (optional)</strong> — if you set up the Apple Pay shortcut in your iPhone's Shortcuts app, every time you pay with Apple Pay the shortcut sends Manifiesto the merchant and the amount of that payment. Since version 3.0.0, the shortcut can also send the name the card has in your Wallet (for example, "Visa Bank"), to suggest which of your cards the purchase belongs to. Manifiesto does not access your Wallet or your cards, and the expense is saved only when you confirm it.</li>
+        <li><strong>Expenses from payment notifications (optional, Android)</strong> — since version 3.0.0, on Android, you can turn on "Expenses from notifications" and give Manifiesto access to the phone's notifications. For each notification, the app first checks which app it comes from: if it is not one of the payment apps on its list (Google Wallet, Mercado Pago and banks and wallets), it does not read or store it. From those apps' notifications it reads the title and text on your own phone and, if it is a payment, stores on the phone the amount, the merchant, the date and, for Google Wallet, the name of the card you paid with, to suggest it as an expense. None of it leaves the phone until you confirm it, and what you do not confirm is deleted within 30 days. You can turn it off, and remove Manifiesto's access, at any time from the app or from Android's settings.</li>
         <li><strong>Your credit cards (optional)</strong> — since version 3.0.0 you can add your cards to log purchases and see each statement. For each card we store what you type: the name you give it, the network (Visa, Mastercard or another), its closing day and due day and, if you want, its last 4 digits, which are only used to tell one card from another. We never ask for or store the full number, the expiry date or the security code, and Manifiesto does not connect to your bank or card issuer: you log the purchases, the installments and each statement's payments yourself.</li>
-        <li><strong>Mercado Pago payments (optional, with a plan)</strong> — since version 2.2.0, on iPhone and where available depending on the country of your Mercado Pago account, you can connect it with its official authorization: you sign in on Mercado Pago (we never see your password) and give us permission to read your payments. We ask for read access only and Manifiesto only reads: it does not pay, charge or move money, and it never writes to your account (it only removes its own permission when it is disconnected). We read what you paid and received with Mercado Pago —amount, currency, date, merchant or description, type of operation and, for a transfer, the name of the person who received or sent it as Mercado Pago reports it and, since version 3.0.0, if you paid with a credit card, the card brand and its last 4 digits, which we use to suggest which of your cards the purchase belongs to and which are only stored if you add that card— to suggest it as an expense or income, and only what you confirm is saved (that name may stay in the expense description). On our servers we store the ID and status of each payment already processed (so we do not offer it to you twice); the ID, nickname and country of your Mercado Pago account; the date you gave your consent; the connection settings (from which date to bring your payments and whether you want notifications); technical data of the connection (such as the permissions granted, the last error, the dates of the pause for lack of a plan and how many notifications we sent you today); the times of the last check, the last notification and your last opening of the app (so we do not notify you about what you already saw); and the access credentials Mercado Pago gives us, encrypted. We never store your card details, your ID document, your balance or your password. Manifiesto is not owned by, sponsored by or endorsed by Mercado Pago.</li>
+        <li><strong>Mercado Pago payments (optional, with a plan)</strong> — since version 2.2.0 on iPhone (and since 3.0.0 on Android), where available depending on the country of your Mercado Pago account, you can connect it with its official authorization: you sign in on Mercado Pago (we never see your password) and give us permission to read your payments. We ask for read access only and Manifiesto only reads: it does not pay, charge or move money, and it never writes to your account (it only removes its own permission when it is disconnected). We read what you paid and received with Mercado Pago —amount, currency, date, merchant or description, type of operation and, for a transfer, the name of the person who received or sent it as Mercado Pago reports it and, since version 3.0.0, if you paid with a credit card, the card brand and its last 4 digits, which we use to suggest which of your cards the purchase belongs to and which are only stored if you add that card— to suggest it as an expense or income, and only what you confirm is saved (that name may stay in the expense description). On our servers we store the ID and status of each payment already processed (so we do not offer it to you twice); the ID, nickname and country of your Mercado Pago account; the date you gave your consent; the connection settings (from which date to bring your payments and whether you want notifications); technical data of the connection (such as the permissions granted, the last error, the dates of the pause for lack of a plan and how many notifications we sent you today); the times of the last check, the last notification and your last opening of the app (so we do not notify you about what you already saw); and the access credentials Mercado Pago gives us, encrypted. We never store your card details, your ID document, your balance or your password. Manifiesto is not owned by, sponsored by or endorsed by Mercado Pago.</li>
       </ul>
 
       <h3>Technical data</h3>
@@ -445,7 +446,7 @@
       <div class="callout">
         <div class="callout-eyebrow">What we do not collect</div>
         <p>
-          We do not access your contacts, location or calendar. The camera and the microphone are used only when you turn them on, to read a receipt or dictate an expense (as we explain above), and we never store photos or audio. Manifiesto does not connect to your bank accounts or to your card issuers, nor does it read your financial information from banks or other institutions. About your cards it only knows what you type (as we explain above). Since version 2.2.0, the only connection is the optional Mercado Pago connection described above, in which Manifiesto only reads; version 2.1.0 and earlier do not connect to any wallet. All other financial information is entered by you: by hand or by dictating it, from a screenshot or a receipt, or with the Apple Pay shortcut you set up yourself.
+          We do not access your contacts, location or calendar. The camera and the microphone are used only when you turn them on, to read a receipt or dictate an expense (as we explain above), and we never store photos or audio. Manifiesto does not connect to your bank accounts or to your card issuers, nor does it read your financial information from banks or other institutions. About your cards it only knows what you type (as we explain above). Since version 2.2.0, the only connection is the optional Mercado Pago connection described above, in which Manifiesto only reads; version 2.1.0 and earlier do not connect to any wallet. All other financial information is entered by you: by hand or by dictating it, from a screenshot or a receipt, with the Apple Pay shortcut you set up yourself or, on Android, from the payment notifications you choose to let the app read.
         </p>
         <p>
           Nor do we scan your gallery: the only access to your photos occurs when you choose to import a screenshot (as we explain above), and that image is processed on your device.
@@ -492,7 +493,7 @@
       </p>
       <ul>
         <li><strong>Performance of a contract:</strong> the data we need for the app to work when you accept the Terms.</li>
-        <li><strong>Consent:</strong> push notifications, syncing with other household members, the Mercado Pago connection (which you authorize in the app and on Mercado Pago's own screen), sending your iPhone's advertising identifier to Meta (which you authorize with Apple's tracking permission), and any other optional use.</li>
+        <li><strong>Consent:</strong> push notifications, syncing with other household members, the Mercado Pago connection (which you authorize in the app and on Mercado Pago's own screen), reading payment notifications on Android (which you authorize in the app and in Android's settings), sending your iPhone's advertising identifier to Meta (which you authorize with Apple's tracking permission), and any other optional use.</li>
         <li><strong>Legitimate interest:</strong> protecting the app against abuse, improving the product in aggregate and measuring the results of our campaigns in aggregate.</li>
         <li><strong>Legal obligation:</strong> retention of tax information or response to requirements from authorities.</li>
       </ul>
@@ -523,6 +524,13 @@
         Manifiesto does not receive or store the audio: only the text. iOS asks you for permission to use the microphone and speech recognition the first time you tap the button, and you can turn them off at any time from your iPhone's Settings.
       </p>
 
+      <h3>Google (speech recognition and receipt reading on Android, optional)</h3>
+      <p>
+        On Android, if you dictate an expense, the app uses your phone's voice service (usually Google's) to turn your voice into text; depending on the phone and the language, this happens on the phone itself or on Google's servers, and Google handles that audio under its own
+        <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Privacy Policy</a>.
+        Manifiesto does not receive or store the audio: only the text. To read a receipt, the app uses Google's ML Kit document scanner and text recognition, which run on your phone: the image is not sent to Google or to us, although Google may receive technical usage data from those components. Android asks you for microphone permission the first time you tap the button, and you can remove it at any time from the phone's settings.
+      </p>
+
       <h3>Expo (push notifications)</h3>
       <p>
         Processes the delivery of notifications from our servers to your device, via Apple Push Notification service (APNs) and Firebase Cloud Messaging (FCM) according to your platform.
@@ -531,7 +539,7 @@
 
       <h3>App Store and Google Play</h3>
       <p>
-        Manifiesto is distributed through Apple's App Store and, soon, Google Play. Those services collect download and installation metrics under their own policies. Subscriptions are bought and paid for on the App Store: Apple processes the payment and confirms the purchase to us.
+        Manifiesto is distributed through Apple's App Store and Google Play. Those services collect download and installation metrics under their own policies. Subscriptions are bought and paid for in the store: on iPhone, in the App Store (Apple processes the payment and confirms the purchase to us); on Android, in Google Play (Google processes the payment, and our servers ask it for the subscription status and receive its renewal or cancellation notices).
       </p>
 
       <h3>Exchange rate providers (optional)</h3>

@@ -11,6 +11,8 @@
 
 /privacy   /privacy/   301
 /terms     /terms/     301
+/delete-account     /delete-account/     301
+/en/delete-account  /en/delete-account/  301
 
 # Archivos del repo que Cloudflare Pages publica igual (no hay forma de
 # excluirlos sin paso de build): se mandan a la portada.
